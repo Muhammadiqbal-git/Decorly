@@ -12,6 +12,7 @@ Color white_cr = const Color(0xFFFFFFFF);
 TextStyle apps_name = GoogleFonts.gochiHand(fontSize: 24);
 TextStyle display = GoogleFonts.rubik(fontSize: 25, fontWeight: FontWeight.w500);
 TextStyle title = GoogleFonts.rubik(fontSize: 20, fontWeight: FontWeight.w500);
+TextStyle desc = GoogleFonts.rubik(fontSize: 20, fontWeight: FontWeight.w400);
 TextStyle body_1 = GoogleFonts.rubik(fontSize: 16, fontWeight: FontWeight.w500);
 TextStyle body_2 = GoogleFonts.rubik(fontSize: 14, fontWeight: FontWeight.w400);
 TextStyle caption_1 = GoogleFonts.rubik(fontSize: 13, fontWeight: FontWeight.w400);
