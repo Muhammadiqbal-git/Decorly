@@ -1,13 +1,16 @@
+import 'package:decorly/screens/onboarding.dart';
 import 'package:decorly/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'dart:io';
 
 class SplashScreens extends StatefulWidget {
   final double screen_height;
-  const SplashScreens({Key? key, required this.screen_height}) : super(key: key);
+  const SplashScreens({Key? key, required this.screen_height})
+      : super(key: key);
 
   @override
   State<SplashScreens> createState() => _SplashScreensState();
@@ -17,34 +20,56 @@ class _SplashScreensState extends State<SplashScreens>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller_fill;
   late Animation<double> _animation_fill;
+  late Animation<Color?> _color;
 
   @override
   void initState() {
-    // TODO: implement initState
+    super.initState();
     _controller_fill =
         AnimationController(vsync: this, duration: const Duration(seconds: 3));
-
-    _animation_fill = Tween<double>(begin: 0, end: 1.25).animate(CurvedAnimation(
-        parent: _controller_fill,
-        curve: const Interval(0.225, 0.95, curve: Curves.easeOutQuart)))
+    _animation_fill = Tween<double>(begin: 0, end: 1.25).animate(
+        CurvedAnimation(
+            parent: _controller_fill,
+            curve: const Interval(0.4, 0.90, curve: Curves.easeOutQuart)))
+      ..addListener(() {
+        setState(() {});
+      });
+    _animation_fill.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        Navigator.pushReplacement(
+            context,
+            PageRouteBuilder(
+                pageBuilder: (context, animation, secondaryAnimation) =>
+                    OnBoardingIndicator(),
+                transitionDuration: Duration(seconds: 2),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) =>
+                        FadeTransition(
+                          opacity: animation,
+                          child: child,
+                        )));
+      }
+    });
+    _color = ColorTween(begin: light_primary_cr, end: primary_cr).animate(
+        CurvedAnimation(
+            parent: _controller_fill,
+            curve: const Interval(0.75, 0.85, curve: Curves.easeInCirc)))
       ..addListener(() {
         setState(() {});
       });
     _controller_fill.forward();
-    super.initState();
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     _controller_fill.dispose();
-
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    print(_animation_fill.value);
+    print("tes ${_controller_fill.value}");
     return Scaffold(
       backgroundColor: white_cr,
       body: Center(
@@ -55,8 +80,8 @@ class _SplashScreensState extends State<SplashScreens>
             Positioned(
               top: getHeight(context, 35),
               child: CustomPaint(
-                size: Size(
-                    getWidth(context, 60), (getWidth(context, 60) * 0.5295950155763239)),
+                size: Size(getWidth(context, 60),
+                    (getWidth(context, 60) * 0.5295950155763239)),
                 painter: RPSCustomPainter(_animation_fill.value),
               ),
             ),
@@ -72,9 +97,13 @@ class _SplashScreensState extends State<SplashScreens>
                       padding: const EdgeInsets.all(15),
                       width: getWidth(context, 55),
                       child: SvgPicture.asset('assets/imgs/splash_logo.svg')),
-                  const SizedBox(height: 6,),
-                  Text('Do Decorly', style: apps_name.copyWith(color: white_cr),)
-                  
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  Text(
+                    'Do-Decorly',
+                    style: apps_name.copyWith(color: (_controller_fill.value >= 0.7 ? _color.value : Colors.transparent )),
+                  )
                 ],
               ),
             ),
@@ -100,14 +129,15 @@ class RPSCustomPainter extends CustomPainter {
     double value3 = _fill_value;
     double value4 = _fill_value;
     double value5 = _fill_value;
-    path_0.moveTo(size.width * (0.9840966 + value * 1.5), size.height * 0.5435406);
+    path_0.moveTo(
+        size.width * (0.9840966 + value * 1.5), size.height * 0.5435406);
 
     // right top
     path_0.cubicTo(
-        size.width * (0.9840966 + value * 1.5 ),
+        size.width * (0.9840966 + value * 1.5),
         size.height * (0.5435406 - value * 0.5),
         size.width * (0.8980717 + value * 1.1),
-        size.height * (0.1804371 - value ),
+        size.height * (0.1804371 - value),
         size.width * (0.6841028 + value * 1.4),
         size.height * (0.07082059 - value * 0.9));
     // top left
@@ -124,16 +154,16 @@ class RPSCustomPainter extends CustomPainter {
         size.height * (0.2677912 - value2 * 2.3),
         size.width * (0.1249134 - value2 * 1.5),
         size.height * (0.4869312 - value2 * 2),
-        size.width * (0.05322617 - value2 * 1.5 ),
+        size.width * (0.05322617 - value2 * 1.5),
         size.height * (0.6034941 - 0));
 
     // left bot
     path_0.cubicTo(
         size.width * (-0.01846103 - value3 * 1.5),
         size.height * (0.7200588 + value3 * 1),
-        size.width * (-0.05927726 - value3 * 2 ),
+        size.width * (-0.05927726 - value3 * 2),
         size.height * (0.8826882 + value3 * 2),
-        size.width * (0.2120433 - value3 * 1.5 ),
+        size.width * (0.2120433 - value3 * 1.5),
         size.height * (0.9683412 + value3 * 2.1));
 
     // bot right
@@ -147,9 +177,9 @@ class RPSCustomPainter extends CustomPainter {
 
     // right bot
     path_0.cubicTo(
-        size.width * (0.9157103 + value5 * 0.9 ),
+        size.width * (0.9157103 + value5 * 0.9),
         size.height * (0.9683176 + value5 * 0.9),
-        size.width * (1.039252 + value5 * 1 ),
+        size.width * (1.039252 + value5 * 1),
         size.height * (0.8587471 + value5 * 0.5),
         size.width * (0.9840966 + value5 * 1.5),
         size.height * (0.5435406 + value5));
