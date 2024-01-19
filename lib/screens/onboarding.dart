@@ -6,7 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class OnboardingItem {
   final String title;
   final String desc;
-  OnboardingItem({required this.title, required this.desc});
+  final List position;
+  OnboardingItem(
+      {required this.title, required this.desc, required this.position});
 }
 
 class OnBoardingIndicator extends StatelessWidget {
@@ -14,21 +16,24 @@ class OnBoardingIndicator extends StatelessWidget {
   final List<OnboardingItem> onboarding_list = [
     OnboardingItem(
         title: "Unique furniture,",
-        desc:
-            "make your home speaks with items from a variety of home brands."),
+        desc: "make your home speaks with items from a variety of home brands.",
+        position: [-40, 40, 100, 100]),
     OnboardingItem(
         title: "View in a room,",
         desc:
-            "3d feature allows you efficiently visualize and arrange items within your space."),
+            "3d feature allows you efficiently visualize and arrange items within your space.",
+        position: [-100, -15, 100, 100]),
     OnboardingItem(
         title: "Design Consultations,",
-        desc: "Contact directly to any professional interior designer."),
+        desc: "Contact directly to any professional interior designer.",
+        position: [-100, -100, 0, 100]),
     OnboardingItem(
         title: "Articles about design,",
         desc:
-            "keep up-to-date on the latest news and updates related to decore and design."),
+            "keep up-to-date on the latest news and updates related to decore and design.",
+        position: [-100, -100, -100, 0]),
   ];
-  PageController _pageController = PageController(initialPage: 0);
+  final PageController _pageController = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,65 +114,93 @@ class OnBoardingIndicator extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Stack(
-                fit: StackFit.expand,
-                alignment: Alignment.center,
-                children: [
-                  // BlocListener<OnboardingCubit, OnboardingState>(
-                  //   listener: (context, state) {
-                  //     print("terjadi perubahan ${_pageController.page}");
-                  //     // if (state.value - _pageController.page.value == 1) {
+              child: BlocBuilder<OnboardingCubit, OnboardingState>(
+                builder: (context, state) {
+                  return Stack(
+                    fit: StackFit.expand,
+                    alignment: Alignment.center,
+                    children: [
+                      // BlocListener<OnboardingCubit, OnboardingState>(
+                      //   listener: (context, state) {
+                      //     print("terjadi perubahan ${_pageController.page}");
+                      //     // if (state.value - _pageController.page.value == 1) {
 
-                  //     // } else {
+                      //     // } else {
 
-                  //     // }
-                  //   },
-                  //   child: PageView(
-                  //     controller: _pageController,
-                  //     children: [
-                  //       Image.asset("assets/imgs/onboarding_item1.png"),
-                  //       Image.asset("assets/imgs/onboarding_item1.png"),
-                  //       Image.asset("assets/imgs/onboarding_item1.png"),
-                  //       Image.asset("assets/imgs/onboarding_item1.png"),
+                      //     // }
+                      //   },
+                      //   child: PageView(
+                      //     controller: _pageController,
+                      //     children: [
+                      //       Image.asset("assets/imgs/onboarding_item1.png"),
+                      //       Image.asset("assets/imgs/onboarding_item1.png"),
+                      //       Image.asset("assets/imgs/onboarding_item1.png"),
+                      //       Image.asset("assets/imgs/onboarding_item1.png"),
 
-                  //     ],
-                  //   ),
-                  // ),
-                  AnimatedPositioned(
-                      bottom: getHeight(context, 5),
-                      right: -getWidth(context, 40),
-                      duration: const Duration(milliseconds: 290),
-                      child: Image.asset(
-                        "assets/imgs/onboarding_item1.png",
-                        width: getWidth(context, 100),
-                      )),
-                  AnimatedPositioned(
-                      bottom: 0,
-                      right: -getWidth(context, 15),
-                      duration: const Duration(milliseconds: 290),
-                      child: Image.asset(
-                        "assets/imgs/onboarding_item2.png",
-                        width: getWidth(context, 80),
-                      )),
-                  Positioned(
-                    top: 0,
-                    right: 10,
-                    child: SizedBox(
-                      height: 30,
-                      width: 30,
-                      child: OutlinedButton(
-                          onPressed: () {
-                            print("Button onboarding pressed !!");
-                            BlocProvider.of<OnboardingCubit>(context)
-                                .next(_pageController);
-                          },
-                          style: OutlinedButton.styleFrom(
-                              backgroundColor: Colors.yellow.shade800,
-                              padding: const EdgeInsets.all(0)),
-                          child: const Text('>')),
-                    ),
-                  ),
-                ],
+                      //     ],
+                      //   ),
+                      // ),
+                      AnimatedPositioned(
+                          bottom: getHeight(context, 5),
+                          right: getWidth(context,
+                              onboarding_list[0].position[state.value]),
+                          duration: const Duration(milliseconds: 290),
+                          child: Image.asset(
+                            "assets/imgs/onboarding_item1.png",
+                            width: getWidth(context, 100),
+                          )),
+                      AnimatedPositioned(
+                          bottom: 0,
+                          right: getWidth(context,
+                              onboarding_list[1].position[state.value]),
+                          duration: const Duration(milliseconds: 290),
+                          child: Image.asset(
+                            "assets/imgs/onboarding_item2.png",
+                            width: getWidth(context, 80),
+                          )),
+                      AnimatedPositioned(
+                          bottom: 0,
+                          right: state.value == 2
+                              ? null
+                              : getWidth(context,
+                                  onboarding_list[2].position[state.value]),
+                          duration: const Duration(milliseconds: 290),
+                          child: Image.asset(
+                            "assets/imgs/onboarding_item3.png",
+                            width: getWidth(context, 70),
+                          )),
+                      AnimatedPositioned(
+                          bottom: 0,
+                          right: state.value == 3
+                              ? null
+                              : getWidth(context,
+                                  onboarding_list[3].position[state.value]),
+                          duration: const Duration(milliseconds: 290),
+                          child: Image.asset(
+                            "assets/imgs/onboarding_item4.png",
+                            width: getWidth(context, 80),
+                          )),
+                      Positioned(
+                        top: 0,
+                        right: 10,
+                        child: SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: OutlinedButton(
+                              onPressed: () {
+                                print("Button onboarding pressed !!");
+                                BlocProvider.of<OnboardingCubit>(context)
+                                    .next(_pageController);
+                              },
+                              style: OutlinedButton.styleFrom(
+                                  backgroundColor: Colors.yellow.shade800,
+                                  padding: const EdgeInsets.all(0)),
+                              child: const Text('>')),
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
             )
           ],
