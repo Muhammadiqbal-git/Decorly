@@ -2,10 +2,10 @@
 void double() {
   const int apel = 10;
   int jambu = 5;
-  int paket_b = (2*apel) + jambu;
+  int paketB = (2*apel) + jambu;
   print("harga apel sebelum diubah $apel");
-  print("harga apel sebelum diubah $paket_b");
+  print("harga apel sebelum diubah $paketB");
 
-  int apel_palsu = 5;
-  print("harga apel setelah $paket_b");
+  int apelPalsu = 5;
+  print("harga apel setelah $paketB");
 }

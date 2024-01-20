@@ -1,4 +1,3 @@
-import 'package:decorly/screens/onboarding.dart';
 import 'package:decorly/screens/splash.dart';
 import 'package:decorly/theme.dart';
 import 'package:flutter/cupertino.dart';

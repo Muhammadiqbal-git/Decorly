@@ -1,6 +1,4 @@
 import 'package:decorly/bloc/onboarding_cubit.dart';
-import 'package:decorly/screens/onboarding.dart';
-import 'package:decorly/screens/splash.dart';
 import 'package:decorly/test_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

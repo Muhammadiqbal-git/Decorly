@@ -70,7 +70,7 @@ class OnBoardingIndicator extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
+                  SizedBox(
                     height: getHeight(context, 20),
                     child: BlocBuilder<OnboardingCubit, OnboardingState>(
                       builder: (context, state) {
@@ -92,7 +92,7 @@ class OnBoardingIndicator extends StatelessWidget {
                   SizedBox(height: getHeight(context, 3)),
                   BlocBuilder<OnboardingCubit, OnboardingState>(
                     builder: (context, state) {
-                      print('State number ' + state.value.toString());
+                      print('State number ${state.value}');
                       return Row(
                         children: List.generate(
                           4,
