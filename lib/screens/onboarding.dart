@@ -28,7 +28,7 @@ class OnBoardingIndicator extends StatelessWidget {
         desc:
             "keep up-to-date on the latest news and updates related to decore and design."),
   ];
-  PageController _pageController = PageController(initialPage: 0);
+  final PageController _pageController = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +65,7 @@ class OnBoardingIndicator extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
+                  SizedBox(
                     height: getHeight(context, 20),
                     child: BlocBuilder<OnboardingCubit, OnboardingState>(
                       builder: (context, state) {
@@ -87,7 +87,7 @@ class OnBoardingIndicator extends StatelessWidget {
                   SizedBox(height: getHeight(context, 3)),
                   BlocBuilder<OnboardingCubit, OnboardingState>(
                     builder: (context, state) {
-                      print('State number ' + state.value.toString());
+                      print('State number ${state.value}');
                       return Row(
                         children: List.generate(
                           4,

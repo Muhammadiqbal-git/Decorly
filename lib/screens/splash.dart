@@ -1,11 +1,7 @@
 import 'package:decorly/screens/onboarding.dart';
 import 'package:decorly/theme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'dart:io';
 
 class SplashScreens extends StatefulWidget {
   final double screen_height;
@@ -27,7 +23,7 @@ class _SplashScreensState extends State<SplashScreens>
     super.initState();
     _controller_fill =
         AnimationController(vsync: this, duration: const Duration(seconds: 3));
-    _animation_fill = Tween<double>(begin: 0, end: 1.25).animate(
+    _animation_fill = Tween<double>(begin: 0, end: (2.10 - getScreenHeight(1))).animate(
         CurvedAnimation(
             parent: _controller_fill,
             curve: const Interval(0.4, 0.90, curve: Curves.easeOutQuart)))
@@ -41,7 +37,7 @@ class _SplashScreensState extends State<SplashScreens>
             PageRouteBuilder(
                 pageBuilder: (context, animation, secondaryAnimation) =>
                     OnBoardingIndicator(),
-                transitionDuration: Duration(seconds: 2),
+                transitionDuration: const Duration(seconds: 2),
                 transitionsBuilder:
                     (context, animation, secondaryAnimation, child) =>
                         FadeTransition(
@@ -69,7 +65,7 @@ class _SplashScreensState extends State<SplashScreens>
 
   @override
   Widget build(BuildContext context) {
-    print("tes ${_controller_fill.value}");
+    print("tes ${_animation_fill.value}");
     return Scaffold(
       backgroundColor: white_cr,
       body: Center(
@@ -185,9 +181,9 @@ class RPSCustomPainter extends CustomPainter {
         size.height * (0.5435406 + value5));
     path_0.close();
 
-    Paint paint_0_fill = Paint()..style = PaintingStyle.fill;
-    paint_0_fill.color = light_primary_cr;
-    canvas.drawPath(path_0, paint_0_fill);
+    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
+    paint0Fill.color = light_primary_cr;
+    canvas.drawPath(path_0, paint0Fill);
   }
 
   @override
