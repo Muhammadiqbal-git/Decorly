@@ -2,13 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Color primary_cr = const Color(0xFF317865);
-Color light_primary_cr = const Color(0xFFC9D9D2);
-Color secondary_cr = const Color(0xFFFFA892);
-Color text_cr = const Color(0xFF313131);
-Color subtle_text_cr = const Color(0xFF919191);
-Color accent_cr = const Color(0xFFEFF1ED);
-Color white_cr = const Color(0xFFFFFFFF);
+const Color primary_cr = Color(0xFF317865);
+const Color light_primary_cr = Color(0xFFC9D9D2);
+const Color secondary_cr = Color(0xFFFFA892);
+const Color text_cr = Color(0xFF313131);
+const Color subtle_text_cr = Color(0xFF919191);
+const Color accent_cr = Color(0xFFEFF1ED);
+const Color white_cr = Color(0xFFFFFFFF);
 
 TextStyle apps_name = GoogleFonts.gochiHand(fontSize: 24);
 TextStyle display =
@@ -36,11 +36,39 @@ double getHeight(BuildContext context, int size) {
   return MediaQuery.of(context).size.height * (size / 100);
 }
 
-double getScreenHeight(double size) {
-  print(
-      "height ${PlatformDispatcher.instance.views.first.physicalSize.height}");
-  print("height ${PlatformDispatcher.instance.views.first.physicalSize.width}");
-
+double getScreenRatio(double size) {
   return PlatformDispatcher.instance.views.first.physicalSize.width /
-      PlatformDispatcher.instance.views.first.physicalSize.height;
+      PlatformDispatcher.instance.views.first.physicalSize.height *
+      (size / 100);
+}
+
+class ButtonPainter extends CustomPainter {
+  final Color color;
+  final double opacity;
+  ButtonPainter({required this.color, this.opacity = 1.0});
+  @override
+  void paint(
+    Canvas canvas,
+    Size size,
+  ) {
+    Path path_0 = Path();
+    path_0.moveTo(0, 12);
+    path_0.cubicTo(0, 5.37258, 5.37258, 0, 12, 0);
+    path_0.lineTo(size.width, 0);
+    path_0.lineTo(size.width, size.height - 12);
+    path_0.cubicTo(size.width, size.height - 5.3726, size.width - 5.3726,
+        size.height, size.width - 12, size.height);
+    path_0.lineTo(0, size.height);
+
+    path_0.close();
+
+    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
+    paint0Fill.color = color.withOpacity(opacity);
+    canvas.drawPath(path_0, paint0Fill);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
 }

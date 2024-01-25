@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SplashScreens extends StatefulWidget {
-  final double screen_height;
-  const SplashScreens({Key? key, required this.screen_height})
+  final double screenHeight;
+  const SplashScreens({Key? key, required this.screenHeight})
       : super(key: key);
 
   @override
@@ -23,7 +23,7 @@ class _SplashScreensState extends State<SplashScreens>
     super.initState();
     _controller_fill =
         AnimationController(vsync: this, duration: const Duration(seconds: 3));
-    _animation_fill = Tween<double>(begin: 0, end: (2.10 - getScreenHeight(1))).animate(
+    _animation_fill = Tween<double>(begin: 0, end: (2.07 - getScreenRatio(1))).animate(
         CurvedAnimation(
             parent: _controller_fill,
             curve: const Interval(0.4, 0.90, curve: Curves.easeOutQuart)))
@@ -49,7 +49,7 @@ class _SplashScreensState extends State<SplashScreens>
     _color = ColorTween(begin: light_primary_cr, end: primary_cr).animate(
         CurvedAnimation(
             parent: _controller_fill,
-            curve: const Interval(0.75, 0.85, curve: Curves.easeInCirc)))
+            curve: const Interval(0.73, 0.88, curve: Curves.easeInCirc)))
       ..addListener(() {
         setState(() {});
       });
@@ -81,10 +81,6 @@ class _SplashScreensState extends State<SplashScreens>
                 painter: RPSCustomPainter(_animation_fill.value),
               ),
             ),
-            // Container(
-            //   color: primary_cr,
-            //   width: getWidth(context, 100),
-            // ),
             Positioned(
               top: getHeight(context, 35),
               child: Column(
@@ -97,7 +93,7 @@ class _SplashScreensState extends State<SplashScreens>
                     height: 6,
                   ),
                   Text(
-                    'Do-Decorly',
+                    'DO - Decorly',
                     style: apps_name.copyWith(color: (_controller_fill.value >= 0.7 ? _color.value : Colors.transparent )),
                   )
                 ],

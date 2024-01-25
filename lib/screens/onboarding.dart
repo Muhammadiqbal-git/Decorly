@@ -1,5 +1,6 @@
 import 'package:decorly/bloc/onboarding_cubit.dart';
 import 'package:decorly/theme.dart';
+import 'package:decorly/widgets/button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,21 +18,31 @@ class OnBoardingIndicator extends StatelessWidget {
     OnboardingItem(
         title: "Unique furniture,",
         desc: "make your home speaks with items from a variety of home brands.",
-        position: [-40, 40, 100, 100]),
+        position: [-25, 60, 160, 160]),
     OnboardingItem(
         title: "View in a room,",
         desc:
             "3d feature allows you efficiently visualize and arrange items within your space.",
-        position: [-100, -15, 100, 100]),
+        position: [-100, -15, 95, 115]),
     OnboardingItem(
         title: "Design Consultations,",
         desc: "Contact directly to any professional interior designer.",
-        position: [-100, -100, 0, 100]),
+        position: [
+          [120, -100],
+          [120, -100],
+          [13, 13],
+          [-100, 120]
+        ]),
     OnboardingItem(
         title: "Articles about design,",
         desc:
             "keep up-to-date on the latest news and updates related to decore and design.",
-        position: [-100, -100, -100, 0]),
+        position: [
+          [120, -100],
+          [120, -100],
+          [120, -100],
+          [10, 10]
+        ]),
   ];
   final PageController _pageController = PageController(initialPage: 0);
   @override
@@ -47,13 +58,12 @@ class OnBoardingIndicator extends StatelessWidget {
             onPressed: (() {
               BlocProvider.of<OnboardingCubit>(context)
                   .previous(_pageController);
-              print("pressed");
             }),
             icon: const ImageIcon(AssetImage('assets/imgs/back_arrow.png'))),
         actions: [
           TextButton(
               onPressed: (() {
-                print("skip pressed");
+                //TODO SKIP
               }),
               style: const ButtonStyle(
                   splashFactory: NoSplash.splashFactory,
@@ -71,7 +81,7 @@ class OnBoardingIndicator extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: getHeight(context, 20),
+                    height: 130,
                     child: BlocBuilder<OnboardingCubit, OnboardingState>(
                       builder: (context, state) {
                         return Column(
@@ -82,14 +92,20 @@ class OnBoardingIndicator extends StatelessWidget {
                             const SizedBox(
                               height: 20,
                             ),
-                            Text(onboarding_list[state.value].desc,
-                                style: desc.copyWith(color: white_cr))
+                            Text(
+                              onboarding_list[state.value].desc,
+                              style: desc.copyWith(color: white_cr),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 3,
+                            )
                           ],
                         );
                       },
                     ),
                   ),
-                  SizedBox(height: getHeight(context, 3)),
+                  SizedBox(
+                    height: getHeight(context, 6),
+                  ),
                   BlocBuilder<OnboardingCubit, OnboardingState>(
                     builder: (context, state) {
                       print('State number ${state.value}');
@@ -109,7 +125,7 @@ class OnBoardingIndicator extends StatelessWidget {
                       );
                     },
                   ),
-                  SizedBox(height: getHeight(context, 6)),
+                  SizedBox(height: getHeight(context, 3)),
                 ],
               ),
             ),
@@ -120,27 +136,8 @@ class OnBoardingIndicator extends StatelessWidget {
                     fit: StackFit.expand,
                     alignment: Alignment.center,
                     children: [
-                      // BlocListener<OnboardingCubit, OnboardingState>(
-                      //   listener: (context, state) {
-                      //     print("terjadi perubahan ${_pageController.page}");
-                      //     // if (state.value - _pageController.page.value == 1) {
-
-                      //     // } else {
-
-                      //     // }
-                      //   },
-                      //   child: PageView(
-                      //     controller: _pageController,
-                      //     children: [
-                      //       Image.asset("assets/imgs/onboarding_item1.png"),
-                      //       Image.asset("assets/imgs/onboarding_item1.png"),
-                      //       Image.asset("assets/imgs/onboarding_item1.png"),
-                      //       Image.asset("assets/imgs/onboarding_item1.png"),
-
-                      //     ],
-                      //   ),
-                      // ),
                       AnimatedPositioned(
+                          curve: Curves.easeInOut,
                           bottom: getHeight(context, 5),
                           right: getWidth(context,
                               onboarding_list[0].position[state.value]),
@@ -150,54 +147,71 @@ class OnBoardingIndicator extends StatelessWidget {
                             width: getWidth(context, 100),
                           )),
                       AnimatedPositioned(
+                          curve: Curves.easeInOut,
                           bottom: 0,
                           right: getWidth(context,
                               onboarding_list[1].position[state.value]),
                           duration: const Duration(milliseconds: 290),
                           child: Image.asset(
                             "assets/imgs/onboarding_item2.png",
-                            width: getWidth(context, 80),
+                            width: getWidth(context, 90),
                           )),
                       AnimatedPositioned(
+                          curve: Curves.easeInOut,
                           bottom: 0,
-                          right: state.value == 2
-                              ? null
-                              : getWidth(context,
-                                  onboarding_list[2].position[state.value]),
-                          duration: const Duration(milliseconds: 290),
+                          left: getWidth(context,
+                              onboarding_list[2].position[state.value][0]),
+                          right: getWidth(context,
+                              onboarding_list[2].position[state.value][1]),
+                          duration: const Duration(milliseconds: 310),
                           child: Image.asset(
                             "assets/imgs/onboarding_item3.png",
-                            width: getWidth(context, 70),
+                            width: getWidth(context, 100),
                           )),
                       AnimatedPositioned(
+                          curve: Curves.easeInOut,
                           bottom: 0,
-                          right: state.value == 3
-                              ? null
-                              : getWidth(context,
-                                  onboarding_list[3].position[state.value]),
-                          duration: const Duration(milliseconds: 290),
+                          left: getWidth(context,
+                              onboarding_list[3].position[state.value][0]),
+                          right: getWidth(context,
+                              onboarding_list[3].position[state.value][1]),
+                          duration: const Duration(milliseconds: 310),
                           child: Image.asset(
                             "assets/imgs/onboarding_item4.png",
                             width: getWidth(context, 80),
                           )),
                       Positioned(
-                        top: 0,
-                        right: 10,
-                        child: SizedBox(
-                          height: 30,
-                          width: 30,
-                          child: OutlinedButton(
-                              onPressed: () {
-                                print("Button onboarding pressed !!");
-                                BlocProvider.of<OnboardingCubit>(context)
-                                    .next(_pageController);
-                              },
-                              style: OutlinedButton.styleFrom(
-                                  backgroundColor: Colors.yellow.shade800,
-                                  padding: const EdgeInsets.all(0)),
-                              child: const Text('>')),
-                        ),
+                        top: getHeight(context, 5),
+                        right: 0,
+                        child: Padding(
+                            padding: const EdgeInsets.only(right: 16),
+                            child: CustomButton(
+                                function: () {
+                                  BlocProvider.of<OnboardingCubit>(context)
+                                      .next(_pageController);
+                                },
+                                colorButton: white_cr,
+                                heightButton: 48,
+                                widthButton: 48,
+                                opacityButton: 0.86,
+                                childButton: const ImageIcon(
+                                    AssetImage("assets/imgs/forward_arrow.png"),
+                                    color: primary_cr))),
                       ),
+                      SizedBox.expand(
+                        child: GestureDetector(
+                          onHorizontalDragEnd: (details) {
+                            int sens = 50;
+                            if (details.primaryVelocity! > sens) {
+                              BlocProvider.of<OnboardingCubit>(context)
+                                  .previous(_pageController);
+                            } else if (details.primaryVelocity! < -sens) {
+                              BlocProvider.of<OnboardingCubit>(context)
+                                  .next(_pageController);
+                            }
+                          },
+                        ),
+                      )
                     ],
                   );
                 },
