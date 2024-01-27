@@ -1,9 +1,11 @@
 import 'package:decorly/theme.dart';
+import 'package:decorly/widgets/form_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  TextEditingController _emailTextController = TextEditingController();
+  LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +26,8 @@ class LoginPage extends StatelessWidget {
                 "DO - Decorly",
                 style: apps_name.copyWith(color: primary_cr, fontSize: 18),
               ),
-              const SizedBox(
-                height: 25,
+              SizedBox(
+                height: 25 + getHeight(context, 1),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -67,7 +69,9 @@ class LoginPage extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(height: 30,),
+              SizedBox(
+                height: 30,
+              ),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Column(
@@ -77,8 +81,18 @@ class LoginPage extends StatelessWidget {
                       "Welcome back \nYou've been missed!",
                       style: body_1,
                     ),
-                    SizedBox(height: 30,),
-                    Text("Email", style: body_2,)
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Text(
+                      "Email",
+                      style: body_2,
+                    ),
+                    CustomForm(
+                      logo: AssetImage("assets/imgs/msg.png"),
+                      isObsecure: false,
+                      textEditingController: _emailTextController,
+                    )
                   ],
                 ),
               )

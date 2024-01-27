@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SplashScreens extends StatefulWidget {
-  final double screenHeight;
-  const SplashScreens({Key? key, required this.screenHeight})
+  const SplashScreens({Key? key})
       : super(key: key);
 
   @override
@@ -23,7 +22,7 @@ class _SplashScreensState extends State<SplashScreens>
     super.initState();
     _controller_fill =
         AnimationController(vsync: this, duration: const Duration(seconds: 3));
-    _animation_fill = Tween<double>(begin: 0, end: (2.07 - getScreenRatio(1))).animate(
+    _animation_fill = Tween<double>(begin: 0, end: (1.10 + getScreenRatio(100))).animate(
         CurvedAnimation(
             parent: _controller_fill,
             curve: const Interval(0.4, 0.90, curve: Curves.easeOutQuart)))
