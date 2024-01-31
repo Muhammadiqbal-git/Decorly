@@ -24,16 +24,28 @@ TextStyle caption_1 =
 /// Takes [context] and a [size] representing the desired percentage of the screen width.
 /// [size] argument must be in range 1-100 whereas 1 for the minimum width pixels and 100 for the maximum.
 /// Returns [double] representing the calculated width in logical pixels.
-double getWidth(BuildContext context, int size) {
-  return MediaQuery.of(context).size.width * (size / 100);
+double getWidth(int size) {
+  return (WidgetsBinding
+              .instance.platformDispatcher.views.first.physicalSize.width /
+          WidgetsBinding
+              .instance.platformDispatcher.views.first.devicePixelRatio) *
+      (size / 100);
+
+  // return 10.0;
 }
 
 /// Return the specific percentage of the screen height
 /// Takes [context] and a [size] representing the desired percentage of the screen height.
 /// [size] argument must be in range 1-100 whereas 1 for the minimum height pixels and 100 for the maximum.
 /// Returns [double] representing the calculated height in logical pixels.
-double getHeight(BuildContext context, int size) {
-  return MediaQuery.of(context).size.height * (size / 100);
+double getHeight(int size) {
+  // return MediaQuery.of(context).size.height * (size / 100);
+  return (WidgetsBinding
+              .instance.platformDispatcher.views.first.physicalSize.height /
+          WidgetsBinding
+              .instance.platformDispatcher.views.first.devicePixelRatio) *
+      (size / 100);
+  // return 10.0;
 }
 
 double getScreenRatio(double size) {

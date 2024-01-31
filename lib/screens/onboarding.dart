@@ -1,6 +1,7 @@
 import 'package:decorly/bloc/onboarding_cubit.dart';
+import 'package:decorly/screens/login_page.dart';
 import 'package:decorly/theme.dart';
-import 'package:decorly/widgets/button_widget.dart';
+import 'package:decorly/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -63,7 +64,9 @@ class OnBoardingIndicator extends StatelessWidget {
         actions: [
           TextButton(
               onPressed: (() {
-                //TODO SKIP
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => LoginPage(),
+                ));
               }),
               style: const ButtonStyle(
                   splashFactory: NoSplash.splashFactory,
@@ -104,7 +107,7 @@ class OnBoardingIndicator extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: getHeight(context, 6),
+                    height: getHeight(6),
                   ),
                   BlocBuilder<OnboardingCubit, OnboardingState>(
                     builder: (context, state) {
@@ -125,7 +128,7 @@ class OnBoardingIndicator extends StatelessWidget {
                       );
                     },
                   ),
-                  SizedBox(height: getHeight(context, 3)),
+                  SizedBox(height: getHeight(3)),
                 ],
               ),
             ),
@@ -138,65 +141,89 @@ class OnBoardingIndicator extends StatelessWidget {
                     children: [
                       AnimatedPositioned(
                           curve: Curves.easeInOut,
-                          bottom: getHeight(context, 5),
-                          right: getWidth(context,
+                          bottom: getHeight( 5),
+                          right: getWidth(
                               onboarding_list[0].position[state.value]),
                           duration: const Duration(milliseconds: 290),
                           child: Image.asset(
                             "assets/imgs/onboarding_item1.png",
-                            width: getWidth(context, 100),
+                            width: getWidth( 100),
                           )),
                       AnimatedPositioned(
                           curve: Curves.easeInOut,
                           bottom: 0,
-                          right: getWidth(context,
+                          right: getWidth(
                               onboarding_list[1].position[state.value]),
                           duration: const Duration(milliseconds: 290),
                           child: Image.asset(
                             "assets/imgs/onboarding_item2.png",
-                            width: getWidth(context, 90),
+                            width: getWidth( 90),
                           )),
                       AnimatedPositioned(
                           curve: Curves.easeInOut,
                           bottom: 0,
-                          left: getWidth(context,
+                          left: getWidth(
                               onboarding_list[2].position[state.value][0]),
-                          right: getWidth(context,
+                          right: getWidth(
                               onboarding_list[2].position[state.value][1]),
                           duration: const Duration(milliseconds: 310),
                           child: Image.asset(
                             "assets/imgs/onboarding_item3.png",
-                            width: getWidth(context, 100),
+                            width: getWidth( 100),
                           )),
                       AnimatedPositioned(
                           curve: Curves.easeInOut,
                           bottom: 0,
-                          left: getWidth(context,
+                          left: getWidth(
                               onboarding_list[3].position[state.value][0]),
-                          right: getWidth(context,
+                          right: getWidth(
                               onboarding_list[3].position[state.value][1]),
                           duration: const Duration(milliseconds: 310),
                           child: Image.asset(
                             "assets/imgs/onboarding_item4.png",
-                            width: getWidth(context, 80),
+                            width: getWidth( 80),
                           )),
                       Positioned(
-                        top: getHeight(context, 5),
+                        top: getHeight( 5),
                         right: 0,
                         child: Padding(
                             padding: const EdgeInsets.only(right: 16),
-                            child: CustomButton(
-                                function: () {
-                                  BlocProvider.of<OnboardingCubit>(context)
-                                      .next(_pageController);
-                                },
-                                colorButton: white_cr,
-                                heightButton: 48,
-                                widthButton: 48,
-                                opacityButton: 0.86,
-                                childButton: const ImageIcon(
-                                    AssetImage("assets/imgs/forward_arrow.png"),
-                                    color: primary_cr))),
+                            child:
+                                BlocBuilder<OnboardingCubit, OnboardingState>(
+                              builder: (context, state) {
+                                if (state.value == 3) {
+                                  return CustomButton(
+                                      function: () {
+                                        Navigator.of(context)
+                                            .pushReplacement(MaterialPageRoute(
+                                          builder: (context) => LoginPage(),
+                                        ));
+                                      },
+                                      colorButton: white_cr,
+                                      heightButton: 48,
+                                      widthButton: 128,
+                                      opacityButton: 0.90,
+                                      childButton: Text(
+                                        "Get Started",
+                                        style:
+                                            body_1.copyWith(color: primary_cr),
+                                      ));
+                                } else {}
+                                return CustomButton(
+                                    function: () {
+                                      BlocProvider.of<OnboardingCubit>(context)
+                                          .next(_pageController);
+                                    },
+                                    colorButton: white_cr,
+                                    heightButton: 48,
+                                    widthButton: 48,
+                                    opacityButton: 0.86,
+                                    childButton: const ImageIcon(
+                                        AssetImage(
+                                            "assets/imgs/forward_arrow.png"),
+                                        color: primary_cr));
+                              },
+                            )),
                       ),
                       SizedBox.expand(
                         child: GestureDetector(

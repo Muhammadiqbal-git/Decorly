@@ -73,20 +73,20 @@ class _SplashScreensState extends State<SplashScreens>
           alignment: Alignment.center,
           children: [
             Positioned(
-              top: getHeight(context, 35),
+              top: getHeight(35),
               child: CustomPaint(
-                size: Size(getWidth(context, 60),
-                    (getWidth(context, 60) * 0.5295950155763239)),
+                size: Size(getWidth(60),
+                    (getWidth(60) * 0.5295950155763239)),
                 painter: RPSCustomPainter(_animation_fill.value),
               ),
             ),
             Positioned(
-              top: getHeight(context, 35),
+              top: getHeight(35),
               child: Column(
                 children: [
                   Container(
                       padding: const EdgeInsets.all(15),
-                      width: getWidth(context, 55),
+                      width: getWidth(55),
                       child: SvgPicture.asset('assets/imgs/splash_logo.svg')),
                   const SizedBox(
                     height: 6,
