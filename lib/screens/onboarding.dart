@@ -195,9 +195,7 @@ class OnBoardingIndicator extends StatelessWidget {
                                   return CustomButton(
                                       function: () {
                                         Navigator.of(context)
-                                            .pushReplacement(MaterialPageRoute(
-                                          builder: (context) => LoginPage(),
-                                        ));
+                                            .pushReplacementNamed("/login");
                                       },
                                       colorButton: white_cr,
                                       heightButton: 48,

@@ -56,8 +56,14 @@ double getScreenRatio(double size) {
 
 class ButtonPainter extends CustomPainter {
   final Color color;
+  final Color? borderColor;
   final double opacity;
-  ButtonPainter({required this.color, this.opacity = 1.0});
+  final double borderWidth;
+  ButtonPainter(
+      {required this.color,
+      this.borderColor,
+      this.opacity = 1.0,
+      this.borderWidth = 2});
   @override
   void paint(
     Canvas canvas,
@@ -74,9 +80,23 @@ class ButtonPainter extends CustomPainter {
 
     path_0.close();
 
-    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
-    paint0Fill.color = color.withOpacity(opacity);
-    canvas.drawPath(path_0, paint0Fill);
+    if (color != Colors.transparent) {
+      Paint paint0Fill = Paint()..style = PaintingStyle.fill;
+      paint0Fill.color = color.withOpacity(opacity);
+      canvas.drawPath(path_0, paint0Fill);
+    }
+
+    Paint borderPaint = Paint()..style = PaintingStyle.stroke;
+    double borderOpacity = 1;
+    if (borderColor != null) {
+      borderOpacity = opacity;
+    } else if (borderColor == null && opacity != 1.0) {
+      borderOpacity = 0;
+    }
+    borderPaint.strokeWidth = borderWidth;
+    borderPaint.color = borderColor ?? color;
+    borderPaint.color = borderPaint.color.withOpacity(borderOpacity);
+    canvas.drawPath(path_0, borderPaint);
   }
 
   @override

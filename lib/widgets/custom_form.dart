@@ -5,6 +5,7 @@ class CustomForm extends StatefulWidget {
   final AssetImage logo;
   final TextInputAction textInputAction;
   final TextEditingController textEditingController;
+  final TextStyle? inputStyle;
   final String hintText;
   final Color backgroundColor;
   final double borderRadius;
@@ -15,6 +16,7 @@ class CustomForm extends StatefulWidget {
     required this.logo,
     required this.textEditingController,
     required this.textInputAction,
+    this.inputStyle,
     this.hintText = "",
     this.backgroundColor = accent_cr,
     this.borderRadius = 12,
@@ -28,7 +30,7 @@ class _CustomFormState extends State<CustomForm> {
   bool obscured = false;
   @override
   void initState() {
-    print("awal forms");
+    print("awal forms ${widget.isObsecure}");
     obscured = widget.isObsecure;
     super.initState();
   }
@@ -40,7 +42,7 @@ class _CustomFormState extends State<CustomForm> {
       height: 48,
       decoration: BoxDecoration(
         color: widget.backgroundColor,
-        borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius)),
+        borderRadius: BorderRadius.circular(widget.borderRadius),
       ),
       child: Row(
         children: [
@@ -58,6 +60,7 @@ class _CustomFormState extends State<CustomForm> {
               },
               obscureText: obscured,
               textInputAction: widget.textInputAction,
+              style: widget.inputStyle ?? body_2.copyWith(fontSize: 16, color: text_cr),
               decoration: InputDecoration(
                   hintText: widget.hintText,
                   hintStyle: caption_1.copyWith(color: subtle_text_cr),

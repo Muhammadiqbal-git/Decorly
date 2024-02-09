@@ -1,8 +1,12 @@
+import 'package:decorly/bloc/login_page_cubit.dart';
+import 'package:decorly/bloc/term_cubit.dart';
 import 'package:decorly/screens/reset/verif_email.dart';
+import 'package:decorly/screens/term_page.dart';
 import 'package:decorly/theme.dart';
 import 'package:decorly/widgets/custom_button.dart';
 import 'package:decorly/widgets/custom_form.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginPage extends StatefulWidget {
@@ -15,13 +19,24 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   late TextEditingController _emailTextController;
   late TextEditingController _passTextController;
+  late TextEditingController _nameTextController;
+  late TextEditingController _phoneTextController;
+  late TextEditingController _registPassTextController;
+  late PageController _pageController;
   late bool check;
+  late bool term;
+
   @override
   void initState() {
     print("awal page");
     _emailTextController = TextEditingController();
     _passTextController = TextEditingController();
+    _nameTextController = TextEditingController();
+    _phoneTextController = TextEditingController();
+    _registPassTextController = TextEditingController();
+    _pageController = PageController();
     check = false;
+    term = false;
     super.initState();
   }
 
@@ -30,6 +45,10 @@ class _LoginPageState extends State<LoginPage> {
     print("disposed");
     _emailTextController.dispose();
     _passTextController.dispose();
+    _nameTextController.dispose();
+    _phoneTextController.dispose();
+    _registPassTextController.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
@@ -38,214 +57,446 @@ class _LoginPageState extends State<LoginPage> {
     print("page kebuild lg");
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              SizedBox(
-                height: getHeight(6),
-              ),
-              SvgPicture.asset('assets/imgs/logo.svg'),
-              const SizedBox(
-                height: 4,
-              ),
-              Text(
-                "DO - Decorly",
-                style: apps_name.copyWith(color: primary_cr, fontSize: 18),
-              ),
-              SizedBox(
-                height: 25 + getHeight(1),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Column(
-                    children: [
-                      Text("Sign In",
-                          style: body_1.copyWith(color: primary_cr)),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Container(
-                          height: 5,
-                          width: 63,
-                          decoration: BoxDecoration(
-                              color: primary_cr,
-                              borderRadius: BorderRadius.circular(6))),
-                    ],
-                  ),
-                  const SizedBox(
-                    width: 77,
-                  ),
-                  Column(
-                    children: [
-                      Text(
-                        "Sign Out",
+        child: Column(
+          children: [
+            SizedBox(
+              height: getHeight(8),
+            ),
+            SvgPicture.asset('assets/imgs/logo.svg'),
+            const SizedBox(
+              height: 4,
+            ),
+            Text(
+              "DO - Decorly",
+              style: apps_name.copyWith(color: primary_cr, fontSize: 18),
+            ),
+            SizedBox(
+              height: 25 + getHeight(1),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    InkWell(
+                        overlayColor:
+                            const MaterialStatePropertyAll(Colors.transparent),
+                        splashFactory: NoSplash.splashFactory,
+                        onTap: () {
+                          BlocProvider.of<LoginPageCubit>(context)
+                              .changeState(false);
+                          // _pageController.previousPage(
+                          //     duration: Duration(milliseconds: 300),
+                          //     curve: Curves.linear);
+                        },
+                        child: Text("Sign In",
+                            style: body_1.copyWith(color: primary_cr))),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    BlocBuilder<LoginPageCubit, LoginPageState>(
+                      builder: (context, state) {
+                        return AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            height: 5,
+                            width: 63,
+                            decoration: BoxDecoration(
+                                color: state.nextPage
+                                    ? Colors.transparent
+                                    : primary_cr,
+                                borderRadius: BorderRadius.circular(6)));
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  width: 77,
+                ),
+                Column(
+                  children: [
+                    InkWell(
+                      overlayColor:
+                          const MaterialStatePropertyAll(Colors.transparent),
+                      splashFactory: NoSplash.splashFactory,
+                      onTap: () {
+                        BlocProvider.of<LoginPageCubit>(context)
+                            .changeState(true);
+                        // _pageController.nextPage(
+                        //     duration: Duration(milliseconds: 300),
+                        //     curve: Curves.linear);
+                      },
+                      child: Text(
+                        "Sign Up",
                         style: body_1.copyWith(color: primary_cr),
                       ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Container(
-                          height: 5,
-                          width: 63,
-                          decoration: BoxDecoration(
-                              color: primary_cr,
-                              borderRadius: BorderRadius.circular(6))),
-                    ],
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Welcome back \nYou've been missed!",
-                  style: body_1.copyWith(color: text_cr),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Email",
-                        style: body_2,
-                      ),
-                      const SizedBox(
-                        height: 7,
-                      ),
-                      CustomForm(
-                        logo: const AssetImage("assets/imgs/msg.png"),
-                        textEditingController: _emailTextController,
-                        textInputAction: TextInputAction.next,
-                        hintText: "Enter your email",
-                      ),
-                      const SizedBox(
-                        height: 25,
-                      ),
-                      Text(
-                        "Password",
-                        style: body_2,
-                      ),
-                      const SizedBox(
-                        height: 7,
-                      ),
-                      CustomForm(
-                        logo: const AssetImage("assets/imgs/lock.png"),
-                        isObsecure: true,
-                        textEditingController: _passTextController,
-                        textInputAction: TextInputAction.done,
-                        hintText: "Enter your password",
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    BlocBuilder<LoginPageCubit, LoginPageState>(
+                      builder: (context, state) {
+                        return AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            height: 5,
+                            width: 63,
+                            decoration: BoxDecoration(
+                                color: state.nextPage
+                                    ? primary_cr
+                                    : Colors.transparent,
+                                borderRadius: BorderRadius.circular(6)));
+                      },
+                    ),
+                  ],
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            Expanded(
+              child: BlocListener<LoginPageCubit, LoginPageState>(
+                listener: (context, state) {
+                  if (state.nextPage) {
+                    _pageController.animateToPage(1,
+                        duration: const Duration(milliseconds: 250),
+                        curve: Curves.easeOutCubic);
+                  } else {
+                    _pageController.animateToPage(0,
+                        duration: const Duration(milliseconds: 250),
+                        curve: Curves.easeOutCubic);
+                  }
+                },
+                child: PageView(
+                  controller: _pageController,
+                  onPageChanged: (value) {
+                    if (value == 1) {
+                      BlocProvider.of<LoginPageCubit>(context)
+                          .changeState(true);
+                      BlocProvider.of<TermCubit>(context).changeState(false);
+                    } else {
+                      BlocProvider.of<LoginPageCubit>(context)
+                          .changeState(false);
+                    }
+                  },
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(
-                            width: 1,
-                          ),
-                          SizedBox(
-                            width: 16,
-                            height: 16,
-                            child: Checkbox(
-                              splashRadius: 20.0,
-                              value: check,
-                              onChanged: (value) {
-                                setState(() {
-                                  check = !check;
-                                });
-                              },
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
                           Text(
-                            "Remember me!",
-                            style: caption_1.copyWith(
-                                fontSize: 11, color: subtle_text_cr),
+                            "Welcome back \nYou've been missed!",
+                            style: body_1.copyWith(color: text_cr),
                           ),
-                          const Spacer(),
-                          InkWell(
-                            overlayColor: const MaterialStatePropertyAll(
-                                Colors.transparent),
-                            splashFactory: NoSplash.splashFactory,
-                            onTap: () {
-                              print("forgot pressed");
-                              FocusScope.of(context).unfocus();
-                              Navigator.of(context).push(MaterialPageRoute(
-                                // maintainState: false,
-                                builder: (context) => const ResetEmailVerif(),
-                              ));
-                            },
-                            child: Text(
-                              "Forgot password?",
-                              style: caption_1.copyWith(color: text_cr),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Expanded(
+                            child: SingleChildScrollView(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    "Email",
+                                    style: body_1.copyWith(
+                                        fontSize: 15, color: text_cr),
+                                  ),
+                                  const SizedBox(
+                                    height: 7,
+                                  ),
+                                  CustomForm(
+                                    logo:
+                                        const AssetImage("assets/imgs/msg.png"),
+                                    textEditingController: _emailTextController,
+                                    textInputAction: TextInputAction.next,
+                                    hintText: "Enter your email",
+                                  ),
+                                  const SizedBox(
+                                    height: 25,
+                                  ),
+                                  Text(
+                                    "Password",
+                                    style: body_1.copyWith(
+                                        fontSize: 15, color: text_cr),
+                                  ),
+                                  const SizedBox(
+                                    height: 7,
+                                  ),
+                                  CustomForm(
+                                    logo: const AssetImage(
+                                        "assets/imgs/lock.png"),
+                                    isObsecure: true,
+                                    textEditingController: _passTextController,
+                                    textInputAction: TextInputAction.done,
+                                    hintText: "Enter your password",
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Row(
+                                    children: [
+                                      const SizedBox(
+                                        width: 1,
+                                      ),
+                                      SizedBox(
+                                        width: 16,
+                                        height: 16,
+                                        child: Checkbox(
+                                          overlayColor:
+                                              const MaterialStatePropertyAll(
+                                                  Colors.transparent),
+                                          value: check,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              check = !check;
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        "Remember me!",
+                                        style: caption_1.copyWith(
+                                            fontSize: 11,
+                                            color: subtle_text_cr),
+                                      ),
+                                      const Spacer(),
+                                      InkWell(
+                                        overlayColor:
+                                            const MaterialStatePropertyAll(
+                                                Colors.transparent),
+                                        splashFactory: NoSplash.splashFactory,
+                                        onTap: () {
+                                          print("forgot pressed");
+                                          FocusScope.of(context).unfocus();
+                                          Navigator.of(context)
+                                              .push(MaterialPageRoute(
+                                            // maintainState: false,
+                                            builder: (context) =>
+                                                const ResetEmailVerif(),
+                                          ));
+                                        },
+                                        child: Text(
+                                          "Forgot password?",
+                                          style: caption_1.copyWith(
+                                              color: text_cr),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 55,
+                                  ),
+                                  Align(
+                                    alignment: Alignment.center,
+                                    child: CustomButton(
+                                      function: () {
+                                        print("sign in pressed");
+                                      },
+                                      colorButton: primary_cr,
+                                      heightButton: 48,
+                                      widthButton: 260,
+                                      childButton: Text(
+                                        "Sign In",
+                                        style: body_1.copyWith(color: white_cr),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10 + getHeight(2),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "You Don't Have An Account? ",
+                                        style: caption_1.copyWith(
+                                            color: subtle_text_cr),
+                                      ),
+                                      InkWell(
+                                        overlayColor:
+                                            const MaterialStatePropertyAll(
+                                                Colors.transparent),
+                                        splashFactory: NoSplash.splashFactory,
+                                        onTap: () {
+                                          print("sign up pressed");
+                                        },
+                                        child: Text(
+                                          "Sign Up",
+                                          style: caption_1.copyWith(
+                                              color: primary_cr,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
                             ),
-                          )
+                          ),
                         ],
                       ),
-                      const SizedBox(
-                        height: 55,
-                      ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: CustomButton(
-                          function: () {
-                            print("sign in pressed");
-                          },
-                          colorButton: primary_cr,
-                          heightButton: 48,
-                          widthButton: 260,
-                          childButton: Text(
-                            "Sign In",
-                            style: body_1,
-                          ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Full Name",
+                              style:
+                                  body_1.copyWith(fontSize: 15, color: text_cr),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            CustomForm(
+                              logo: const AssetImage("assets/imgs/profile.png"),
+                              textEditingController: _nameTextController,
+                              textInputAction: TextInputAction.next,
+                              hintText: "eg: Muhammad Iqbal",
+                            ),
+                            const SizedBox(
+                              height: 25,
+                            ),
+                            Text(
+                              "Email",
+                              style:
+                                  body_1.copyWith(fontSize: 15, color: text_cr),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            CustomForm(
+                              logo: const AssetImage("assets/imgs/msg.png"),
+                              textEditingController: _emailTextController,
+                              textInputAction: TextInputAction.next,
+                              hintText: "youremail@gmail.com",
+                            ),
+                            const SizedBox(
+                              height: 25,
+                            ),
+                            Text(
+                              "Mobile Number",
+                              style:
+                                  body_1.copyWith(fontSize: 15, color: text_cr),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            CustomForm(
+                              logo: const AssetImage("assets/imgs/phone.png"),
+                              textEditingController: _phoneTextController,
+                              textInputAction: TextInputAction.next,
+                              hintText: "Enter your Phone Number",
+                            ),
+                            const SizedBox(
+                              height: 25,
+                            ),
+                            Text(
+                              "Password",
+                              style:
+                                  body_1.copyWith(fontSize: 15, color: text_cr),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            CustomForm(
+                              logo: const AssetImage("assets/imgs/lock.png"),
+                              textEditingController: _registPassTextController,
+                              textInputAction: TextInputAction.done,
+                              hintText: "Enter your Password",
+                              isObsecure: true,
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Row(
+                              children: [
+                                const SizedBox(
+                                  width: 1,
+                                ),
+                                SizedBox(
+                                  height: 16,
+                                  width: 16,
+                                  child: BlocBuilder<TermCubit, TermState>(
+                                    builder: (context, state) {
+                                      return Checkbox(
+                                          overlayColor:
+                                              const MaterialStatePropertyAll(
+                                                  Colors.transparent),
+                                          value: state.value,
+                                          onChanged: null);
+                                    },
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      "By creating an account, you agree our ",
+                                      style: caption_1.copyWith(
+                                          fontSize: 11, color: subtle_text_cr),
+                                    ),
+                                    InkWell(
+                                      overlayColor:
+                                          const MaterialStatePropertyAll(
+                                              Colors.transparent),
+                                      splashFactory: NoSplash.splashFactory,
+                                      onTap: () {
+                                        Navigator.of(context)
+                                            .push(MaterialPageRoute(
+                                          builder: (context) => const TermsPage(),
+                                        ));
+                                      },
+                                      child: Text(
+                                        "Terms and Conditions",
+                                        style: body_1.copyWith(
+                                            fontSize: 11,
+                                            color: subtle_text_cr),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 50,
+                            ),
+                            Align(
+                              alignment: Alignment.center,
+                              child: CustomButton(
+                                  function: () {
+                                    print("sign up pressed");
+                                  },
+                                  colorButton: primary_cr,
+                                  heightButton: 48,
+                                  widthButton: 260,
+                                  childButton: Text(
+                                    "Sign Up",
+                                    style: body_1.copyWith(color: white_cr),
+                                  )),
+                            ),
+                            SizedBox(
+                              height: 10 + getHeight(2),
+                            )
+                          ],
                         ),
                       ),
-                      SizedBox(
-                        height: 15 + getHeight(2),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "You Don't Have An Account? ",
-                            style: caption_1.copyWith(color: subtle_text_cr),
-                          ),
-                          InkWell(
-                            overlayColor: const MaterialStatePropertyAll(
-                                Colors.transparent),
-                            splashFactory: NoSplash.splashFactory,
-                            onTap: () {
-                              print("sign up pressed");
-                            },
-                            child: Text(
-                              "Sign Up",
-                              style: caption_1.copyWith(
-                                  color: primary_cr,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

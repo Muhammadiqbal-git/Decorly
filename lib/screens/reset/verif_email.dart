@@ -28,7 +28,6 @@ class _ResetEmailVerifState extends State<ResetEmailVerif> {
 
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size.width);
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -99,6 +98,9 @@ class _ResetEmailVerifState extends State<ResetEmailVerif> {
                   splashFactory: NoSplash.splashFactory,
                   overlayColor:
                       const MaterialStatePropertyAll(Colors.transparent),
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
                   child: Text(
                     "Back to Sign In",
                     style: caption_1.copyWith(color: subtle_text_cr),

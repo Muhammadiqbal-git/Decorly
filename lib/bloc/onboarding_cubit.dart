@@ -9,15 +9,12 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   void next(PageController pageController) {
     if (state.value < 3) {
       emit(OnboardingState(value: state.value + 1));
-      // pageController.animateToPage(state.value, duration: const Duration(milliseconds: 280), curve: Curves.linear);
     }
   }
 
   void previous(PageController pageController) {
     if (state.value > 0) {
       emit(OnboardingState(value: state.value - 1));
-      // pageController.animateToPage(state.value, duration: const Duration(milliseconds: 280), curve: Curves.linear);
-
     }
   }
 }

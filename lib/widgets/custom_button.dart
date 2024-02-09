@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class CustomButton extends StatelessWidget {
   final Function() function;
   final Color colorButton;
+  final Color? borderColor;
   final double heightButton;
   final double widthButton;
   final Widget childButton;
@@ -15,6 +16,7 @@ class CustomButton extends StatelessWidget {
       required this.heightButton,
       required this.widthButton,
       required this.childButton,
+      this.borderColor,
       this.opacityButton = 1.0});
 
   @override
@@ -27,7 +29,10 @@ class CustomButton extends StatelessWidget {
         height: heightButton,
         width: widthButton,
         child: CustomPaint(
-          painter: ButtonPainter(color: colorButton, opacity: opacityButton),
+          painter: ButtonPainter(
+              color: colorButton,
+              borderColor: borderColor,
+              opacity: opacityButton),
           child: Center(child: childButton),
         ),
       ),
