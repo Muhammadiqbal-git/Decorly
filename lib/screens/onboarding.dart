@@ -1,17 +1,10 @@
 import 'package:decorly/bloc/onboarding_cubit.dart';
+import 'package:decorly/models/onboarding_item.dart';
 import 'package:decorly/screens/login_page.dart';
 import 'package:decorly/theme.dart';
 import 'package:decorly/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-class OnboardingItem {
-  final String title;
-  final String desc;
-  final List position;
-  OnboardingItem(
-      {required this.title, required this.desc, required this.position});
-}
 
 class OnBoardingIndicator extends StatelessWidget {
   OnBoardingIndicator({super.key});
@@ -213,8 +206,8 @@ class OnBoardingIndicator extends StatelessWidget {
                                           .next(_pageController);
                                     },
                                     colorButton: white_cr,
-                                    heightButton: 48,
                                     widthButton: 48,
+                                    heightButton: 48,
                                     opacityButton: 0.86,
                                     childButton: const ImageIcon(
                                         AssetImage(

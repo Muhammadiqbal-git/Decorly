@@ -5,16 +5,16 @@ class CustomButton extends StatelessWidget {
   final Function() function;
   final Color colorButton;
   final Color? borderColor;
-  final double heightButton;
   final double widthButton;
+  final double heightButton;
   final Widget childButton;
   final double opacityButton;
   const CustomButton(
       {super.key,
       required this.function,
       required this.colorButton,
-      required this.heightButton,
       required this.widthButton,
+      required this.heightButton,
       required this.childButton,
       this.borderColor,
       this.opacityButton = 1.0});

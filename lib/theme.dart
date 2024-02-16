@@ -24,7 +24,7 @@ TextStyle caption_1 =
 /// Takes [context] and a [size] representing the desired percentage of the screen width.
 /// [size] argument must be in range 1-100 whereas 1 for the minimum width pixels and 100 for the maximum.
 /// Returns [double] representing the calculated width in logical pixels.
-double getWidth(int size) {
+double getWidth(num size) {
   return (WidgetsBinding
               .instance.platformDispatcher.views.first.physicalSize.width /
           WidgetsBinding
@@ -38,7 +38,7 @@ double getWidth(int size) {
 /// Takes [context] and a [size] representing the desired percentage of the screen height.
 /// [size] argument must be in range 1-100 whereas 1 for the minimum height pixels and 100 for the maximum.
 /// Returns [double] representing the calculated height in logical pixels.
-double getHeight(int size) {
+double getHeight(num size) {
   // return MediaQuery.of(context).size.height * (size / 100);
   return (WidgetsBinding
               .instance.platformDispatcher.views.first.physicalSize.height /

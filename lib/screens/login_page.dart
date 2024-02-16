@@ -1,5 +1,6 @@
 import 'package:decorly/bloc/login_page_cubit.dart';
 import 'package:decorly/bloc/term_cubit.dart';
+import 'package:decorly/screens/main_page.dart';
 import 'package:decorly/screens/reset/verif_email.dart';
 import 'package:decorly/screens/term_page.dart';
 import 'package:decorly/theme.dart';
@@ -296,11 +297,14 @@ class _LoginPageState extends State<LoginPage> {
                                     alignment: Alignment.center,
                                     child: CustomButton(
                                       function: () {
-                                        print("sign in pressed");
+                                        Navigator.of(context)
+                                            .pushReplacement(MaterialPageRoute(
+                                          builder: (context) => MainPage(),
+                                        ));
                                       },
                                       colorButton: primary_cr,
-                                      heightButton: 48,
                                       widthButton: 260,
+                                      heightButton: 48,
                                       childButton: Text(
                                         "Sign In",
                                         style: body_1.copyWith(color: white_cr),
@@ -324,7 +328,9 @@ class _LoginPageState extends State<LoginPage> {
                                                 Colors.transparent),
                                         splashFactory: NoSplash.splashFactory,
                                         onTap: () {
-                                          print("sign up pressed");
+                                          BlocProvider.of<LoginPageCubit>(
+                                                  context)
+                                              .changeState(true);
                                         },
                                         child: Text(
                                           "Sign Up",
@@ -454,7 +460,8 @@ class _LoginPageState extends State<LoginPage> {
                                       onTap: () {
                                         Navigator.of(context)
                                             .push(MaterialPageRoute(
-                                          builder: (context) => const TermsPage(),
+                                          builder: (context) =>
+                                              const TermsPage(),
                                         ));
                                       },
                                       child: Text(

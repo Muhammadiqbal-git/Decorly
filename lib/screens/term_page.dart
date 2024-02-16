@@ -11,6 +11,7 @@ class TermsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: white_cr,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: white_cr,
@@ -39,7 +40,7 @@ class TermsPage extends StatelessWidget {
               const SizedBox(
                 height: 25,
               ),
-              SvgPicture.asset("assets/imgs/terms.svg"),
+              SvgPicture.asset("assets/imgs/terms.svg", width: getWidth(25),),
               const SizedBox(
                 height: 20,
               ),
