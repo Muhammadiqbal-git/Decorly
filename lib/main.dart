@@ -1,3 +1,4 @@
+import 'package:decorly/bloc/featured_item_cubit.dart';
 import 'package:decorly/bloc/login_page_cubit.dart';
 import 'package:decorly/bloc/onboarding_cubit.dart';
 import 'package:decorly/bloc/term_cubit.dart';
@@ -27,6 +28,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => TermCubit(),
+        ),
+        BlocProvider(
+          create: (context) => FeaturedItemCubit(),
         )
       ],
       child: MaterialApp(
@@ -41,6 +45,7 @@ class MyApp extends StatelessWidget {
             // or simply save your changes to "hot reload" in a Flutter IDE).
             // Notice that the counter didn't reset back to zero; the application
             // is not restarted.
+            appBarTheme: const AppBarTheme(surfaceTintColor: Colors.transparent),
             primarySwatch: Colors.red,
             colorScheme: ColorScheme.fromSwatch(accentColor: primary_cr)),
         routes: {

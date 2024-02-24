@@ -6,12 +6,15 @@ class CustomCard extends StatelessWidget {
   final double widthContainer;
   final Color backgroundColor;
   final Widget widget;
+  final EdgeInsets marginContainer;
   const CustomCard(
       {super.key,
       required this.heightContainer,
       required this.widthContainer,
       required this.backgroundColor,
-      required this.widget});
+      required this.widget,
+      this.marginContainer =const EdgeInsets.all(0) 
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +23,7 @@ class CustomCard extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16, 15, 16, 10),
       height: heightContainer,
       width: widthContainer,
+      margin: marginContainer,
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(12),

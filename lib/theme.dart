@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 const Color primary_cr = Color(0xFF317865);
 const Color light_primary_cr = Color(0xFFC9D9D2);
 const Color secondary_cr = Color(0xFFFFA892);
+const Color red_cr = Color(0xFFF84F31);
 const Color text_cr = Color(0xFF313131);
 const Color subtle_text_cr = Color(0xFF919191);
 const Color accent_cr = Color(0xFFEFF1ED);

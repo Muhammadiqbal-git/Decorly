@@ -1,3 +1,4 @@
+import 'package:decorly/bloc/featured_item_cubit.dart';
 import 'package:decorly/bloc/login_page_cubit.dart';
 import 'package:decorly/bloc/term_cubit.dart';
 import 'package:decorly/screens/main_page.dart';
@@ -57,6 +58,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     print("page kebuild lg");
     return Scaffold(
+      backgroundColor: white_cr,
       body: SafeArea(
         child: Column(
           children: [
@@ -297,6 +299,7 @@ class _LoginPageState extends State<LoginPage> {
                                     alignment: Alignment.center,
                                     child: CustomButton(
                                       function: () {
+                                        BlocProvider.of<FeaturedItemCubit>(context).getData(1, 0);
                                         Navigator.of(context)
                                             .pushReplacement(MaterialPageRoute(
                                           builder: (context) => MainPage(),
