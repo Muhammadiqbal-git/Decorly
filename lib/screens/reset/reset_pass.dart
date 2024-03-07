@@ -68,7 +68,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                 height: 10,
               ),
               CustomForm(
-                logo: const AssetImage("assets/imgs/lock.png"),
+                logo: const AssetImage("assets/imgs/icons/lock.png"),
                 textEditingController: _newPassTextController,
                 textInputAction: TextInputAction.next,
                 hintText: "New password",
@@ -78,7 +78,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                 height: 20,
               ),
               CustomForm(
-                logo: const AssetImage("assets/imgs/lock.png"),
+                logo: const AssetImage("assets/imgs/icons/lock.png"),
                 textEditingController: _confirmPassTextController,
                 textInputAction: TextInputAction.done,
                 hintText: "Confirm password",

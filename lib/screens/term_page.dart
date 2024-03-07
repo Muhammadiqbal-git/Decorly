@@ -23,7 +23,7 @@ class TermsPage extends StatelessWidget {
               Navigator.of(context).pop();
             },
             icon: const ImageIcon(
-              AssetImage("assets/imgs/back_arrow.png"),
+              AssetImage("assets/imgs/icons/back_arrow.png"),
               color: text_cr,
             )),
         title: Text(
@@ -40,7 +40,10 @@ class TermsPage extends StatelessWidget {
               const SizedBox(
                 height: 25,
               ),
-              SvgPicture.asset("assets/imgs/terms.svg", width: getWidth(25),),
+              SvgPicture.asset(
+                "assets/imgs/terms.svg",
+                width: getWidth(25),
+              ),
               const SizedBox(
                 height: 20,
               ),
@@ -92,14 +95,16 @@ class TermsPage extends StatelessWidget {
                         BlocProvider.of<TermCubit>(context).changeState(false);
                         Navigator.of(context).pop();
                       },
-                      colorButton: Colors.transparent,
+                      colorButton: white_cr,
                       borderColor: secondary_cr,
+                      borderWidth: 2.0,
                       heightButton: 48,
-                      widthButton: 130,
+                      widthButton: 140,
                       childButton: Text(
                         "Cancel",
                         style: body_1.copyWith(color: secondary_cr),
                       )),
+
                   SizedBox(
                     width: 30 + getWidth(3),
                   ),
@@ -137,7 +142,7 @@ class TermsPage extends StatelessWidget {
                     },
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),

@@ -78,7 +78,7 @@ class _ResetCodeVerifState extends State<ResetCodeVerif> {
               Navigator.of(context).pop();
             },
             icon: const ImageIcon(
-              AssetImage('assets/imgs/back_arrow.png'),
+              AssetImage('assets/imgs/icons/back_arrow.png'),
               color: text_cr,
             )),
         title: Text(

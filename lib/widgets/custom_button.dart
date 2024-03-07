@@ -5,6 +5,7 @@ class CustomButton extends StatelessWidget {
   final Function() function;
   final Color colorButton;
   final Color? borderColor;
+  final double borderWidth;
   final double widthButton;
   final double heightButton;
   final Widget childButton;
@@ -17,6 +18,7 @@ class CustomButton extends StatelessWidget {
       required this.heightButton,
       required this.childButton,
       this.borderColor,
+      this.borderWidth = 1.0,
       this.opacityButton = 1.0});
 
   @override
@@ -26,14 +28,21 @@ class CustomButton extends StatelessWidget {
       overlayColor: const MaterialStatePropertyAll(Colors.transparent),
       onTap: function,
       child: SizedBox(
-        height: heightButton,
         width: widthButton,
+        height: heightButton,
         child: CustomPaint(
           painter: ButtonPainter(
-              color: colorButton,
-              borderColor: borderColor,
-              opacity: opacityButton),
-          child: Center(child: childButton),
+              color: borderColor ?? colorButton, opacity: opacityButton),
+          child: Center(
+            child: SizedBox(
+              width: widthButton - borderWidth,
+              height: heightButton - borderWidth,
+              child: CustomPaint(
+                painter: ButtonPainter(color: colorButton),
+                child: Center( child: childButton),
+              ),
+            ),
+          ),
         ),
       ),
     );

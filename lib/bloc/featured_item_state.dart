@@ -18,7 +18,4 @@ class FeaturedItemEmpty extends FeaturedItemState{}
 class FeaturedItemInitial extends FeaturedItemState{
   final List<Furniture> data;
   FeaturedItemInitial({required this.data});
-  void main(){
-    
-  }
 }

@@ -1,0 +1,24 @@
+{
+    "data": [
+        {
+            "img": "assets/imgs/article1.png",
+            "title": "How To Decorate Your Home",
+            "author": "Tim Architect"
+        },
+        {
+            "img": "assets/imgs/article2.png",
+            "title": "8 Cabinet Colors for Small Kitchen",
+            "author": "Furniture Master"
+        },
+        {
+            "img": "assets/imgs/article3.png",
+            "title": "7 Best Colors to Paint Walls",
+            "author": "InteriorDesignPro"
+        },
+        {
+            "img": "assets/imgs/article4.png",
+            "title": "Carpet Goes with Wood Panelling",
+            "author": "SleepWellInteriors"
+        }
+    ]
+}

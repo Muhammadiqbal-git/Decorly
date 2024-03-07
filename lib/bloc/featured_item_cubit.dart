@@ -29,9 +29,9 @@ class FeaturedItemCubit extends Cubit<FeaturedItemState> {
           40
         ],
         paddingCard: [
-          [0.08, 0.08],
-          [0.10, 0.10],
-          [0.12, 0.12]
+          [0.14, 0.14],
+          [0.16, 0.16],
+          [0.18, 0.18]
         ],
         colorCard: [
           accent_cr,

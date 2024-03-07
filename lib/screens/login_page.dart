@@ -1,3 +1,5 @@
+import 'package:decorly/bloc/article_post_cubit.dart';
+import 'package:decorly/bloc/design_post_cubit.dart';
 import 'package:decorly/bloc/featured_item_cubit.dart';
 import 'package:decorly/bloc/login_page_cubit.dart';
 import 'package:decorly/bloc/term_cubit.dart';
@@ -212,7 +214,7 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                   CustomForm(
                                     logo:
-                                        const AssetImage("assets/imgs/msg.png"),
+                                        const AssetImage("assets/imgs/icons/msg.png"),
                                     textEditingController: _emailTextController,
                                     textInputAction: TextInputAction.next,
                                     hintText: "Enter your email",
@@ -230,7 +232,7 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                   CustomForm(
                                     logo: const AssetImage(
-                                        "assets/imgs/lock.png"),
+                                        "assets/imgs/icons/lock.png"),
                                     isObsecure: true,
                                     textEditingController: _passTextController,
                                     textInputAction: TextInputAction.done,
@@ -300,6 +302,8 @@ class _LoginPageState extends State<LoginPage> {
                                     child: CustomButton(
                                       function: () {
                                         BlocProvider.of<FeaturedItemCubit>(context).getData(1, 0);
+                                        BlocProvider.of<DesignCubit>(context).getData();
+                                        BlocProvider.of<ArticleCubit>(context).getData();
                                         Navigator.of(context)
                                             .pushReplacement(MaterialPageRoute(
                                           builder: (context) => MainPage(),
@@ -366,7 +370,7 @@ class _LoginPageState extends State<LoginPage> {
                               height: 10,
                             ),
                             CustomForm(
-                              logo: const AssetImage("assets/imgs/profile.png"),
+                              logo: const AssetImage("assets/imgs/icons/profile.png"),
                               textEditingController: _nameTextController,
                               textInputAction: TextInputAction.next,
                               hintText: "eg: Muhammad Iqbal",
@@ -383,7 +387,7 @@ class _LoginPageState extends State<LoginPage> {
                               height: 10,
                             ),
                             CustomForm(
-                              logo: const AssetImage("assets/imgs/msg.png"),
+                              logo: const AssetImage("assets/imgs/icons/msg.png"),
                               textEditingController: _emailTextController,
                               textInputAction: TextInputAction.next,
                               hintText: "youremail@gmail.com",
@@ -400,7 +404,7 @@ class _LoginPageState extends State<LoginPage> {
                               height: 10,
                             ),
                             CustomForm(
-                              logo: const AssetImage("assets/imgs/phone.png"),
+                              logo: const AssetImage("assets/imgs/icons/phone.png"),
                               textEditingController: _phoneTextController,
                               textInputAction: TextInputAction.next,
                               hintText: "Enter your Phone Number",
@@ -417,7 +421,7 @@ class _LoginPageState extends State<LoginPage> {
                               height: 10,
                             ),
                             CustomForm(
-                              logo: const AssetImage("assets/imgs/lock.png"),
+                              logo: const AssetImage("assets/imgs/icons/lock.png"),
                               textEditingController: _registPassTextController,
                               textInputAction: TextInputAction.done,
                               hintText: "Enter your Password",

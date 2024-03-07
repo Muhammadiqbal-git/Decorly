@@ -40,7 +40,7 @@ class _ResetEmailVerifState extends State<ResetEmailVerif> {
               Navigator.of(context).pop();
             },
             icon: const ImageIcon(
-              AssetImage('assets/imgs/back_arrow.png'),
+              AssetImage('assets/imgs/icons/back_arrow.png'),
               color: text_cr,
             )),
         title: Text(
@@ -86,7 +86,7 @@ class _ResetEmailVerifState extends State<ResetEmailVerif> {
                   height: 40,
                 ),
                 CustomForm(
-                  logo: const AssetImage("assets/imgs/msg.png"),
+                  logo: const AssetImage("assets/imgs/icons/msg.png"),
                   textEditingController: _emailTextController,
                   textInputAction: TextInputAction.done,
                   hintText: "Enter your Email",

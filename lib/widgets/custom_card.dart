@@ -5,15 +5,15 @@ class CustomCard extends StatelessWidget {
   final double heightContainer;
   final double widthContainer;
   final Color backgroundColor;
-  final Widget widget;
+  final Widget child;
   final EdgeInsets marginContainer;
   const CustomCard(
       {super.key,
       required this.heightContainer,
       required this.widthContainer,
       required this.backgroundColor,
-      required this.widget,
-      this.marginContainer =const EdgeInsets.all(0) 
+      required this.child,
+      this.marginContainer = const EdgeInsets.all(0) 
       });
 
   @override
@@ -28,7 +28,7 @@ class CustomCard extends StatelessWidget {
         color: backgroundColor,
         borderRadius: BorderRadius.circular(12),
       ),
-      child: widget,
+      child: child,
     );
   }
 }

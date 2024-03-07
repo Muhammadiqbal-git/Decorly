@@ -53,7 +53,7 @@ class OnBoardingIndicator extends StatelessWidget {
               BlocProvider.of<OnboardingCubit>(context)
                   .previous(_pageController);
             }),
-            icon: const ImageIcon(AssetImage('assets/imgs/back_arrow.png'))),
+            icon: const ImageIcon(AssetImage('assets/imgs/icons/back_arrow.png'))),
         actions: [
           TextButton(
               onPressed: (() {
@@ -64,7 +64,7 @@ class OnBoardingIndicator extends StatelessWidget {
               style: const ButtonStyle(
                   splashFactory: NoSplash.splashFactory,
                   overlayColor: MaterialStatePropertyAll(Colors.transparent)),
-              child: Text("Skip", style: body_2.copyWith(color: white_cr)))
+              child: Text("Skip", style: body_2.copyWith(color: white_cr, letterSpacing: 2.2)))
         ],
       ),
       body: SafeArea(
@@ -211,7 +211,7 @@ class OnBoardingIndicator extends StatelessWidget {
                                     opacityButton: 0.86,
                                     childButton: const ImageIcon(
                                         AssetImage(
-                                            "assets/imgs/forward_arrow.png"),
+                                            "assets/imgs/icons/forward_arrow.png"),
                                         color: primary_cr));
                               },
                             )),

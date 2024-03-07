@@ -12,7 +12,7 @@ class CustomRate extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Image.asset(
-          "assets/imgs/star.png",
+          "assets/imgs/icons/star.png",
           color: Colors.yellow.shade700,
         ),
         const SizedBox(
