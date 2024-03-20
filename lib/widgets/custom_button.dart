@@ -10,6 +10,7 @@ class CustomButton extends StatelessWidget {
   final double heightButton;
   final Widget childButton;
   final double opacityButton;
+  final List<BoxShadow>? boxShadow;
   const CustomButton(
       {super.key,
       required this.function,
@@ -17,6 +18,7 @@ class CustomButton extends StatelessWidget {
       required this.widthButton,
       required this.heightButton,
       required this.childButton,
+      this.boxShadow,
       this.borderColor,
       this.borderWidth = 1.0,
       this.opacityButton = 1.0});
@@ -27,9 +29,12 @@ class CustomButton extends StatelessWidget {
       splashFactory: NoSplash.splashFactory,
       overlayColor: const MaterialStatePropertyAll(Colors.transparent),
       onTap: function,
-      child: SizedBox(
+      child: Container(
         width: widthButton,
         height: heightButton,
+        decoration: BoxDecoration(
+          boxShadow: boxShadow
+        ),
         child: CustomPaint(
           painter: ButtonPainter(
               color: borderColor ?? colorButton, opacity: opacityButton),

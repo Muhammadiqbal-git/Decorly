@@ -68,10 +68,10 @@ class ButtonPainter extends CustomPainter {
   ) {
     Path path_0 = Path();
     path_0.moveTo(0, 12);
-    path_0.cubicTo(0, 5.37258, 5.37258, 0, 12, 0);
+    path_0.cubicTo(0, 5, 5, 0, 12, 0);
     path_0.lineTo(size.width, 0);
     path_0.lineTo(size.width, size.height - 12);
-    path_0.cubicTo(size.width, size.height - 5.3726, size.width - 5.3726,
+    path_0.cubicTo(size.width, size.height - 5, size.width - 5,
         size.height, size.width - 12, size.height);
     path_0.lineTo(0, size.height);
 
@@ -79,6 +79,7 @@ class ButtonPainter extends CustomPainter {
 
     if (color != Colors.transparent) {
       Paint paint0Fill = Paint()..style = PaintingStyle.fill;
+      paint0Fill.strokeWidth = 1.0;
       paint0Fill.color = color.withOpacity(opacity);
       canvas.drawPath(path_0, paint0Fill);
     }

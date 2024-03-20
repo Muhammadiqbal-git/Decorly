@@ -1,0 +1,47 @@
+{
+    "data": [
+        {
+            "id": "f2",
+            "img": "assets/imgs/item2.png",
+            "name": "Interior Modern Vase",
+            "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "rate": "4.49",
+            "price": "79.99",
+            "discount_price": "59.99",
+            "bookmark": false,
+            "category": "Interior"
+        },
+        {
+            "id": "f5",
+            "img": "assets/imgs/chair.png",
+            "name": "Modern Pink Sofa",
+            "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "rate": "4.99",
+            "price": "99.99",
+            "discount_price": "89.99",
+            "bookmark": false,
+            "category": "Interior"
+        },
+        {
+            "id": "f4",
+            "img": "assets/imgs/circular_shelf.png",
+            "name": "Circular Shelf",
+            "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "rate": "4.19",
+            "price": "49.99",
+            "discount_price": "39.99",
+            "bookmark": false,
+            "category": "Interior"
+        },
+        {
+            "id": "f6",
+            "img": "assets/imgs/chair.png",
+            "name": "Cozy Luxury Hanging Chair",
+            "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "rate": "4.79",
+            "price": "129.99",
+            "discount_price": "100.99",
+            "category": "Interior"
+        }
+    ]
+}

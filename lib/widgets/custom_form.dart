@@ -5,7 +5,12 @@ class CustomForm extends StatefulWidget {
   final AssetImage logo;
   final TextInputAction textInputAction;
   final TextEditingController textEditingController;
+  final FocusNode? focusNode;
+  final void Function(String)? onChanged;
+  final void Function()? onEdittingComplete;
+
   final TextStyle? inputStyle;
+  final double width;
   final String hintText;
   final Color backgroundColor;
   final double borderRadius;
@@ -16,6 +21,10 @@ class CustomForm extends StatefulWidget {
     required this.logo,
     required this.textEditingController,
     required this.textInputAction,
+    this.focusNode,
+    this.onChanged,
+    this.onEdittingComplete,
+    this.width = double.maxFinite,
     this.inputStyle,
     this.hintText = "",
     this.backgroundColor = accent_cr,
@@ -40,6 +49,7 @@ class _CustomFormState extends State<CustomForm> {
     print("form kebuild");
     return Container(
       height: 48,
+      width: widget.width,
       decoration: BoxDecoration(
         color: widget.backgroundColor,
         borderRadius: BorderRadius.circular(widget.borderRadius),
@@ -51,6 +61,9 @@ class _CustomFormState extends State<CustomForm> {
           const SizedBox(width: 10),
           Expanded(
             child: TextFormField(
+              onChanged: widget.onChanged,
+              onEditingComplete: widget.onEdittingComplete,
+              focusNode: widget.focusNode,
               controller: widget.textEditingController,
               validator: (value) {
                 if (value == "tes") {

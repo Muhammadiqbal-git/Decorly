@@ -5,6 +5,8 @@ abstract class SavedListState{
 
 class SavedListEmpty extends SavedListState{
 }
+class SavedListLoading extends SavedListState{
+}
 
 class SavedListFetched extends SavedListState{
   DataSavedList data;

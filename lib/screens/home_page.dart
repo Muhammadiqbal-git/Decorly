@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:decorly/bloc/article_post_cubit.dart';
 import 'package:decorly/bloc/design_post_cubit.dart';
 import 'package:decorly/bloc/featured_item_cubit.dart';
-import 'package:decorly/models/featured_item.dart';
+import 'package:decorly/models/furniture_item.dart';
 import 'package:decorly/theme.dart';
 import 'package:decorly/widgets/custom_button.dart';
 import 'package:decorly/widgets/custom_card.dart';
@@ -42,6 +42,28 @@ class _HomePageState extends State<HomePage> {
   late TextEditingController _seachTextController;
 
   List tes = ["1", "2", 3, 4, 5, 5, 6, 7, 8, 9, 10];
+  List iconFilter = [
+    "bedroom.png",
+    "livingroom.png",
+    "diningroom.png",
+    "bathroom.png",
+    "kitchen.png",
+    "office.png",
+    "outdoor.png",
+    "indoor.png",
+    "kids.png"
+  ];
+  List nameFilter = [
+    "Bed Room",
+    "Living Room",
+    "Dining Room",
+    "Bath Room",
+    "Kitchen",
+    "Office",
+    "Outdoor",
+    "Indoor",
+    "Kids"
+  ];
 
   @override
   void initState() {
@@ -164,23 +186,48 @@ class _HomePageState extends State<HomePage> {
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
-                        children: tes.map((e) {
-                      return Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: InkWell(
-                            onTap: () {
-                              print("tapped");
-                            },
-                            child: Container(
-                              height: 102,
-                              width: 64,
-                              decoration: BoxDecoration(
-                                  color: primary_cr,
-                                  borderRadius: BorderRadius.circular(12)),
-                              child: Text(e.toString()),
-                            )),
-                      );
-                    }).toList()),
+                        children: iconFilter
+                            .asMap()
+                            .map((i, e) {
+                              return MapEntry(
+                                  i,
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 10),
+                                    child: InkWell(
+                                        onTap: () {
+                                          print("tapped");
+                                        },
+                                        child: Container(
+                                          height: 102,
+                                          width: 64,
+                                          padding: const EdgeInsets.fromLTRB(
+                                              5, 10, 5, 10),
+                                          decoration: BoxDecoration(
+                                              color: primary_cr,
+                                              borderRadius:
+                                                  BorderRadius.circular(12)),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Image.asset("assets/imgs/$e"),
+                                              const Spacer(),
+                                              Text(
+                                                nameFilter[i],
+                                                style: body_1.copyWith(
+                                                    fontSize: 12,
+                                                    color: white_cr),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ],
+                                          ),
+                                        )),
+                                  ));
+                            })
+                            .values
+                            .toList()),
                   ),
                 ),
                 const SizedBox(
@@ -206,8 +253,7 @@ class _HomePageState extends State<HomePage> {
                 Container(
                   height: 250,
                   width: getWidth(100),
-                  child:
-                      LayoutBuilder(builder: (context, constraintsFeatured) {
+                  child: LayoutBuilder(builder: (context, constraintsFeatured) {
                     return BlocBuilder<FeaturedItemCubit, FeaturedItemState>(
                         builder: (context, state) {
                       print("featured built");
@@ -246,8 +292,7 @@ class _HomePageState extends State<HomePage> {
                       } else if (state is FeaturedItemFetched) {
                         return Stack(
                             alignment: Alignment.center,
-                            children:
-                                List.generate(state.data.length, (index) {
+                            children: List.generate(state.dataFurniture.data.length, (index) {
                               return AnimatedPositioned(
                                 duration: const Duration(milliseconds: 200),
                                 bottom: state.bottomPosition[index],
@@ -290,7 +335,7 @@ class _HomePageState extends State<HomePage> {
                                                 top: 0,
                                                 child: Image(
                                                   image: AssetImage(
-                                                      state.data[index].img),
+                                                      state.dataFurniture.data[index].img),
                                                   // image: const AssetImage(
                                                   //     "assets/imgs/chair.png"),
                                                   height:
@@ -308,25 +353,25 @@ class _HomePageState extends State<HomePage> {
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        state
-                                                            .data[index].name,
+                                                        state.dataFurniture.data[index].name,
                                                         style: body_1.copyWith(
+                                                            letterSpacing: 0.4,
                                                             fontSize: 14,
-                                                            color: index %
-                                                                        2 ==
+                                                            color: index % 2 ==
                                                                     0
                                                                 ? state.colorText[
                                                                     0]
                                                                 : state.colorText[
                                                                     1]),
                                                       ),
-                                                      const CustomRate(
-                                                          rateScore: "4.9"),
+                                                      CustomRate(
+                                                          rateScore: state
+                                                              .dataFurniture.data[index]
+                                                              .rate),
                                                       Text(
-                                                        "99.99 \$",
+                                                        "\$ ${state.dataFurniture.data[index].price} ",
                                                         style: body_1.copyWith(
-                                                            color: index %
-                                                                        2 ==
+                                                            color: index % 2 ==
                                                                     0
                                                                 ? state.colorText[
                                                                     0]
@@ -341,16 +386,27 @@ class _HomePageState extends State<HomePage> {
                                                   child: InkWell(
                                                     onTap: () {
                                                       print("ss");
+                                                      BlocProvider.of<
+                                                                  FeaturedItemCubit>(
+                                                              context)
+                                                          .updateData(
+                                                              !state.dataFurniture.data[index]
+                                                                  .bookmark,
+                                                              state.dataFurniture.data[index]
+                                                                  .id);
                                                     },
                                                     child: ImageIcon(
-                                                      AssetImage(index % 2 ==
-                                                              0
+                                                      AssetImage(index % 2 == 0
                                                           ? "assets/imgs/icons/bookmark.png"
                                                           : "assets/imgs/icons/bookmark_light.png"),
-                                                      color: index % 2 == 0
-                                                          ? state.colorText[0]
-                                                          : state
-                                                              .colorText[1],
+                                                      color: !state.dataFurniture.data[index]
+                                                              .bookmark
+                                                          ? subtle_text_cr
+                                                          : index % 2 == 0
+                                                              ? state
+                                                                  .colorText[0]
+                                                              : state
+                                                                  .colorText[1],
                                                     ),
                                                   )),
                                               Positioned(
@@ -364,9 +420,10 @@ class _HomePageState extends State<HomePage> {
                                                       const AssetImage(
                                                           "assets/imgs/icons/cart.png"),
                                                       color: index % 2 == 0
-                                                          ? state.colorText[0]
-                                                          : state
-                                                              .colorText[1],
+                                                              ? state
+                                                                  .colorText[0]
+                                                              : state
+                                                                  .colorText[1],
                                                     ),
                                                   )),
                                             ],
@@ -393,7 +450,7 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Featured Products",
+                        "Top Offers",
                         style: body_1.copyWith(color: text_cr),
                       ),
                       Text(
@@ -453,8 +510,7 @@ class _HomePageState extends State<HomePage> {
                                                           "Top offer",
                                                           style:
                                                               body_1.copyWith(
-                                                                  fontSize:
-                                                                      13,
+                                                                  fontSize: 13,
                                                                   color:
                                                                       red_cr),
                                                         ),
@@ -472,15 +528,14 @@ class _HomePageState extends State<HomePage> {
                                                           "Outdoor White & Beige Hanging Chair",
                                                           style:
                                                               body_1.copyWith(
-                                                                  fontSize:
-                                                                      14),
+                                                                  fontSize: 14),
                                                         ),
                                                         const CustomRate(
                                                             rateScore: "4.9"),
                                                         Row(
                                                           children: [
                                                             Text(
-                                                              "1.190 \$",
+                                                              "\$1.190",
                                                               style: body_1
                                                                   .copyWith(
                                                                       color:
@@ -490,10 +545,9 @@ class _HomePageState extends State<HomePage> {
                                                               width: 6,
                                                             ),
                                                             Text(
-                                                              "1.810 \$",
+                                                              "\$1.810 ",
                                                               style: body_2.copyWith(
-                                                                  fontSize:
-                                                                      14,
+                                                                  fontSize: 14,
                                                                   decoration:
                                                                       TextDecoration
                                                                           .lineThrough),
@@ -512,7 +566,8 @@ class _HomePageState extends State<HomePage> {
                                                       child: const ImageIcon(
                                                           AssetImage(
                                                               "assets/imgs/icons/bookmark.png"),
-                                                          color: primary_cr),
+                                                          color:
+                                                              subtle_text_cr),
                                                     )),
                                                 Positioned(
                                                     right: 0,
@@ -595,15 +650,14 @@ class _HomePageState extends State<HomePage> {
                                         state.currentIndex == index ? 0 : 20),
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                      image:
-                                          AssetImage(state.data[index].img),
+                                      image: AssetImage(state.data[index].img),
                                       alignment: Alignment.bottomCenter,
                                       fit: BoxFit.cover),
                                   borderRadius: BorderRadius.circular(12),
                                   boxShadow: [
                                     BoxShadow(
                                         color: state.currentIndex == index
-                                            ? text_cr.withOpacity(0.5)
+                                            ? text_cr.withOpacity(0.6)
                                             : Colors.transparent,
                                         spreadRadius: 0,
                                         blurRadius: 6,
@@ -614,17 +668,14 @@ class _HomePageState extends State<HomePage> {
                                     alignment: Alignment.bottomCenter,
                                     child: Container(
                                         alignment: Alignment.centerLeft,
-                                        padding:
-                                            const EdgeInsets.only(left: 15),
+                                        padding: const EdgeInsets.only(
+                                            left: 15, right: 15),
                                         height: 44,
                                         width: double.maxFinite,
                                         decoration: BoxDecoration(
-                                          borderRadius:
-                                              const BorderRadius.only(
-                                                  bottomLeft:
-                                                      Radius.circular(12),
-                                                  bottomRight:
-                                                      Radius.circular(12)),
+                                          borderRadius: const BorderRadius.only(
+                                              bottomLeft: Radius.circular(12),
+                                              bottomRight: Radius.circular(12)),
                                           gradient: LinearGradient(
                                               begin: Alignment.bottomCenter,
                                               end: Alignment.topCenter,
@@ -634,10 +685,40 @@ class _HomePageState extends State<HomePage> {
                                                 Colors.transparent,
                                               ]),
                                         ),
-                                        child: Text(
-                                          state.data[index].title,
-                                          style: body_1.copyWith(
-                                              fontSize: 14, color: white_cr),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  state.data[index].title,
+                                                  style: body_1.copyWith(
+                                                      fontSize: 14,
+                                                      color: white_cr),
+                                                ),
+                                                const SizedBox(
+                                                  height: 5,
+                                                )
+                                              ],
+                                            ),
+                                            InkWell(
+                                                overlayColor:
+                                                    const MaterialStatePropertyAll(
+                                                        Colors.transparent),
+                                                onTap: () {
+                                                  print("decor style tapped");
+                                                },
+                                                child: const ImageIcon(
+                                                  AssetImage(
+                                                      "assets/imgs/icons/bookmark.png"),
+                                                  color: white_cr,
+                                                ))
+                                          ],
                                         ))),
                               );
                             });
@@ -703,8 +784,7 @@ class _HomePageState extends State<HomePage> {
                               const SizedBox(
                                 height: 5,
                               ),
-                              const CustomRate(
-                                  rateScore: "5. 00 (75 reviews)"),
+                              const CustomRate(rateScore: "5. 00 (75 reviews)"),
                               const SizedBox(
                                 height: 10,
                               ),
@@ -764,8 +844,7 @@ class _HomePageState extends State<HomePage> {
                               const SizedBox(
                                 height: 5,
                               ),
-                              const CustomRate(
-                                  rateScore: "5. 00 (75 reviews)"),
+                              const CustomRate(rateScore: "5. 00 (75 reviews)"),
                               const SizedBox(
                                 height: 10,
                               ),
@@ -804,8 +883,7 @@ class _HomePageState extends State<HomePage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Articles",
-                          style: body_1.copyWith(color: text_cr)),
+                      Text("Articles", style: body_1.copyWith(color: text_cr)),
                       Text(
                         "See All",
                         style: body_2.copyWith(color: subtle_text_cr),
@@ -848,8 +926,7 @@ class _HomePageState extends State<HomePage> {
                                         state.currentIndex == index ? 0 : 20),
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                      image:
-                                          AssetImage(state.data[index].img),
+                                      image: AssetImage(state.data[index].img),
                                       alignment: Alignment.bottomCenter,
                                       fit: BoxFit.cover),
                                   borderRadius: BorderRadius.circular(12),
@@ -864,49 +941,67 @@ class _HomePageState extends State<HomePage> {
                                   ],
                                 ),
                                 child: Align(
-                                    alignment: Alignment.bottomCenter,
-                                    child: Container(
-                                        alignment: Alignment.centerLeft,
-                                        padding:
-                                            const EdgeInsets.only(left: 15),
-                                        height: 44,
-                                        width: double.maxFinite,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              const BorderRadius.only(
-                                                  bottomLeft:
-                                                      Radius.circular(12),
-                                                  bottomRight:
-                                                      Radius.circular(12)),
-                                          gradient: LinearGradient(
-                                              begin: Alignment.bottomCenter,
-                                              end: Alignment.topCenter,
-                                              colors: [
-                                                text_cr.withOpacity(0.6),
-                                                text_cr.withOpacity(0.4),
-                                                Colors.transparent,
-                                              ]),
-                                        ),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              state.data[index].title,
-                                              style: body_1.copyWith(
-                                                  fontSize: 14,
-                                                  color: white_cr),
+                                  alignment: Alignment.bottomCenter,
+                                  child: Container(
+                                      alignment: Alignment.centerLeft,
+                                      padding: const EdgeInsets.only(
+                                          left: 15, right: 15),
+                                      height: 44,
+                                      width: double.maxFinite,
+                                      decoration: BoxDecoration(
+                                        borderRadius: const BorderRadius.only(
+                                            bottomLeft: Radius.circular(12),
+                                            bottomRight: Radius.circular(12)),
+                                        gradient: LinearGradient(
+                                            begin: Alignment.bottomCenter,
+                                            end: Alignment.topCenter,
+                                            colors: [
+                                              text_cr.withOpacity(0.6),
+                                              text_cr.withOpacity(0.4),
+                                              Colors.transparent,
+                                            ]),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                state.data[index].title,
+                                                style: body_1.copyWith(
+                                                    fontSize: 14,
+                                                    color: white_cr),
+                                              ),
+                                              Text(
+                                                "By ${state.data[index].author}",
+                                                style: body_1.copyWith(
+                                                    fontSize: 10,
+                                                    color: white_cr),
+                                              ),
+                                            ],
+                                          ),
+                                          const InkWell(
+                                            splashFactory:
+                                                NoSplash.splashFactory,
+                                            overlayColor:
+                                                MaterialStatePropertyAll(
+                                                    Colors.transparent),
+                                            child: ImageIcon(
+                                              AssetImage(
+                                                  "assets/imgs/icons/bookmark.png"),
+                                              color: white_cr,
                                             ),
-                                            Text(
-                                              "By ${state.data[index].author}",
-                                              style: body_1.copyWith(
-                                                  fontSize: 10,
-                                                  color: white_cr),
-                                            ),
-                                          ],
-                                        ))),
+                                          )
+                                        ],
+                                      )),
+                                ),
                               );
                             });
                       } else {

@@ -2,17 +2,19 @@ import 'package:decorly/theme.dart';
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatelessWidget {
-  final double heightContainer;
-  final double widthContainer;
+  final double? heightContainer;
+  final double? widthContainer;
   final Color backgroundColor;
   final Widget child;
   final EdgeInsets marginContainer;
+  final EdgeInsets paddingContainer;
   const CustomCard(
       {super.key,
       required this.heightContainer,
       required this.widthContainer,
       required this.backgroundColor,
       required this.child,
+      this.paddingContainer = const EdgeInsets.fromLTRB(16, 15, 16, 10),
       this.marginContainer = const EdgeInsets.all(0) 
       });
 
@@ -20,7 +22,7 @@ class CustomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
-      padding: const EdgeInsets.fromLTRB(16, 15, 16, 10),
+      padding: paddingContainer,
       height: heightContainer,
       width: widthContainer,
       margin: marginContainer,

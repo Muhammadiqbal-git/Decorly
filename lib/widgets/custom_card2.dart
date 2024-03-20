@@ -7,6 +7,7 @@ class CustomCard2 extends StatelessWidget {
   final double borderWidth;
   final double widthCard;
   final double heightCard;
+  final EdgeInsets padding;
   final Widget childCard;
   final double opacityCard;
   final Alignment align;
@@ -16,6 +17,7 @@ class CustomCard2 extends StatelessWidget {
       required this.widthCard,
       required this.heightCard,
       required this.childCard,
+      this.padding = EdgeInsets.zero,
       this.borderColor,
       this.align = Alignment.center,
       this.borderWidth = 1.0,
@@ -23,23 +25,21 @@ class CustomCard2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      splashFactory: NoSplash.splashFactory,
-      overlayColor: const MaterialStatePropertyAll(Colors.transparent),
-      child: SizedBox(
-        width: widthCard,
-        height: heightCard,
-        child: CustomPaint(
-          painter: ButtonPainter(
-              color: borderColor ?? colorCard, opacity: opacityCard),
-          child: Center(
-            child: SizedBox(
-              width: widthCard - borderWidth,
-              height: heightCard - borderWidth,
-              child: CustomPaint(
-                painter: ButtonPainter(color: colorCard),
-                child: Align(alignment: align, child: childCard),
-              ),
+    return SizedBox(
+      width: widthCard,
+      height: heightCard,
+      child: CustomPaint(
+        painter: ButtonPainter(
+            color: borderColor ?? colorCard, opacity: opacityCard),
+        child: Center(
+          child: SizedBox(
+            width: widthCard - borderWidth,
+            height: heightCard - borderWidth,
+            child: CustomPaint(
+              painter: ButtonPainter(color: colorCard),
+              child: Container(
+                padding: padding,
+                alignment: align, child: childCard),
             ),
           ),
         ),

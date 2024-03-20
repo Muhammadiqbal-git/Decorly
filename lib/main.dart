@@ -3,6 +3,8 @@ import 'package:decorly/bloc/design_post_cubit.dart';
 import 'package:decorly/bloc/featured_item_cubit.dart';
 import 'package:decorly/bloc/login_page_cubit.dart';
 import 'package:decorly/bloc/onboarding_cubit.dart';
+import 'package:decorly/bloc/saved_list_cubit.dart';
+import 'package:decorly/bloc/shop_cubit.dart';
 import 'package:decorly/bloc/term_cubit.dart';
 import 'package:decorly/screens/login_page.dart';
 import 'package:decorly/test_screens.dart';
@@ -37,8 +39,17 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => DesignCubit(),
         ),
-                BlocProvider(
+        BlocProvider(
           create: (context) => ArticleCubit(),
+        ),
+        BlocProvider(
+          create: (context) => SavedListCubit(),
+        ),
+        BlocProvider(
+          create: (context) => ShopCubit(),
+        ),
+        BlocProvider(
+          create: (context) => FilterCubit(),
         )
       ],
       child: MaterialApp(
@@ -55,7 +66,7 @@ class MyApp extends StatelessWidget {
             // is not restarted.
             appBarTheme:
                 const AppBarTheme(surfaceTintColor: Colors.transparent),
-            primarySwatch: Colors.red,
+            primaryColor: primary_cr,
             colorScheme: ColorScheme.fromSwatch(accentColor: primary_cr)),
         routes: {
           "/login": (context) => LoginPage(),

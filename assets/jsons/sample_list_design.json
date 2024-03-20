@@ -1,21 +1,25 @@
 {
     "data": [
         {
+            "id": "ad1",
             "img": "assets/imgs/modern_style.png",
             "title": "Modern Style Living Room",
             "author": "Tim Architect"
         },
         {
+            "id": "ad2",
             "img": "assets/imgs/simple_style.png",
             "title": "Contemporary Sofa Design",
             "author": "Furniture Master"
         },
         {
+            "id": "ad3",
             "img": "assets/imgs/modern2_style.png",
             "title": "Elegant Sofa & Table Set",
             "author": "Home DecorGuru"
         },
         {
+            "id": "ad4",
             "img": "assets/imgs/cozy_style.png",
             "title": "Cozy Living Room Retreat",
             "author": "Dreamy Spaces"

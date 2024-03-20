@@ -1,5 +1,5 @@
 import 'package:decorly/models/article_post.dart';
-import 'package:decorly/services/article.dart';
+import 'package:decorly/services/article_api.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'article_post_state.dart';
 
