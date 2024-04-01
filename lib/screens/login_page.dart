@@ -1,5 +1,6 @@
 import 'package:decorly/bloc/article_post_cubit.dart';
 import 'package:decorly/bloc/design_post_cubit.dart';
+import 'package:decorly/bloc/designer_cubit.dart';
 import 'package:decorly/bloc/featured_item_cubit.dart';
 import 'package:decorly/bloc/login_page_cubit.dart';
 import 'package:decorly/bloc/term_cubit.dart';
@@ -304,6 +305,7 @@ class _LoginPageState extends State<LoginPage> {
                                         BlocProvider.of<FeaturedItemCubit>(context).getData(1, 0);
                                         BlocProvider.of<DesignCubit>(context).getData();
                                         BlocProvider.of<ArticleCubit>(context).getData();
+                                        BlocProvider.of<DesignerCubit>(context).getData();
                                         Navigator.of(context)
                                             .pushReplacement(MaterialPageRoute(
                                           builder: (context) => MainPage(),

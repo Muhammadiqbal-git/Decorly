@@ -1,5 +1,7 @@
 import 'package:decorly/bloc/article_post_cubit.dart';
+import 'package:decorly/bloc/cart_cubit.dart';
 import 'package:decorly/bloc/design_post_cubit.dart';
+import 'package:decorly/bloc/designer_cubit.dart';
 import 'package:decorly/bloc/featured_item_cubit.dart';
 import 'package:decorly/bloc/login_page_cubit.dart';
 import 'package:decorly/bloc/onboarding_cubit.dart';
@@ -47,6 +49,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ShopCubit(),
+        ),
+        BlocProvider(
+          create: (context) => DesignerCubit(),
+        ),
+        BlocProvider(
+          create: (context) => CartCubit(),
         ),
         BlocProvider(
           create: (context) => FilterCubit(),

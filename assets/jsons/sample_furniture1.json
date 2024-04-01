@@ -6,8 +6,8 @@
       "name": "Milliard Cozy Chair",
       "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       "rate": "4.99",
-      "price": "99.99",
-      "discount_price": "89.99",
+      "price": 99.99,
+      "discount_price": 89.99,
       "bookmark": false,
       "category": "Interior"
     },
@@ -17,8 +17,8 @@
       "name": "Interior Modern Vase",
       "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       "rate": "4.49",
-      "price": "79.99",
-      "discount_price": "59.99",
+      "price": 79.99,
+      "discount_price": 59.99,
       "bookmark": false,
       "category": "Interior"
     },
@@ -28,8 +28,8 @@
       "name": "Milliard Cozy Chair",
       "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       "rate": "4.99",
-      "price": "99.99",
-      "discount_price": "89.99",
+      "price": 99.99,
+      "discount_price": 89.99,
       "bookmark": false,
       "category": "Interior"
     }

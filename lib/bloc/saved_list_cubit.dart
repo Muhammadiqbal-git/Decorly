@@ -14,26 +14,46 @@ part 'saved_list_state.dart';
 class SavedListCubit extends Cubit<SavedListState> {
   SavedListCubit() : super(SavedListEmpty());
 
-  getData() async {
-    emit(SavedListLoading());
-    DataArticle dataArticle = await ArticleAPI().getData("article");
-    DataArticle dataDesign = await ArticleAPI().getData("design");
-    DataDesigner dataDesigner = await DesignerAPI().getData();
-    DataFurniture dataFurniture = await FurnitureAPI().getData(1);
-    print(dataFurniture);
-    emit(SavedListFetched(
-        data: DataSavedList(
-            furniture: dataFurniture.data,
-            article: dataArticle.data,
-            design: dataDesign.data,
-            designer: dataDesigner.data),
-        index: 0));
+  checkEmpty() {
+    DataSavedList data = state.data;
+    if (data.furniture.isEmpty &
+        data.designer.isEmpty &
+        data.design.isEmpty &
+        data.article.isEmpty) {
+      emit(SavedListEmpty());
+    }
   }
 
-  updateIndex(int indexTab) async {
-    dynamic currentState = state;
-    if (currentState is SavedListFetched) {
-      emit(SavedListFetched(data: currentState.data, index: indexTab));
+  updateSavedFurniture({required Furniture furniture}) async {
+    if (state.data.furniture.containsKey(furniture.id)) {
+      state.data.furniture.remove(furniture.id);
+    } else {
+      dynamic jsonData = furniture.toJson();
+      jsonData["bookmark"] = true;
+      state.data.furniture[furniture.id] = Furniture.fromJson(jsonData);
     }
+    emit(SavedListFetched(datas: state.data));
+  }
+
+  updateSavedArticle({required Article article}) async {
+    if (state.data.article.containsKey(article.id)) {
+      state.data.article.remove(article.id);
+    } else {
+      dynamic jsonData = article.toJson();
+      jsonData["bookmark"] = true;
+      state.data.article[article.id] = Article.fromJson(jsonData);
+    }
+    emit(SavedListFetched(datas: state.data));
+  }
+
+  updateSavedDesign({required Article design}) async {
+    if (state.data.design.containsKey(design.id)) {
+      state.data.design.remove(design.id);
+    } else {
+      dynamic jsonData = design.toJson();
+      jsonData["bookmark"] = true;
+      state.data.design[design.id] = Article.fromJson(jsonData);
+    }
+    emit(SavedListFetched(datas: state.data));
   }
 }

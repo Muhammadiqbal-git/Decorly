@@ -15,8 +15,8 @@ class Furniture {
   final String name;
   final String desc;
   final String rate;
-  final String price;
-  final String? discountPrice;
+  final double price;
+  final double? discountPrice;
   final bool bookmark;
   final String category;
   Furniture(
@@ -36,8 +36,8 @@ class Furniture {
         name: json['name'] ?? '',
         desc: json['desc'] ?? '',
         rate: json['rate'] ?? '',
-        price: json['price'] ?? '',
-        discountPrice: json['discount_price'] ?? '',
+        price: json['price'] ?? 0.0,
+        discountPrice: json['discount_price'] ?? 0.0,
         bookmark: json['bookmark'] ?? false,
         category: json['category'] ?? '');
   }

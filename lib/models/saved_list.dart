@@ -3,10 +3,10 @@ import 'package:decorly/models/designer.dart';
 import 'package:decorly/models/furniture_item.dart';
 
 class DataSavedList {
-  List<Furniture> furniture;
-  List<Article> article;
-  List<Article> design;
-  List<Designer> designer;
+  Map<String, Furniture> furniture;
+  Map<String, Article> article;
+  Map<String, Article> design;
+  Map<String, Designer> designer;
 
   DataSavedList(
       {required this.furniture, required this.article, required this.design, required this.designer});

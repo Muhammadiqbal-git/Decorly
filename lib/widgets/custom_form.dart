@@ -2,13 +2,12 @@ import 'package:decorly/theme.dart';
 import 'package:flutter/material.dart';
 
 class CustomForm extends StatefulWidget {
-  final AssetImage logo;
+  final AssetImage? logo;
   final TextInputAction textInputAction;
   final TextEditingController textEditingController;
   final FocusNode? focusNode;
   final void Function(String)? onChanged;
   final void Function()? onEdittingComplete;
-
   final TextStyle? inputStyle;
   final double width;
   final String hintText;
@@ -18,9 +17,9 @@ class CustomForm extends StatefulWidget {
 
   const CustomForm({
     super.key,
-    required this.logo,
     required this.textEditingController,
     required this.textInputAction,
+    this.logo,
     this.focusNode,
     this.onChanged,
     this.onEdittingComplete,
@@ -57,8 +56,12 @@ class _CustomFormState extends State<CustomForm> {
       child: Row(
         children: [
           const SizedBox(width: 15),
-          ImageIcon(widget.logo, color: primary_cr),
-          const SizedBox(width: 10),
+          widget.logo != null
+              ? Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: ImageIcon(widget.logo, color: primary_cr),
+              )
+              : const SizedBox(),
           Expanded(
             child: TextFormField(
               onChanged: widget.onChanged,
@@ -73,7 +76,8 @@ class _CustomFormState extends State<CustomForm> {
               },
               obscureText: obscured,
               textInputAction: widget.textInputAction,
-              style: widget.inputStyle ?? body_2.copyWith(fontSize: 16, color: text_cr),
+              style: widget.inputStyle ??
+                  body_2.copyWith(fontSize: 16, color: text_cr),
               decoration: InputDecoration(
                   hintText: widget.hintText,
                   hintStyle: caption_1.copyWith(color: subtle_text_cr),

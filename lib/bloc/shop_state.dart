@@ -22,11 +22,11 @@ class FilterLoading extends FilterState {
   FilterLoading(super.filters, super.recentFilters, super.activeFilter);
 }
 
-class FilterDone extends FilterState {
-  FilterDone(List<String> filters, List<String> recentFilters, List<String> activeFilter)
+class FilterSearch extends FilterState {
+  FilterSearch(List<String> filters, List<String> recentFilters, List<String> activeFilter)
       : super(filters, recentFilters, activeFilter);
 }
-class FilterEmpty extends FilterState {
-  FilterEmpty(List<String> filters, List<String> recentFilters, List<String> activeFilter)
+class FilterInitial extends FilterState {
+  FilterInitial(List<String> filters, List<String> recentFilters, List<String> activeFilter)
       : super(filters, recentFilters, activeFilter);
 }

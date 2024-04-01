@@ -2,7 +2,9 @@ import 'dart:ui';
 
 import 'package:decorly/bloc/article_post_cubit.dart';
 import 'package:decorly/bloc/design_post_cubit.dart';
+import 'package:decorly/bloc/designer_cubit.dart';
 import 'package:decorly/bloc/featured_item_cubit.dart';
+import 'package:decorly/bloc/saved_list_cubit.dart';
 import 'package:decorly/models/furniture_item.dart';
 import 'package:decorly/theme.dart';
 import 'package:decorly/widgets/custom_button.dart';
@@ -292,7 +294,8 @@ class _HomePageState extends State<HomePage> {
                       } else if (state is FeaturedItemFetched) {
                         return Stack(
                             alignment: Alignment.center,
-                            children: List.generate(state.dataFurniture.data.length, (index) {
+                            children: List.generate(
+                                state.dataFurniture.data.length, (index) {
                               return AnimatedPositioned(
                                 duration: const Duration(milliseconds: 200),
                                 bottom: state.bottomPosition[index],
@@ -334,8 +337,10 @@ class _HomePageState extends State<HomePage> {
                                               Positioned(
                                                 top: 0,
                                                 child: Image(
-                                                  image: AssetImage(
-                                                      state.dataFurniture.data[index].img),
+                                                  image: AssetImage(state
+                                                      .dataFurniture
+                                                      .data[index]
+                                                      .img),
                                                   // image: const AssetImage(
                                                   //     "assets/imgs/chair.png"),
                                                   height:
@@ -353,7 +358,8 @@ class _HomePageState extends State<HomePage> {
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        state.dataFurniture.data[index].name,
+                                                        state.dataFurniture
+                                                            .data[index].name,
                                                         style: body_1.copyWith(
                                                             letterSpacing: 0.4,
                                                             fontSize: 14,
@@ -366,7 +372,8 @@ class _HomePageState extends State<HomePage> {
                                                       ),
                                                       CustomRate(
                                                           rateScore: state
-                                                              .dataFurniture.data[index]
+                                                              .dataFurniture
+                                                              .data[index]
                                                               .rate),
                                                       Text(
                                                         "\$ ${state.dataFurniture.data[index].price} ",
@@ -390,16 +397,29 @@ class _HomePageState extends State<HomePage> {
                                                                   FeaturedItemCubit>(
                                                               context)
                                                           .updateData(
-                                                              !state.dataFurniture.data[index]
+                                                              !state
+                                                                  .dataFurniture
+                                                                  .data[index]
                                                                   .bookmark,
-                                                              state.dataFurniture.data[index]
+                                                              state
+                                                                  .dataFurniture
+                                                                  .data[index]
                                                                   .id);
+                                                      BlocProvider.of<
+                                                                  SavedListCubit>(
+                                                              context)
+                                                          .updateSavedFurniture(
+                                                              furniture: state
+                                                                  .dataFurniture
+                                                                  .data[index]);
                                                     },
                                                     child: ImageIcon(
                                                       AssetImage(index % 2 == 0
                                                           ? "assets/imgs/icons/bookmark.png"
                                                           : "assets/imgs/icons/bookmark_light.png"),
-                                                      color: !state.dataFurniture.data[index]
+                                                      color: !state
+                                                              .dataFurniture
+                                                              .data[index]
                                                               .bookmark
                                                           ? subtle_text_cr
                                                           : index % 2 == 0
@@ -420,10 +440,8 @@ class _HomePageState extends State<HomePage> {
                                                       const AssetImage(
                                                           "assets/imgs/icons/cart.png"),
                                                       color: index % 2 == 0
-                                                              ? state
-                                                                  .colorText[0]
-                                                              : state
-                                                                  .colorText[1],
+                                                          ? state.colorText[0]
+                                                          : state.colorText[1],
                                                     ),
                                                   )),
                                             ],
@@ -619,6 +637,7 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 10,
                 ),
+                // Design Style
                 SizedBox(
                   height: 185,
                   child: BlocBuilder<DesignCubit, DesignState>(
@@ -635,7 +654,7 @@ class _HomePageState extends State<HomePage> {
                             clipBehavior: Clip.none,
                             controller: PageController(
                                 initialPage: 0, viewportFraction: 0.85),
-                            itemCount: state.data.length,
+                            itemCount: state.dataArticle.data.length,
                             onPageChanged: (value) {
                               BlocProvider.of<DesignCubit>(context)
                                   .updateIndexData(value);
@@ -650,7 +669,8 @@ class _HomePageState extends State<HomePage> {
                                         state.currentIndex == index ? 0 : 20),
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                      image: AssetImage(state.data[index].img),
+                                      image: AssetImage(
+                                          state.dataArticle.data[index].img),
                                       alignment: Alignment.bottomCenter,
                                       fit: BoxFit.cover),
                                   borderRadius: BorderRadius.circular(12),
@@ -696,7 +716,8 @@ class _HomePageState extends State<HomePage> {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Text(
-                                                  state.data[index].title,
+                                                  state.dataArticle.data[index]
+                                                      .title,
                                                   style: body_1.copyWith(
                                                       fontSize: 14,
                                                       color: white_cr),
@@ -711,12 +732,27 @@ class _HomePageState extends State<HomePage> {
                                                     const MaterialStatePropertyAll(
                                                         Colors.transparent),
                                                 onTap: () {
-                                                  print("decor style tapped");
+                                                  BlocProvider.of<DesignCubit>(
+                                                          context)
+                                                      .updateData(state
+                                                          .dataArticle
+                                                          .data[index]
+                                                          .id);
+                                                  BlocProvider.of<
+                                                              SavedListCubit>(
+                                                          context)
+                                                      .updateSavedDesign(
+                                                          design: state
+                                                              .dataArticle
+                                                              .data[index]);
                                                 },
-                                                child: const ImageIcon(
-                                                  AssetImage(
+                                                child: ImageIcon(
+                                                  const AssetImage(
                                                       "assets/imgs/icons/bookmark.png"),
-                                                  color: white_cr,
+                                                  color: state.dataArticle
+                                                          .data[index].bookmark
+                                                      ? primary_cr
+                                                      : white_cr,
                                                 ))
                                           ],
                                         ))),
@@ -752,127 +788,90 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CustomCard(
-                          backgroundColor: accent_cr,
-                          widthContainer: 160,
-                          heightContainer: 270,
-                          child: Column(
-                            children: [
-                              CustomCard2(
-                                  colorCard: accent_cr,
-                                  widthCard: 95,
-                                  heightCard: 95,
-                                  borderColor: white_cr,
-                                  borderWidth: 10.0,
-                                  align: Alignment.bottomCenter,
-                                  childCard: Image.asset(
-                                    "assets/imgs/person1.png",
-                                    fit: BoxFit.cover,
-                                    height: 75,
-                                    alignment: Alignment.bottomCenter,
-                                  )),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "Yehia Eshaikh",
-                                style: body_1.copyWith(color: primary_cr),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const CustomRate(rateScore: "5. 00 (75 reviews)"),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "Lorem ipsum dolor sitame,ipsum dolor consectetura dipis cing elit.",
-                                maxLines: 4,
-                                overflow: TextOverflow.ellipsis,
-                                style: body_1.copyWith(
-                                    fontSize: 13, color: text_cr),
-                              ),
-                              const Spacer(),
-                              Align(
-                                alignment: Alignment.bottomRight,
-                                child: InkWell(
-                                  onTap: () {
-                                    print("buyer");
-                                  },
-                                  child: const ImageIcon(
-                                    AssetImage(
-                                        "assets/imgs/icons/calendar.png"),
-                                    color: secondary_cr,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          width: getWidth(10),
-                        ),
-                        CustomCard(
-                          backgroundColor: accent_cr,
-                          widthContainer: 160,
-                          heightContainer: 270,
-                          child: Column(
-                            children: [
-                              CustomCard2(
-                                  colorCard: accent_cr,
-                                  widthCard: 95,
-                                  heightCard: 95,
-                                  borderColor: white_cr,
-                                  borderWidth: 10.0,
-                                  align: Alignment.bottomCenter,
-                                  childCard: Image.asset(
-                                    "assets/imgs/person2.png",
-                                    fit: BoxFit.cover,
-                                    height: 75,
-                                    alignment: Alignment.bottomCenter,
-                                  )),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "Deiaa Elbana",
-                                style: body_1.copyWith(color: primary_cr),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const CustomRate(rateScore: "5. 00 (75 reviews)"),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "Lorem ipsum dolor sitame,ipsum dolor consectetura dipis cing elit.",
-                                maxLines: 4,
-                                overflow: TextOverflow.ellipsis,
-                                style: body_1.copyWith(
-                                    fontSize: 13, color: text_cr),
-                              ),
-                              const Spacer(),
-                              Align(
-                                alignment: Alignment.bottomRight,
-                                child: InkWell(
-                                  onTap: () {
-                                    print("buyer");
-                                  },
-                                  child: const ImageIcon(
-                                    AssetImage(
-                                        "assets/imgs/icons/calendar.png"),
-                                    color: secondary_cr,
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        )
-                      ]),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    height: 270,
+                    child: BlocBuilder<DesignerCubit, DesignerState>(
+                      builder: (context, state) {
+                        if (state is DesignerLoading) {
+                          return const Center(
+                            child: CircularProgressIndicator(
+                              color: primary_cr,
+                            ),
+                          );
+                        } else if (state is DesignerFetched) {
+                          return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: state.data.data
+                                  .take(2)
+                                  .map(
+                                    (e) => CustomCard(
+                                      backgroundColor: accent_cr,
+                                      widthContainer: 160,
+                                      heightContainer: 270,
+                                      child: Column(
+                                        children: [
+                                          CustomCard2(
+                                              colorCard: accent_cr,
+                                              widthCard: 95,
+                                              heightCard: 95,
+                                              borderColor: white_cr,
+                                              borderWidth: 10.0,
+                                              align: Alignment.bottomCenter,
+                                              childCard: Image.asset(
+                                                e.img,
+                                                fit: BoxFit.cover,
+                                                height: 75,
+                                                alignment: Alignment.bottomCenter,
+                                              )),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Text(
+                                            e.name,
+                                            style: body_1.copyWith(
+                                                color: primary_cr),
+                                          ),
+                                          const SizedBox(
+                                            height: 5,
+                                          ),
+                                          CustomRate(
+                                              rateScore: "${e.rate} (75 reviews)"),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Text(
+                                            e.biography,
+                                            maxLines: 4,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: body_1.copyWith(
+                                                fontSize: 13, color: text_cr),
+                                          ),
+                                          const Spacer(),
+                                          Align(
+                                            alignment: Alignment.bottomRight,
+                                            child: InkWell(
+                                              onTap: () {
+                                                print("buyer");
+                                              },
+                                              child: const ImageIcon(
+                                                AssetImage(
+                                                    "assets/imgs/icons/calendar.png"),
+                                                color: secondary_cr,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                  .toList());
+                        } else {
+                          return Container(child: Text("ss"),);
+                        }
+                      },
+                    ),
+                  ),
                 ),
                 // CustomSlido(cubit: DesignCubit(), state: DesignState,)
                 const SizedBox(
@@ -911,7 +910,7 @@ class _HomePageState extends State<HomePage> {
                             clipBehavior: Clip.none,
                             controller: PageController(
                                 initialPage: 0, viewportFraction: 0.85),
-                            itemCount: state.data.length,
+                            itemCount: state.dataArticle.data.length,
                             onPageChanged: (value) {
                               BlocProvider.of<ArticleCubit>(context)
                                   .updateIndexData(value);
@@ -926,7 +925,8 @@ class _HomePageState extends State<HomePage> {
                                         state.currentIndex == index ? 0 : 20),
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                      image: AssetImage(state.data[index].img),
+                                      image: AssetImage(
+                                          state.dataArticle.data[index].img),
                                       alignment: Alignment.bottomCenter,
                                       fit: BoxFit.cover),
                                   borderRadius: BorderRadius.circular(12),
@@ -974,29 +974,42 @@ class _HomePageState extends State<HomePage> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                state.data[index].title,
+                                                state.dataArticle.data[index]
+                                                    .title,
                                                 style: body_1.copyWith(
                                                     fontSize: 14,
                                                     color: white_cr),
                                               ),
                                               Text(
-                                                "By ${state.data[index].author}",
+                                                "By ${state.dataArticle.data[index].author}",
                                                 style: body_1.copyWith(
                                                     fontSize: 10,
                                                     color: white_cr),
                                               ),
                                             ],
                                           ),
-                                          const InkWell(
-                                            splashFactory:
-                                                NoSplash.splashFactory,
+                                          InkWell(
                                             overlayColor:
                                                 MaterialStatePropertyAll(
                                                     Colors.transparent),
+                                            onTap: () {
+                                              BlocProvider.of<ArticleCubit>(
+                                                      context)
+                                                  .updateData(state.dataArticle
+                                                      .data[index].id);
+                                              BlocProvider.of<SavedListCubit>(
+                                                      context)
+                                                  .updateSavedArticle(
+                                                      article: state.dataArticle
+                                                          .data[index]);
+                                            },
                                             child: ImageIcon(
                                               AssetImage(
                                                   "assets/imgs/icons/bookmark.png"),
-                                              color: white_cr,
+                                              color: state.dataArticle
+                                                      .data[index].bookmark
+                                                  ? primary_cr
+                                                  : white_cr,
                                             ),
                                           )
                                         ],

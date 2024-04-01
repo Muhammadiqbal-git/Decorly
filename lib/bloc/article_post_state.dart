@@ -3,8 +3,8 @@ abstract class ArticleState{}
 
 class ArticleFetched extends ArticleState{
 final int currentIndex;
-final List<Article> data;
+final DataArticle dataArticle;
 
-  ArticleFetched({required this.currentIndex, required this.data});
+  ArticleFetched({required this.currentIndex, required this.dataArticle});
 }
 class ArticleLoading extends ArticleState{}
