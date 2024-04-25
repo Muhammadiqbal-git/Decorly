@@ -11,6 +11,8 @@ class CustomForm extends StatefulWidget {
   final TextStyle? inputStyle;
   final double width;
   final String hintText;
+  final TextAlign? textAlign;
+  final TextStyle? hintStyle;
   final Color backgroundColor;
   final double borderRadius;
   final bool isObsecure;
@@ -26,6 +28,8 @@ class CustomForm extends StatefulWidget {
     this.width = double.maxFinite,
     this.inputStyle,
     this.hintText = "",
+    this.textAlign,
+    this.hintStyle,
     this.backgroundColor = accent_cr,
     this.borderRadius = 12,
     this.isObsecure = false,
@@ -45,7 +49,6 @@ class _CustomFormState extends State<CustomForm> {
 
   @override
   Widget build(BuildContext context) {
-    print("form kebuild");
     return Container(
       height: 48,
       width: widget.width,
@@ -58,9 +61,9 @@ class _CustomFormState extends State<CustomForm> {
           const SizedBox(width: 15),
           widget.logo != null
               ? Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: ImageIcon(widget.logo, color: primary_cr),
-              )
+                  padding: const EdgeInsets.only(right: 10),
+                  child: ImageIcon(widget.logo, color: primary_cr),
+                )
               : const SizedBox(),
           Expanded(
             child: TextFormField(
@@ -78,9 +81,11 @@ class _CustomFormState extends State<CustomForm> {
               textInputAction: widget.textInputAction,
               style: widget.inputStyle ??
                   body_2.copyWith(fontSize: 16, color: text_cr),
+              textAlign: widget.textAlign ?? TextAlign.start,
               decoration: InputDecoration(
                   hintText: widget.hintText,
-                  hintStyle: caption_1.copyWith(color: subtle_text_cr),
+                  hintStyle: widget.hintStyle ??
+                      caption_1.copyWith(color: subtle_text_cr),
                   isCollapsed: true,
                   border: InputBorder.none),
             ),

@@ -316,7 +316,7 @@ class _LoginPageState extends State<LoginPage> {
                                       heightButton: 48,
                                       childButton: Text(
                                         "Sign In",
-                                        style: body_1.copyWith(color: white_cr),
+                                        style: body_1.copyWith(color: accent_cr),
                                       ),
                                     ),
                                   ),
@@ -498,7 +498,7 @@ class _LoginPageState extends State<LoginPage> {
                                   widthButton: 260,
                                   childButton: Text(
                                     "Sign Up",
-                                    style: body_1.copyWith(color: white_cr),
+                                    style: body_1.copyWith(color: accent_cr),
                                   )),
                             ),
                             SizedBox(

@@ -7,8 +7,8 @@ abstract class CartState {
   final String city;
   final String country;
   final String zipCode;
-  final String paymentMethod;
-  final BankInfo? bank;
+  final int paymentMethod;
+  final String? bank;
   final CreditCard? cc;
   final String? paypal;
   final int? totalItem;
@@ -42,7 +42,7 @@ class CartEmpty extends CartState {
             city: "",
             country: "",
             zipCode: "",
-            paymentMethod: "",
+            paymentMethod: 0,
             totalItem: 0,
             deliveryCost: 0,
             totalCost: 0,
@@ -58,7 +58,32 @@ class CartFilled extends CartState {
       required super.country,
       required super.zipCode,
       required super.paymentMethod,
-      BankInfo? bankInfo,
+      String? bankInfo,
+      CreditCard? ccInfo,
+      String? paypal,
+      int? totalItem,
+      double? deliveryC,
+      double? totalC,
+      required super.progress})
+      : super(
+            bank: bankInfo,
+            cc: ccInfo,
+            paypal: paypal,
+            totalItem: totalItem,
+            deliveryCost: deliveryC,
+            totalCost: totalC);
+}
+
+class CartCheckout extends CartState{
+    CartCheckout(
+      {required super.itemCart,
+      required super.itemPcs,
+      required super.address,
+      required super.city,
+      required super.country,
+      required super.zipCode,
+      required super.paymentMethod,
+      String? bankInfo,
       CreditCard? ccInfo,
       String? paypal,
       int? totalItem,

@@ -364,7 +364,7 @@ class _ShopPageState extends State<ShopPage> {
                     widthButton: 48,
                     childButton: const ImageIcon(
                       AssetImage("assets/imgs/icons/filter.png"),
-                      color: white_cr,
+                      color: accent_cr,
                     )),
               ],
             ),

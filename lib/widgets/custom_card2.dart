@@ -11,6 +11,8 @@ class CustomCard2 extends StatelessWidget {
   final Widget childCard;
   final double opacityCard;
   final Alignment align;
+
+  /// A Card with a border
   const CustomCard2(
       {super.key,
       required this.colorCard,

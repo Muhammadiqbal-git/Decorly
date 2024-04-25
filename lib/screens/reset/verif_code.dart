@@ -265,7 +265,7 @@ class _ResetCodeVerifState extends State<ResetCodeVerif> {
                     widthButton: 260,
                     childButton: Text(
                       "Verify",
-                      style: body_1.copyWith(color: white_cr),
+                      style: body_1.copyWith(color: accent_cr),
                     )),
                 const SizedBox(
                   height: 20,

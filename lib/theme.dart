@@ -31,8 +31,6 @@ double getWidth(num size) {
           WidgetsBinding
               .instance.platformDispatcher.views.first.devicePixelRatio) *
       (size / 100);
-
-  // return 10.0;
 }
 
 /// Return the specific percentage of the screen height
@@ -46,7 +44,6 @@ double getHeight(num size) {
           WidgetsBinding
               .instance.platformDispatcher.views.first.devicePixelRatio) *
       (size / 100);
-  // return 10.0;
 }
 
 double getScreenRatio(double size) {

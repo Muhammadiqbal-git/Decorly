@@ -100,7 +100,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                   widthButton: 260,
                   childButton: Text(
                     "Submit",
-                    style: body_1.copyWith(color: white_cr),
+                    style: body_1.copyWith(color: accent_cr),
                   ))
             ]),
           ),

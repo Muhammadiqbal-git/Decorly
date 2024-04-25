@@ -8,6 +8,8 @@ class CustomCard extends StatelessWidget {
   final Widget child;
   final EdgeInsets marginContainer;
   final EdgeInsets paddingContainer;
+
+  /// A Card without a border
   const CustomCard(
       {super.key,
       required this.heightContainer,

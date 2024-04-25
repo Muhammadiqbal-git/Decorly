@@ -137,7 +137,7 @@ class TermsPage extends StatelessWidget {
                           childButton: Text(
                             "Agree",
                             style: body_1.copyWith(
-                                color: state.value ? white_cr : white_cr),
+                                color: state.value ? accent_cr : accent_cr),
                           ));
                     },
                   ),

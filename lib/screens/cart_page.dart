@@ -1,5 +1,6 @@
 import 'package:decorly/bloc/cart_cubit.dart';
 import 'package:decorly/bloc/shop_cubit.dart';
+import 'package:decorly/screens/check_out.dart';
 import 'package:decorly/screens/shop_page.dart';
 import 'package:decorly/theme.dart';
 import 'package:decorly/widgets/custom_button.dart';
@@ -87,7 +88,7 @@ class _CartPageState extends State<CartPage> {
                     heightButton: 48,
                     childButton: Text(
                       "Shop Now",
-                      style: body_1.copyWith(color: white_cr),
+                      style: body_1.copyWith(color: accent_cr),
                     ))
               ],
             );
@@ -218,9 +219,26 @@ class _CartPageState extends State<CartPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                CustomForm(
-                    textEditingController: _promoCodeController,
-                    textInputAction: TextInputAction.done),
+                Stack(
+                  children: [
+                    Positioned(
+                      child: CustomForm(
+                          textEditingController: _promoCodeController,
+                          textInputAction: TextInputAction.done),
+                    ),
+                    Positioned(
+                        right: 0,
+                        child: CustomButton(
+                            function: () {},
+                            colorButton: primary_cr,
+                            widthButton: 44,
+                            heightButton: 44,
+                            childButton: ImageIcon(
+                              AssetImage("assets/imgs/icons/checklist.png"),
+                              color: accent_cr,
+                            ))),
+                  ],
+                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -228,7 +246,8 @@ class _CartPageState extends State<CartPage> {
                     colorCard: accent_cr,
                     widthCard: double.infinity,
                     heightCard: 124,
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 14),
                     childCard: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -282,7 +301,9 @@ class _CartPageState extends State<CartPage> {
                   children: [
                     CustomButton(
                         function: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ShopPage(),));
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const ShopPage(),
+                          ));
                         },
                         colorButton: primary_cr,
                         widthButton: 100,
@@ -304,7 +325,11 @@ class _CartPageState extends State<CartPage> {
                           ],
                         )),
                     CustomButton(
-                        function: () {},
+                        function: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => CheckOutPage(),
+                          ));
+                        },
                         colorButton: primary_cr,
                         widthButton: 160,
                         heightButton: 48,

@@ -70,7 +70,7 @@ class SavedPage extends StatelessWidget {
                     heightButton: 48,
                     childButton: Text(
                       "Discover Now & Save",
-                      style: body_1.copyWith(color: white_cr),
+                      style: body_1.copyWith(color: accent_cr),
                     ))
               ],
             ),
@@ -127,6 +127,7 @@ class SavedPage extends StatelessWidget {
                 ),
                 Expanded(
                   child: TabBarView(children: [
+                    // Furniture
                     SingleChildScrollView(
                       padding: const EdgeInsets.fromLTRB(22, 0, 22, 22),
                       child: Column(
@@ -275,6 +276,7 @@ class SavedPage extends StatelessWidget {
                                   )
                                 ]),
                     ),
+                    // Designers
                     SingleChildScrollView(
                       padding: const EdgeInsets.fromLTRB(22, 0, 22, 22),
                       child: Column(

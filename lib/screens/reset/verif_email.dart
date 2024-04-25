@@ -120,7 +120,7 @@ class _ResetEmailVerifState extends State<ResetEmailVerif> {
                     widthButton: 260,
                     childButton: Text(
                       "Send Code",
-                      style: body_1.copyWith(color: white_cr),
+                      style: body_1.copyWith(color: accent_cr),
                     ))
               ],
             ),
