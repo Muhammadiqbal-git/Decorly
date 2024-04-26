@@ -5,7 +5,7 @@ import 'package:decorly/bloc/featured_item_cubit.dart';
 import 'package:decorly/bloc/login_page_cubit.dart';
 import 'package:decorly/bloc/term_cubit.dart';
 import 'package:decorly/screens/main_page.dart';
-import 'package:decorly/screens/reset/verif_email.dart';
+import 'package:decorly/screens/reset_verif_email.dart';
 import 'package:decorly/screens/term_page.dart';
 import 'package:decorly/theme.dart';
 import 'package:decorly/widgets/custom_button.dart';

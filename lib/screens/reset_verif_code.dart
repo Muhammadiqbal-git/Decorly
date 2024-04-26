@@ -1,5 +1,4 @@
-import 'package:decorly/screens/login_page.dart';
-import 'package:decorly/screens/reset/reset_pass.dart';
+import 'package:decorly/screens/reset_pass.dart';
 import 'package:decorly/theme.dart';
 import 'package:decorly/widgets/custom_button.dart';
 import 'package:flutter/material.dart';

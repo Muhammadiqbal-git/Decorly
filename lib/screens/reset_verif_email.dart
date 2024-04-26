@@ -1,4 +1,4 @@
-import 'package:decorly/screens/reset/verif_code.dart';
+import 'package:decorly/screens/reset_verif_code.dart';
 import 'package:decorly/theme.dart';
 import 'package:decorly/widgets/custom_button.dart';
 import 'package:decorly/widgets/custom_form.dart';

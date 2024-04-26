@@ -5,6 +5,6 @@ class DesignFetched extends DesignState{
 final int currentIndex;
 final DataArticle dataArticle;
 
-  DesignFetched({required this.currentIndex, required this.dataArticle  });
+  DesignFetched({required this.currentIndex, required this.dataArticle});
 }
 class DesignLoading extends DesignState{}
