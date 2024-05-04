@@ -26,14 +26,17 @@ class CheckOutProcessWidget extends StatelessWidget {
                     width: 26,
                     margin: const EdgeInsets.only(bottom: 25),
                     decoration: BoxDecoration(
-                        color: state.progress > 0 ? primary_cr : subtle_text_cr,
+                        color:
+                            state.progress >= 0 ? primary_cr : subtle_text_cr,
                         borderRadius: BorderRadius.circular(50)),
                     alignment: Alignment.center,
                     child: Container(
                       height: 10,
                       width: 10,
                       decoration: BoxDecoration(
-                          color: state.indexProgress == 0 ? secondary_cr : accent_cr,
+                          color: state.indexProgress == 0
+                              ? secondary_cr
+                              : accent_cr,
                           borderRadius: BorderRadius.circular(50)),
                     ),
                   );
@@ -69,14 +72,16 @@ class CheckOutProcessWidget extends StatelessWidget {
                     margin: const EdgeInsets.only(bottom: 25),
                     decoration: BoxDecoration(
                         color:
-                            state.progress == 1 ? primary_cr : subtle_text_cr,
+                            state.progress >= 1 ? primary_cr : subtle_text_cr,
                         borderRadius: BorderRadius.circular(50)),
                     alignment: Alignment.center,
                     child: Container(
                       height: 10,
                       width: 10,
                       decoration: BoxDecoration(
-                          color: state.indexProgress == 1 ? secondary_cr : accent_cr,
+                          color: state.indexProgress == 1
+                              ? secondary_cr
+                              : accent_cr,
                           borderRadius: BorderRadius.circular(50)),
                     ),
                   );
@@ -112,14 +117,17 @@ class CheckOutProcessWidget extends StatelessWidget {
                     width: 26,
                     margin: const EdgeInsets.only(bottom: 25),
                     decoration: BoxDecoration(
-                        color: subtle_text_cr,
+                        color:
+                            state.progress >= 2 ? primary_cr : subtle_text_cr,
                         borderRadius: BorderRadius.circular(50)),
                     alignment: Alignment.center,
                     child: Container(
                       height: 10,
                       width: 10,
                       decoration: BoxDecoration(
-                          color: accent_cr,
+                          color: state.indexProgress == 2
+                              ? secondary_cr
+                              : accent_cr,
                           borderRadius: BorderRadius.circular(50)),
                     ),
                   );
@@ -143,21 +151,25 @@ class CheckOutProcessWidget extends StatelessWidget {
             clipBehavior: Clip.none,
             alignment: Alignment.topCenter,
             children: [
-              Container(
-                height: 26,
-                width: 26,
-                margin: const EdgeInsets.only(bottom: 25),
-                decoration: BoxDecoration(
-                    color: subtle_text_cr,
-                    borderRadius: BorderRadius.circular(50)),
-                alignment: Alignment.center,
-                child: Container(
-                  height: 10,
-                  width: 10,
-                  decoration: BoxDecoration(
-                      color: accent_cr,
-                      borderRadius: BorderRadius.circular(50)),
-                ),
+              BlocBuilder<CheckOutCubit, CheckOutState>(
+                builder: (context, state) {
+                  return Container(
+                    height: 26,
+                    width: 26,
+                    margin: const EdgeInsets.only(bottom: 25),
+                    decoration: BoxDecoration(
+                        color: state.progress >= 3 ? primary_cr : subtle_text_cr,
+                        borderRadius: BorderRadius.circular(50)),
+                    alignment: Alignment.center,
+                    child: Container(
+                      height: 10,
+                      width: 10,
+                      decoration: BoxDecoration(
+                          color: state.indexProgress == 3 ? secondary_cr : accent_cr,
+                          borderRadius: BorderRadius.circular(50)),
+                    ),
+                  );
+                },
               ),
               Positioned(
                   bottom: 0,

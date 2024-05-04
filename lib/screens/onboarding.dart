@@ -38,7 +38,6 @@ class OnBoardingIndicator extends StatelessWidget {
           [10, 10]
         ]),
   ];
-  final PageController _pageController = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +50,7 @@ class OnBoardingIndicator extends StatelessWidget {
             highlightColor: Colors.transparent,
             onPressed: (() {
               BlocProvider.of<OnboardingCubit>(context)
-                  .previous(_pageController);
+                  .previous();
             }),
             icon: const ImageIcon(AssetImage('assets/imgs/icons/back_arrow.png'))),
         actions: [
@@ -203,7 +202,7 @@ class OnBoardingIndicator extends StatelessWidget {
                                 return CustomButton(
                                     function: () {
                                       BlocProvider.of<OnboardingCubit>(context)
-                                          .next(_pageController);
+                                          .next();
                                     },
                                     colorButton: white_cr,
                                     widthButton: 48,
@@ -222,10 +221,10 @@ class OnBoardingIndicator extends StatelessWidget {
                             int sens = 50;
                             if (details.primaryVelocity! > sens) {
                               BlocProvider.of<OnboardingCubit>(context)
-                                  .previous(_pageController);
+                                  .previous();
                             } else if (details.primaryVelocity! < -sens) {
                               BlocProvider.of<OnboardingCubit>(context)
-                                  .next(_pageController);
+                                  .next();
                             }
                           },
                         ),

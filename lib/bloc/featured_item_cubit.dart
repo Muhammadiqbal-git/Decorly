@@ -16,10 +16,8 @@ class FeaturedItemCubit extends Cubit<FeaturedItemState> {
   /// meaning it only have 6 data
   Future getData(int indexTop3, int bottomIndex) async {
     DataFurniture dataFurniture = await FurnitureAPI().getData(indexTop3);
-    print(dataFurniture.data.length);
     emit(FeaturedItemLoading());
     await Future.delayed(const Duration(seconds: 2));
-    print("1sec");
     emit(FeaturedItemFetched(
         bottomIndex: bottomIndex,
         dataFurniture: dataFurniture,
@@ -64,9 +62,8 @@ class FeaturedItemCubit extends Cubit<FeaturedItemState> {
             paddingCard: paddingData,
             colorCard: currentState.colorCard,
             colorText: currentState.colorText));
-        await Future.delayed(Duration(milliseconds: 300));
+        await Future.delayed(const Duration(milliseconds: 300));
         emit(FeaturedItemEmpty());
-        print("asd");
         return null;
       }
 
@@ -75,13 +72,11 @@ class FeaturedItemCubit extends Cubit<FeaturedItemState> {
       } else {
         paddingData[bottomIndex] = [-1.0, 1.0];
       }
-      print("asdasda");
       for (var i = bottomIndex + 1; i < currentState.dataFurniture.data.length; i++) {
         paddingData[i][0] -= 0.02;
         paddingData[i][1] -= 0.02;
         bottomData[i] -= 20;
       }
-      print(paddingData);
       emit(FeaturedItemFetched(
           bottomIndex: bottomIndex + 1,
           dataFurniture: currentState.dataFurniture,

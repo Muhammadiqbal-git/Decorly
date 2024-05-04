@@ -1,8 +1,10 @@
 import 'package:decorly/bloc/cart_cubit.dart';
 import 'package:decorly/bloc/check_out_cubit.dart';
 import 'package:decorly/screens/sections/check_out_address_section.dart';
+import 'package:decorly/screens/sections/check_out_done_section.dart';
 import 'package:decorly/screens/sections/check_out_payment_section.dart';
 import 'package:decorly/screens/sections/check_out_process_section.dart';
+import 'package:decorly/screens/sections/check_out_review_section.dart';
 import 'package:decorly/theme.dart';
 import 'package:decorly/widgets/custom_button.dart';
 import 'package:decorly/widgets/custom_card.dart';
@@ -38,6 +40,7 @@ class _CheckOutPageState extends State<CheckOutPage> {
 
   @override
   Widget build(BuildContext context) {
+    print("checkout built");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: white_cr,
@@ -64,12 +67,17 @@ class _CheckOutPageState extends State<CheckOutPage> {
           Expanded(
             child: PageView(
               onPageChanged: (value) {
-                BlocProvider.of<CheckOutCubit>(context).updateIndexProgress(value);
+                FocusScope.of(context).unfocus();
+                BlocProvider.of<CheckOutCubit>(context)
+                    .updateIndexProgress(value);
               },
-              controller: PageController(),
-              children: [
+              controller:
+                  BlocProvider.of<CheckOutCubit>(context).pageController,
+              children: const [
                 CheckOutAddressSection(),
                 CheckOutPaymentSection(),
+                CheckOutReviewSection(),
+                CheckOutDoneSection()
               ],
             ),
           )

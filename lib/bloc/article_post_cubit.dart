@@ -1,7 +1,5 @@
-import 'package:decorly/bloc/saved_list_cubit.dart';
 import 'package:decorly/models/article_post.dart';
 import 'package:decorly/services/article_api.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'article_post_state.dart';
 

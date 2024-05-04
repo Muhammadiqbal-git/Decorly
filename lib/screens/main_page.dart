@@ -3,6 +3,7 @@ import 'package:decorly/bloc/main_page_cubit.dart';
 import 'package:decorly/bloc/saved_list_cubit.dart';
 import 'package:decorly/screens/cart_page.dart';
 import 'package:decorly/screens/home_page.dart';
+import 'package:decorly/screens/profile.dart';
 import 'package:decorly/screens/saved_page.dart';
 import 'package:decorly/theme.dart';
 import 'package:flutter/material.dart';
@@ -33,12 +34,14 @@ class _MainPageState extends State<MainPage> {
   final List<Widget> listWidget = [
     const HomePage(),
     const SavedPage(),
-    const CartPage()
+    const CartPage(),
+    const ProfilePage(),
   ];
   final List<AppBar> listAppbar = [
     const HomePage().appBar(null),
     const SavedPage().appBar(null),
-    const CartPage().appBar()
+    const CartPage().appBar(),
+    const ProfilePage().appBar(),
   ];
   int currentIndex = 0;
 
@@ -57,34 +60,47 @@ class _MainPageState extends State<MainPage> {
               children: listWidget,
             ),
             bottomNavigationBar: BottomNavigationBar(
-                elevation: 8,
-                currentIndex: state.index,
-                backgroundColor: white_cr,
-                showSelectedLabels: false,
-                showUnselectedLabels: false,
-                selectedItemColor: secondary_cr,
-                unselectedItemColor: subtle_text_cr,
-                onTap: (value) async {
-                  BlocProvider.of<MainPageCubit>(context).updateIndex(value);
-                  if (!load) {
-                    load = true;
-                    await blocFunction(value).then((value) => load = false);
-                  }
-                },
-                items: const [
-                  BottomNavigationBarItem(
-                      label: "",
-                      icon:
-                          ImageIcon(AssetImage("assets/imgs/icons/home.png"))),
-                  BottomNavigationBarItem(
-                      label: "",
-                      icon: ImageIcon(
-                          AssetImage("assets/imgs/icons/bookmark.png"))),
-                  BottomNavigationBarItem(
-                      label: "",
-                      icon:
-                          ImageIcon(AssetImage("assets/imgs/icons/cart.png"))),
-                ]),
+              elevation: 8,
+              currentIndex: state.index,
+              backgroundColor: white_cr,
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              selectedItemColor: secondary_cr,
+              unselectedItemColor: subtle_text_cr,
+              onTap: (value) async {
+                BlocProvider.of<MainPageCubit>(context).updateIndex(value);
+                if (!load) {
+                  load = true;
+                  await blocFunction(value).then((value) => load = false);
+                }
+              },
+              items: const [
+                BottomNavigationBarItem(
+                  label: "",
+                  icon: ImageIcon(
+                    AssetImage("assets/imgs/icons/home.png"),
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: "",
+                  icon: ImageIcon(
+                    AssetImage("assets/imgs/icons/bookmark.png"),
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: "",
+                  icon: ImageIcon(
+                    AssetImage("assets/imgs/icons/cart.png"),
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: "",
+                  icon: ImageIcon(
+                    AssetImage("assets/imgs/icons/profile.png"),
+                  ),
+                ),
+              ],
+            ),
           );
         },
       ),

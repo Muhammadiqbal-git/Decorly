@@ -1,9 +1,12 @@
+import 'package:decorly/bloc/cart_cubit.dart';
+import 'package:decorly/bloc/check_out_cubit.dart';
 import 'package:decorly/theme.dart';
 import 'package:decorly/widgets/custom_button.dart';
 import 'package:decorly/widgets/custom_card.dart';
 import 'package:decorly/widgets/custom_form.dart';
 import 'package:decorly/widgets/price_card_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 class CheckOutPaymentSection extends StatefulWidget {
@@ -15,6 +18,37 @@ class CheckOutPaymentSection extends StatefulWidget {
 
 class _CheckOutPaymentSectionState extends State<CheckOutPaymentSection> {
   final List<String> creditCardList = const ['MasterCard', 'Visa'];
+  late TextEditingController bankNumber;
+  late TextEditingController nameCC;
+  late TextEditingController numberCC;
+  late TextEditingController dateCC;
+  late TextEditingController codeCC;
+  late TextEditingController payPal;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    bankNumber = TextEditingController();
+    nameCC = TextEditingController();
+    numberCC = TextEditingController();
+    dateCC = TextEditingController();
+    codeCC = TextEditingController();
+    payPal = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    print("disposed");
+    bankNumber.dispose();
+    nameCC.dispose();
+    numberCC.dispose();
+    dateCC.dispose();
+    codeCC.dispose();
+    payPal.dispose();
+    super.dispose();
+  }
+
   String currentCard = "MasterCard";
 
   @override
@@ -111,8 +145,8 @@ class _CheckOutPaymentSectionState extends State<CheckOutPaymentSection> {
                                     height: 14,
                                   ),
                                   CustomForm(
-                                    textEditingController:
-                                        TextEditingController(),
+                                    textEditingController: bankNumber,
+                                    hintText: "**** **** **** ****",
                                     textInputAction: TextInputAction.done,
                                     isObsecure: true,
                                   ),
@@ -130,15 +164,26 @@ class _CheckOutPaymentSectionState extends State<CheckOutPaymentSection> {
                                   const SizedBox(
                                     height: 14,
                                   ),
-                                  const PriceCardWidget(
-                                      subTotal: 99.99,
-                                      delivery: 0,
-                                      total: 99.99),
+                                  BlocBuilder<CartCubit, CartState>(
+                                    builder: (context, state) {
+                                      return PriceCardWidget(
+                                          subTotal: state.totalCost ?? 0,
+                                          delivery: state.deliveryCost ?? 0,
+                                          total: (state.totalCost ?? 0) +
+                                              (state.deliveryCost ?? 0));
+                                    },
+                                  ),
                                   const SizedBox(
                                     height: 24,
                                   ),
                                   CustomButton(
-                                      function: () {},
+                                      function: () {
+                                        BlocProvider.of<CheckOutCubit>(context)
+                                            .nextPage();
+                                        print("pressed");
+                                        BlocProvider.of<CheckOutCubit>(context)
+                                            .bankPayment(bankNumber.value.text);
+                                      },
                                       colorButton: primary_cr,
                                       widthButton: double.maxFinite,
                                       heightButton: 48,
@@ -179,8 +224,7 @@ class _CheckOutPaymentSectionState extends State<CheckOutPaymentSection> {
                                               SizedBox(
                                                 width: getWidth(40),
                                                 child: TextField(
-                                                  controller:
-                                                      TextEditingController(),
+                                                  controller: nameCC,
                                                   cursorColor: accent_cr,
                                                   style: body_2.copyWith(
                                                       color: subtle_text_cr),
@@ -217,8 +261,7 @@ class _CheckOutPaymentSectionState extends State<CheckOutPaymentSection> {
                                               SizedBox(
                                                 width: getWidth(40),
                                                 child: TextField(
-                                                  controller:
-                                                      TextEditingController(),
+                                                  controller: numberCC,
                                                   cursorColor: accent_cr,
                                                   style: body_2.copyWith(
                                                       color: subtle_text_cr),
@@ -256,8 +299,7 @@ class _CheckOutPaymentSectionState extends State<CheckOutPaymentSection> {
                                                   SizedBox(
                                                     width: 45,
                                                     child: TextField(
-                                                      controller:
-                                                          TextEditingController(),
+                                                      controller: dateCC,
                                                       cursorColor: accent_cr,
                                                       style: body_2.copyWith(
                                                           color:
@@ -357,8 +399,7 @@ class _CheckOutPaymentSectionState extends State<CheckOutPaymentSection> {
                                               SizedBox(
                                                 width: 30,
                                                 child: TextField(
-                                                  controller:
-                                                      TextEditingController(),
+                                                  controller: codeCC,
                                                   cursorColor: accent_cr,
                                                   style: body_2.copyWith(
                                                       color: subtle_text_cr),
@@ -402,15 +443,30 @@ class _CheckOutPaymentSectionState extends State<CheckOutPaymentSection> {
                                   const SizedBox(
                                     height: 30,
                                   ),
-                                  PriceCardWidget(
-                                      subTotal: 99.99,
-                                      delivery: 0,
-                                      total: 99.99),
+                                  BlocBuilder<CartCubit, CartState>(
+                                    builder: (context, state) {
+                                      return PriceCardWidget(
+                                          subTotal: state.totalCost ?? 0,
+                                          delivery: state.deliveryCost ?? 0,
+                                          total: (state.totalCost ?? 0) +
+                                              (state.deliveryCost ?? 0));
+                                    },
+                                  ),
                                   const SizedBox(
                                     height: 20,
                                   ),
                                   CustomButton(
-                                      function: () {},
+                                      function: () {
+                                        BlocProvider.of<CheckOutCubit>(context)
+                                            .nextPage();
+                                        BlocProvider.of<CheckOutCubit>(context)
+                                            .ccPayment(
+                                                nameCC.text,
+                                                numberCC.text,
+                                                dateCC.text,
+                                                codeCC.text,
+                                                currentCard);
+                                      },
                                       colorButton: primary_cr,
                                       widthButton: double.maxFinite,
                                       heightButton: 48,
@@ -455,8 +511,7 @@ class _CheckOutPaymentSectionState extends State<CheckOutPaymentSection> {
                                   ),
                                   CustomForm(
                                       hintText: "Email or Mobile Number",
-                                      textEditingController:
-                                          TextEditingController(),
+                                      textEditingController: payPal,
                                       textInputAction: TextInputAction.done),
                                   Align(
                                     alignment: Alignment.centerLeft,
@@ -470,16 +525,23 @@ class _CheckOutPaymentSectionState extends State<CheckOutPaymentSection> {
                                     height: 30,
                                   ),
                                   CustomButton(
-                                      function: () {},
+                                      function: () {
+                                        BlocProvider.of<CheckOutCubit>(context)
+                                            .nextPage();
+                                        BlocProvider.of<CheckOutCubit>(context)
+                                            .paypalPayment(payPal.text);
+                                      },
                                       colorButton: primary_cr,
                                       widthButton: double.maxFinite,
                                       heightButton: 48,
                                       childButton: Text(
                                         "Continue",
-                                        style: body_1.copyWith(color: accent_cr),
+                                        style:
+                                            body_1.copyWith(color: accent_cr),
                                       )),
-                                  const SizedBox(height: 25,),
-                            
+                                  const SizedBox(
+                                    height: 25,
+                                  ),
                                 ],
                               ),
                             ),
@@ -501,20 +563,36 @@ class _CheckOutPaymentSectionState extends State<CheckOutPaymentSection> {
                                   const SizedBox(
                                     height: 30,
                                   ),
-                                  const PriceCardWidget(
-                                      subTotal: 99.99, delivery: 0, total: 99.99),
-                                  const SizedBox(height: 30,),
+                                  BlocBuilder<CartCubit, CartState>(
+                                    builder: (context, state) {
+                                      return PriceCardWidget(
+                                          subTotal: state.totalCost ?? 0,
+                                          delivery: state.deliveryCost ?? 0,
+                                          total: (state.totalCost ?? 0) +
+                                              (state.deliveryCost ?? 0));
+                                    },
+                                  ),
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
                                   CustomButton(
-                                      function: () {},
+                                      function: () {
+                                        BlocProvider.of<CheckOutCubit>(context)
+                                            .nextPage();
+                                        BlocProvider.of<CheckOutCubit>(context)
+                                            .codPayment();
+                                      },
                                       colorButton: primary_cr,
                                       widthButton: double.maxFinite,
                                       heightButton: 48,
                                       childButton: Text(
                                         "Review",
-                                        style: body_1.copyWith(color: accent_cr),
+                                        style:
+                                            body_1.copyWith(color: accent_cr),
                                       )),
-                                  const SizedBox(height: 25,),
-                            
+                                  const SizedBox(
+                                    height: 25,
+                                  ),
                                 ],
                               ),
                             ),

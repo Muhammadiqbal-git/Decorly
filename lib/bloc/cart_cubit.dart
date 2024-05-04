@@ -20,7 +20,9 @@ class CartCubit extends Cubit<CartState> {
     });
     return totalCost;
   }
-
+  clearItem(){
+    emit(CartEmpty());
+  }
   increaseItem(Furniture furniture) {
     state.itemPcs.update(
       furniture.id,
@@ -31,12 +33,12 @@ class CartCubit extends Cubit<CartState> {
       },
     );
     emit(CartFilled(
-        itemCart: state.itemCart,
-        itemPcs: state.itemPcs,
-        totalItem: countTotalItem(state.itemPcs),
-        deliveryC: 59,
-        totalC: countTotalCost(state.itemCart, state.itemPcs),
-));
+      itemCart: state.itemCart,
+      itemPcs: state.itemPcs,
+      totalItem: countTotalItem(state.itemPcs),
+      deliveryC: 59,
+      totalC: countTotalCost(state.itemCart, state.itemPcs),
+    ));
     if (state.itemCart.isEmpty) {
       emit(CartEmpty());
     }
@@ -49,15 +51,14 @@ class CartCubit extends Cubit<CartState> {
       state.itemPcs.remove(furniture.id);
     }
     emit(CartFilled(
-        itemCart: state.itemCart,
-        itemPcs: state.itemPcs,
-        totalItem: countTotalItem(state.itemPcs),
-        deliveryC: 59,
-        totalC: countTotalCost(state.itemCart, state.itemPcs),
-));
+      itemCart: state.itemCart,
+      itemPcs: state.itemPcs,
+      totalItem: countTotalItem(state.itemPcs),
+      deliveryC: 59,
+      totalC: countTotalCost(state.itemCart, state.itemPcs),
+    ));
     if (state.itemCart.isEmpty) {
       emit(CartEmpty());
     }
   }
-
 }

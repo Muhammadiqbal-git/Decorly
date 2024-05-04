@@ -8,6 +8,7 @@ class CustomCard extends StatelessWidget {
   final Widget child;
   final EdgeInsets marginContainer;
   final EdgeInsets paddingContainer;
+  final AlignmentGeometry? align;
 
   /// A Card without a border
   const CustomCard(
@@ -17,7 +18,8 @@ class CustomCard extends StatelessWidget {
       required this.backgroundColor,
       required this.child,
       this.paddingContainer = const EdgeInsets.fromLTRB(16, 15, 16, 10),
-      this.marginContainer = const EdgeInsets.all(0) 
+      this.marginContainer = const EdgeInsets.all(0),
+      this.align
       });
 
   @override
@@ -28,6 +30,7 @@ class CustomCard extends StatelessWidget {
       height: heightContainer,
       width: widthContainer,
       margin: marginContainer,
+      alignment: align,
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(12),

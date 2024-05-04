@@ -226,6 +226,7 @@ class _CartPageState extends State<CartPage> {
                   children: [
                     Positioned(
                       child: CustomForm(
+                        hintText: "Promo Code",
                           textEditingController: _promoCodeController,
                           textInputAction: TextInputAction.done),
                     ),

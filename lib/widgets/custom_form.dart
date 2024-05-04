@@ -14,8 +14,10 @@ class CustomForm extends StatefulWidget {
   final TextAlign? textAlign;
   final TextStyle? hintStyle;
   final Color backgroundColor;
+  final BoxBorder? borders;
   final double borderRadius;
   final bool isObsecure;
+  final bool? enabled;
 
   const CustomForm({
     super.key,
@@ -31,8 +33,11 @@ class CustomForm extends StatefulWidget {
     this.textAlign,
     this.hintStyle,
     this.backgroundColor = accent_cr,
+    this.borders,
     this.borderRadius = 12,
     this.isObsecure = false,
+    this.enabled,
+
   });
   @override
   State<CustomForm> createState() => _CustomFormState();
@@ -55,6 +60,7 @@ class _CustomFormState extends State<CustomForm> {
       decoration: BoxDecoration(
         color: widget.backgroundColor,
         borderRadius: BorderRadius.circular(widget.borderRadius),
+        border: widget.borders
       ),
       child: Row(
         children: [
@@ -67,6 +73,7 @@ class _CustomFormState extends State<CustomForm> {
               : const SizedBox(),
           Expanded(
             child: TextFormField(
+              enabled: widget.enabled,
               onChanged: widget.onChanged,
               onEditingComplete: widget.onEdittingComplete,
               focusNode: widget.focusNode,

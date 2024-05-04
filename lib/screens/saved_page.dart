@@ -22,6 +22,7 @@ class SavedPage extends StatelessWidget {
         "My Saved List",
         style: body_1.copyWith(color: text_cr),
       ),
+      
     );
   }
   // Widget empty(){

@@ -135,6 +135,7 @@ class _CheckOutAddressSectionState extends State<CheckOutAddressSection> {
               child: CustomButton(
                   function: () {
                     BlocProvider.of<CheckOutCubit>(context).addressProcess(street.text, city.text, country.text, zipCode.text);
+                    BlocProvider.of<CheckOutCubit>(context).nextPage();
                   },
                   colorButton: primary_cr,
                   widthButton: 130,
