@@ -27,8 +27,8 @@ class CustomCard extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       padding: paddingContainer,
-      height: heightContainer,
       width: widthContainer,
+      height: heightContainer,
       margin: marginContainer,
       alignment: align,
       decoration: BoxDecoration(

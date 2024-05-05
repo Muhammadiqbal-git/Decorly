@@ -89,7 +89,9 @@ class MyOrderPage extends StatelessWidget {
                           return Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SizedBox(height: getHeight(15),),
+                              SizedBox(
+                                height: getHeight(15),
+                              ),
                               SvgPicture.asset("assets/imgs/cart_no.svg"),
                               const SizedBox(
                                 height: 20,
@@ -280,7 +282,9 @@ class MyOrderPage extends StatelessWidget {
                   Center(
                     child: Column(
                       children: [
-                              SizedBox(height: getHeight(15),),
+                        SizedBox(
+                          height: getHeight(15),
+                        ),
                         SvgPicture.asset("assets/imgs/cart_no.svg"),
                         const SizedBox(
                           height: 20,

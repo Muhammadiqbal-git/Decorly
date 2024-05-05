@@ -1,6 +1,7 @@
 import 'package:decorly/bloc/featured_item_cubit.dart';
 import 'package:decorly/bloc/main_page_cubit.dart';
 import 'package:decorly/bloc/saved_list_cubit.dart';
+import 'package:decorly/screens/appointment_page.dart';
 import 'package:decorly/screens/cart_page.dart';
 import 'package:decorly/screens/home_page.dart';
 import 'package:decorly/screens/profile.dart';
@@ -35,12 +36,14 @@ class _MainPageState extends State<MainPage> {
     const HomePage(),
     const SavedPage(),
     const CartPage(),
+    const AppointmentsPage(),
     const ProfilePage(),
   ];
   final List<AppBar> listAppbar = [
     const HomePage().appBar(null),
     const SavedPage().appBar(null),
     const CartPage().appBar(),
+    const AppointmentsPage().appBar(),
     const ProfilePage().appBar(),
   ];
   int currentIndex = 0;
@@ -91,6 +94,12 @@ class _MainPageState extends State<MainPage> {
                   label: "",
                   icon: ImageIcon(
                     AssetImage("assets/imgs/icons/cart.png"),
+                  ),
+                ),
+                BottomNavigationBarItem(
+                  label: "",
+                  icon: ImageIcon(
+                    AssetImage("assets/imgs/icons/calendar.png"),
                   ),
                 ),
                 BottomNavigationBarItem(
