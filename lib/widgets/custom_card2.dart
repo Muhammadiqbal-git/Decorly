@@ -35,8 +35,8 @@ class CustomCard2 extends StatelessWidget {
             color: borderColor ?? colorCard, opacity: opacityCard),
         child: Center(
           child: SizedBox(
-            width: widthCard - borderWidth,
-            height: heightCard - borderWidth,
+            width: widthCard - borderWidth*2,
+            height: heightCard - borderWidth*2,
             child: CustomPaint(
               painter: ButtonPainter(color: colorCard),
               child: Container(

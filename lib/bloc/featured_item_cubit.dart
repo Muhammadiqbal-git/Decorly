@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:decorly/models/furniture_item.dart';
 import 'package:decorly/services/furniture_api.dart';
 import 'package:decorly/theme.dart';
@@ -49,7 +47,6 @@ class FeaturedItemCubit extends Cubit<FeaturedItemState> {
       paddingData = currentState.paddingCard;
       bottomData = currentState.bottomPosition;
       if (bottomIndex + 1 >= currentState.dataFurniture.data.length) {
-        print("maxx");
         if (swipeRight) {
           paddingData[bottomIndex] = [1.0, -1.0];
         } else {

@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OnBoardingIndicator extends StatelessWidget {
   OnBoardingIndicator({super.key});
-  final List<OnboardingItem> onboarding_list = [
+  final List<OnboardingItem> onBoardingList = [
     OnboardingItem(
         title: "Unique furniture,",
         desc: "make your home speaks with items from a variety of home brands.",
@@ -57,7 +57,7 @@ class OnBoardingIndicator extends StatelessWidget {
           TextButton(
               onPressed: (() {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => LoginPage(),
+                  builder: (context) => const LoginPage(),
                 ));
               }),
               style: const ButtonStyle(
@@ -82,13 +82,13 @@ class OnBoardingIndicator extends StatelessWidget {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(onboarding_list[state.value].title,
+                            Text(onBoardingList[state.value].title,
                                 style: display.copyWith(color: white_cr)),
                             const SizedBox(
                               height: 20,
                             ),
                             Text(
-                              onboarding_list[state.value].desc,
+                              onBoardingList[state.value].desc,
                               style: desc.copyWith(color: white_cr),
                               overflow: TextOverflow.ellipsis,
                               maxLines: 3,
@@ -103,7 +103,6 @@ class OnBoardingIndicator extends StatelessWidget {
                   ),
                   BlocBuilder<OnboardingCubit, OnboardingState>(
                     builder: (context, state) {
-                      print('State number ${state.value}');
                       return Row(
                         children: List.generate(
                           4,
@@ -135,7 +134,7 @@ class OnBoardingIndicator extends StatelessWidget {
                           curve: Curves.easeInOut,
                           bottom: getHeight( 5),
                           right: getWidth(
-                              onboarding_list[0].position[state.value]),
+                              onBoardingList[0].position[state.value]),
                           duration: const Duration(milliseconds: 290),
                           child: Image.asset(
                             "assets/imgs/onboarding_item1.png",
@@ -145,7 +144,7 @@ class OnBoardingIndicator extends StatelessWidget {
                           curve: Curves.easeInOut,
                           bottom: 0,
                           right: getWidth(
-                              onboarding_list[1].position[state.value]),
+                              onBoardingList[1].position[state.value]),
                           duration: const Duration(milliseconds: 290),
                           child: Image.asset(
                             "assets/imgs/onboarding_item2.png",
@@ -155,9 +154,9 @@ class OnBoardingIndicator extends StatelessWidget {
                           curve: Curves.easeInOut,
                           bottom: 0,
                           left: getWidth(
-                              onboarding_list[2].position[state.value][0]),
+                              onBoardingList[2].position[state.value][0]),
                           right: getWidth(
-                              onboarding_list[2].position[state.value][1]),
+                              onBoardingList[2].position[state.value][1]),
                           duration: const Duration(milliseconds: 310),
                           child: Image.asset(
                             "assets/imgs/onboarding_item3.png",
@@ -167,9 +166,9 @@ class OnBoardingIndicator extends StatelessWidget {
                           curve: Curves.easeInOut,
                           bottom: 0,
                           left: getWidth(
-                              onboarding_list[3].position[state.value][0]),
+                              onBoardingList[3].position[state.value][0]),
                           right: getWidth(
-                              onboarding_list[3].position[state.value][1]),
+                              onBoardingList[3].position[state.value][1]),
                           duration: const Duration(milliseconds: 310),
                           child: Image.asset(
                             "assets/imgs/onboarding_item4.png",

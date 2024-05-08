@@ -47,7 +47,6 @@ class _CustomFormState extends State<CustomForm> {
   bool obscured = false;
   @override
   void initState() {
-    print("awal forms and not obscure ${widget.isObsecure}");
     obscured = widget.isObsecure;
     super.initState();
   }

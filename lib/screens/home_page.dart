@@ -1,11 +1,9 @@
-import 'dart:ui';
-
 import 'package:decorly/bloc/article_post_cubit.dart';
 import 'package:decorly/bloc/design_post_cubit.dart';
 import 'package:decorly/bloc/designer_cubit.dart';
 import 'package:decorly/bloc/featured_item_cubit.dart';
 import 'package:decorly/bloc/saved_list_cubit.dart';
-import 'package:decorly/models/furniture_item.dart';
+import 'package:decorly/screens/appointment_today_page.dart';
 import 'package:decorly/theme.dart';
 import 'package:decorly/widgets/custom_button.dart';
 import 'package:decorly/widgets/custom_card.dart';
@@ -81,7 +79,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    print("home built");
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -120,9 +117,19 @@ class _HomePageState extends State<HomePage> {
                 "You have an appointment today",
                 style: caption_1.copyWith(fontSize: 11, color: secondary_cr),
               ),
-              Text(
-                "Click here to check!",
-                style: caption_1.copyWith(fontSize: 11, color: text_cr),
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const TodayAppointmentPage(),
+                    ),
+                  );
+                },
+                overlayColor: const MaterialStatePropertyAll(Colors.transparent),
+                child: Text(
+                  "Click here to check!",
+                  style: caption_1.copyWith(fontSize: 11, color: text_cr),
+                ),
               )
             ],
           ),
@@ -197,7 +204,6 @@ class _HomePageState extends State<HomePage> {
                                     padding: const EdgeInsets.only(right: 10),
                                     child: InkWell(
                                         onTap: () {
-                                          print("tapped");
                                         },
                                         child: Container(
                                           height: 102,
@@ -252,13 +258,12 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 10,
                 ),
-                Container(
+                SizedBox(
                   height: 250,
                   width: getWidth(100),
                   child: LayoutBuilder(builder: (context, constraintsFeatured) {
                     return BlocBuilder<FeaturedItemCubit, FeaturedItemState>(
                         builder: (context, state) {
-                      print("featured built");
                       if (state is FeaturedItemLoading) {
                         return const Center(
                           child: CircularProgressIndicator(
@@ -310,13 +315,11 @@ class _HomePageState extends State<HomePage> {
                                     if (index == state.bottomIndex) {
                                       if (details.primaryVelocity! >
                                           sensPositive) {
-                                        print("right");
                                         BlocProvider.of<FeaturedItemCubit>(
                                                 context)
                                             .swipeData(index, true);
                                       } else if (details.primaryVelocity! <
                                           sensNegative) {
-                                        print("left");
                                         BlocProvider.of<FeaturedItemCubit>(
                                                 context)
                                             .swipeData(index, false);
@@ -392,7 +395,6 @@ class _HomePageState extends State<HomePage> {
                                                   top: 0,
                                                   child: InkWell(
                                                     onTap: () {
-                                                      print("ss");
                                                       BlocProvider.of<
                                                                   FeaturedItemCubit>(
                                                               context)
@@ -434,7 +436,6 @@ class _HomePageState extends State<HomePage> {
                                                   bottom: 0,
                                                   child: InkWell(
                                                     onTap: () {
-                                                      print("buyer");
                                                     },
                                                     child: ImageIcon(
                                                       const AssetImage(
@@ -579,7 +580,6 @@ class _HomePageState extends State<HomePage> {
                                                     top: 0,
                                                     child: InkWell(
                                                       onTap: () {
-                                                        print("ss");
                                                       },
                                                       child: const ImageIcon(
                                                           AssetImage(
@@ -592,7 +592,6 @@ class _HomePageState extends State<HomePage> {
                                                     bottom: 0,
                                                     child: InkWell(
                                                       onTap: () {
-                                                        print("buyer");
                                                       },
                                                       child: const ImageIcon(
                                                           AssetImage(
@@ -642,7 +641,6 @@ class _HomePageState extends State<HomePage> {
                   height: 185,
                   child: BlocBuilder<DesignCubit, DesignState>(
                     builder: (context, state) {
-                      print("design built");
                       if (state is DesignLoading) {
                         return const Center(
                           child: CircularProgressIndicator(
@@ -789,7 +787,7 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     height: 270,
                     child: BlocBuilder<DesignerCubit, DesignerState>(
                       builder: (context, state) {
@@ -822,7 +820,8 @@ class _HomePageState extends State<HomePage> {
                                                 e.img,
                                                 fit: BoxFit.cover,
                                                 height: 75,
-                                                alignment: Alignment.bottomCenter,
+                                                alignment:
+                                                    Alignment.bottomCenter,
                                               )),
                                           const SizedBox(
                                             height: 10,
@@ -836,7 +835,8 @@ class _HomePageState extends State<HomePage> {
                                             height: 5,
                                           ),
                                           CustomRate(
-                                              rateScore: "${e.rate} (75 reviews)"),
+                                              rateScore:
+                                                  "${e.rate} (75 reviews)"),
                                           const SizedBox(
                                             height: 10,
                                           ),
@@ -852,7 +852,6 @@ class _HomePageState extends State<HomePage> {
                                             alignment: Alignment.bottomRight,
                                             child: InkWell(
                                               onTap: () {
-                                                print("buyer");
                                               },
                                               child: const ImageIcon(
                                                 AssetImage(
@@ -867,7 +866,7 @@ class _HomePageState extends State<HomePage> {
                                   )
                                   .toList());
                         } else {
-                          return Container(child: Text("ss"),);
+                          return const Text("ss");
                         }
                       },
                     ),
@@ -898,7 +897,6 @@ class _HomePageState extends State<HomePage> {
                   height: 185,
                   child: BlocBuilder<ArticleCubit, ArticleState>(
                     builder: (context, state) {
-                      print("article built");
                       if (state is ArticleLoading) {
                         return const Center(
                           child: CircularProgressIndicator(
@@ -990,7 +988,7 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                           InkWell(
                                             overlayColor:
-                                                MaterialStatePropertyAll(
+                                                const MaterialStatePropertyAll(
                                                     Colors.transparent),
                                             onTap: () {
                                               BlocProvider.of<ArticleCubit>(
@@ -1004,7 +1002,7 @@ class _HomePageState extends State<HomePage> {
                                                           .data[index]);
                                             },
                                             child: ImageIcon(
-                                              AssetImage(
+                                              const AssetImage(
                                                   "assets/imgs/icons/bookmark.png"),
                                               color: state.dataArticle
                                                       .data[index].bookmark

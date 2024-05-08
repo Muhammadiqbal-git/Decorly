@@ -29,7 +29,7 @@ abstract class CheckOutState {
 class CheckOutInitial extends CheckOutState {
   CheckOutInitial()
       : super(
-            name: "Alex",
+            name: "Muhammad Iqbal",
             address: "",
             city: "",
             country: "",

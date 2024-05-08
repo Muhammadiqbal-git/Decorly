@@ -92,7 +92,7 @@ class MyTrackOrder extends StatelessWidget {
                                             height: 23,
                                           ),
                                           Text(
-                                            "\$${value.price * state.orderList[index].itemPCS[key]!.toDouble()}",
+                                            "\$${(value.price * state.orderList[index].itemPCS[key]!.toDouble()).toStringAsFixed(2)}",
                                             style:
                                                 body_1.copyWith(color: text_cr),
                                           ),

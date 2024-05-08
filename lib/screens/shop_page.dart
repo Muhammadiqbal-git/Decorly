@@ -26,7 +26,6 @@ class _ShopPageState extends State<ShopPage> {
   FocusNode tes = FocusNode();
   @override
   void initState() {
-    // TODO: implement initState
     _searchTextController = TextEditingController();
     _filterTextController = TextEditingController();
 
@@ -35,7 +34,6 @@ class _ShopPageState extends State<ShopPage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _searchTextController.dispose();
     _filterTextController.dispose();
 
@@ -43,17 +41,12 @@ class _ShopPageState extends State<ShopPage> {
   }
 
   delayFilter() {
-    print(_filterTextController.runtimeType);
     if (_delayTimer?.isActive ?? false) {
       _delayTimer!.cancel();
     }
     _delayTimer = Timer(Duration(milliseconds: _delayTime), () {
       BlocProvider.of<FilterCubit>(context)
           .searchFilter(_filterTextController.text);
-      print("tes");
-      // print(BlocProvider.of<FilterCubit>(context).state.activeFilter);
-      //       BlocProvider.of<ShopCubit>(context)
-      //     .getData(["a"]);
     });
   }
 
@@ -61,12 +54,12 @@ class _ShopPageState extends State<ShopPage> {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        contentPadding: EdgeInsets.all(0),
+        contentPadding: const EdgeInsets.all(0),
         content: Padding(
           padding: const EdgeInsets.all(14.0),
           child: Material(
             child: SingleChildScrollView(
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,7 +73,6 @@ class _ShopPageState extends State<ShopPage> {
                     child: CustomForm(
                         focusNode: tes,
                         onChanged: (p0) {
-                          print("asdd");
                           delayFilter();
                         },
                         onEdittingComplete: () {
@@ -93,7 +85,7 @@ class _ShopPageState extends State<ShopPage> {
                   BlocBuilder<FilterCubit, FilterState>(
                     builder: (context, state) {
                       if (state is FilterLoading) {
-                        return Center(
+                        return const Center(
                           child: CircularProgressIndicator(
                             color: primary_cr,
                           ),
@@ -120,7 +112,7 @@ class _ShopPageState extends State<ShopPage> {
                                       children: [
                                         InkWell(
                                           overlayColor:
-                                              MaterialStatePropertyAll(
+                                              const MaterialStatePropertyAll(
                                                   Colors.transparent),
                                           onTap: () {
                                             BlocProvider.of<FilterCubit>(
@@ -188,7 +180,7 @@ class _ShopPageState extends State<ShopPage> {
                                         children: [
                                           InkWell(
                                             overlayColor:
-                                                MaterialStatePropertyAll(
+                                                const MaterialStatePropertyAll(
                                                     Colors.transparent),
                                             onTap: () {
                                               BlocProvider.of<FilterCubit>(
@@ -257,7 +249,7 @@ class _ShopPageState extends State<ShopPage> {
                                       children: [
                                         InkWell(
                                           overlayColor:
-                                              MaterialStatePropertyAll(
+                                              const MaterialStatePropertyAll(
                                                   Colors.transparent),
                                           onTap: () {
                                             BlocProvider.of<FilterCubit>(
@@ -312,7 +304,6 @@ class _ShopPageState extends State<ShopPage> {
       ),
     ).then((value) {
       _filterTextController.clear();
-      print("closed");
       BlocProvider.of<FilterCubit>(context).searchFilter("");
     });
   }
@@ -355,8 +346,6 @@ class _ShopPageState extends State<ShopPage> {
                 ),
                 CustomButton(
                     function: () {
-                      print("s");
-
                       return filterDialog(context);
                     },
                     colorButton: primary_cr,
@@ -382,13 +371,9 @@ class _ShopPageState extends State<ShopPage> {
                   behavior: const ScrollBehavior().copyWith(overscroll: false),
                   child: BlocConsumer<FilterCubit, FilterState>(
                     listener: (context, state) {
-                      print("called");
                       BlocProvider.of<ShopCubit>(context).getData([""]);
                     },
                     listenWhen: (previous, current) {
-                      print("asd");
-                      print(previous.activeFilter.isEmpty);
-                      print(current.activeFilter.isEmpty);
                       return current is FilterInitial && current.activeFilter.isEmpty;
                     },
                     builder: (context, state) {
@@ -456,9 +441,8 @@ class _ShopPageState extends State<ShopPage> {
           Expanded(
             child: BlocBuilder<ShopCubit, ShopState>(
               builder: (context, state) {
-                print("shop built");
                 if (state is ShopLoading) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(color: primary_cr),
                   );
                 }
@@ -486,7 +470,7 @@ class _ShopPageState extends State<ShopPage> {
                                                   color:
                                                       text_cr.withOpacity(0.4),
                                                   spreadRadius: -3.5,
-                                                  blurRadius: 6,
+                                                  blurRadius: 4,
                                                   offset: const Offset(0, 5))
                                             ]),
                                         child: Row(
@@ -552,7 +536,7 @@ class _ShopPageState extends State<ShopPage> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsets.fromLTRB(
+                                              padding: const EdgeInsets.fromLTRB(
                                                   14, 15, 15, 15),
                                               child: Column(
                                                 mainAxisAlignment:
@@ -560,7 +544,7 @@ class _ShopPageState extends State<ShopPage> {
                                                         .spaceBetween,
                                                 children: [
                                                   ImageIcon(
-                                                    AssetImage(
+                                                    const AssetImage(
                                                         "assets/imgs/icons/bookmark.png"),
                                                     color: e.bookmark
                                                         ? secondary_cr
@@ -568,7 +552,7 @@ class _ShopPageState extends State<ShopPage> {
                                                   ),
                                                   InkWell(
                                                     overlayColor:
-                                                        MaterialStatePropertyAll(
+                                                        const MaterialStatePropertyAll(
                                                             Colors.transparent),
                                                     onTap: () {
                                                       BlocProvider.of<
@@ -576,7 +560,7 @@ class _ShopPageState extends State<ShopPage> {
                                                               context)
                                                           .increaseItem(e);
                                                     },
-                                                    child: ImageIcon(
+                                                    child: const ImageIcon(
                                                       AssetImage(
                                                           "assets/imgs/icons/cart.png"),
                                                       color: secondary_cr,
@@ -596,7 +580,7 @@ class _ShopPageState extends State<ShopPage> {
                         child: Container(
                           height: 78,
                           color: white_cr,
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               vertical: 14, horizontal: 22),
                           child: Row(
                             children: [
@@ -625,7 +609,7 @@ class _ShopPageState extends State<ShopPage> {
                                 style: body_2.copyWith(
                                     fontSize: 16, color: primary_cr),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               CustomButton(
                                   function: () {
                                     Navigator.of(context).pop();
@@ -644,7 +628,7 @@ class _ShopPageState extends State<ShopPage> {
                                       const SizedBox(
                                         width: 11,
                                       ),
-                                      ImageIcon(
+                                      const ImageIcon(
                                         AssetImage(
                                             "assets/imgs/icons/cart.png"),
                                         color: accent_cr,

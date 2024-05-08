@@ -1,5 +1,4 @@
 import 'package:decorly/screens/my_order_page.dart';
-import 'package:decorly/screens/my_track_order.dart';
 import 'package:decorly/theme.dart';
 import 'package:decorly/widgets/custom_card.dart';
 import 'package:decorly/widgets/custom_card2.dart';
@@ -38,13 +37,13 @@ class ProfilePage extends StatelessWidget {
                   bottom: 0,
                   child: CustomCard(
                     heightContainer: 130,
-                    widthContainer: 178,
+                    widthContainer: 168,
                     backgroundColor: accent_cr,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          "nama",
+                          "Muhammad Iqbal",
                           style: body_1.copyWith(color: primary_cr),
                         ),
                         const SizedBox(
@@ -55,10 +54,10 @@ class ProfilePage extends StatelessWidget {
                           children: [
                             Image.asset("assets/imgs/icons/loc.png"),
                             const SizedBox(
-                              width: 15,
+                              width: 10,
                             ),
                             Text(
-                              "lokasi",
+                              "Pontianak",
                               style: body_2.copyWith(color: text_cr),
                             ),
                           ],
@@ -74,7 +73,7 @@ class ProfilePage extends StatelessWidget {
                       widthCard: 100,
                       colorCard: accent_cr,
                       borderColor: white_cr,
-                      borderWidth: 15,
+                      borderWidth: 7,
                       align: Alignment.bottomCenter,
                       childCard: Image.asset(
                         "assets/imgs/person4.png",
@@ -107,11 +106,11 @@ class ProfilePage extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => MyOrderPage(),
+                        builder: (context) => const MyOrderPage(),
                       ),
                     );
                   },
-                  overlayColor: MaterialStatePropertyAll(Colors.transparent),
+                  overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                   child: Text(
                     "My Orders",
                     style: body_1.copyWith(color: text_cr),

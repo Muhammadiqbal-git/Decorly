@@ -4,6 +4,8 @@ import 'package:decorly/models/furniture_item.dart';
 import 'package:flutter/services.dart';
 
 class FurnitureAPI {
+  //Imitate the REST API call using json assets
+
   String url = "";
   Future<DataFurniture> getData(int indexTop3) async {
     if (indexTop3 == 1) {
@@ -27,11 +29,8 @@ class FurnitureAPI {
     final dynamic data = await jsonDecode(resp);
     final List d = data["data"];
     int index = d.indexWhere((element) => element.containsValue(id));
-    print(data["data"]);
     data["data"][index]["bookmark"] = !data["data"][index]["bookmark"];
-    print(data["data"]);
     final DataFurniture dataFurniture = DataFurniture.fromJson(data);
-    print(dataFurniture.data[index].bookmark);
     return dataFurniture;
   }
 

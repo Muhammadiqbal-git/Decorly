@@ -9,7 +9,7 @@ class DesignerCubit extends Cubit<DesignerState> {
   getData() async{
     emit(DesignerLoading());
     DataDesigner dataDesigner = await DesignerAPI().getData();
-    Future.delayed(Duration(milliseconds: 500));
+    Future.delayed(const Duration(milliseconds: 500));
     emit(DesignerFetched(data: dataDesigner));
   }
 

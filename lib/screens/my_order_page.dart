@@ -223,7 +223,7 @@ class MyOrderPage extends StatelessWidget {
                                                           height: 15,
                                                         ),
                                                         Text(
-                                                          "\$${value.price * state.orderList[index].itemPCS[key]!.toDouble()}",
+                                                          "\$${(value.price * state.orderList[index].itemPCS[key]!.toDouble()).toStringAsFixed(2)}",
                                                           style: body_2.copyWith(
                                                               fontSize: 13,
                                                               color:
@@ -264,7 +264,7 @@ class MyOrderPage extends StatelessWidget {
                                           width: 30,
                                         ),
                                         Text(
-                                          "Total Price :  \$${state.orderList[index].totalCost}",
+                                          "Total Price :  \$${state.orderList[index].totalCost.toStringAsFixed(2)}",
                                           style: body_2.copyWith(
                                               fontSize: 12, color: primary_cr),
                                         ),

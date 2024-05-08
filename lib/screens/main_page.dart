@@ -23,7 +23,6 @@ class _MainPageState extends State<MainPage> {
     if (index == 0) {
       return BlocProvider.of<FeaturedItemCubit>(context).getData(0, 0);
     } else if (index == 1) {
-      print("called");
       return BlocProvider.of<SavedListCubit>(context).checkEmpty();
     } else {
       // return BlocProvider.of<
@@ -50,7 +49,6 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    print("main built");
     return BlocProvider(
       create: (context) => MainPageCubit(),
       child: BlocBuilder<MainPageCubit, MainPageState>(

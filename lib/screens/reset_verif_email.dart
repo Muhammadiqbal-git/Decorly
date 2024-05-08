@@ -112,7 +112,7 @@ class _ResetEmailVerifState extends State<ResetEmailVerif> {
                 CustomButton(
                     function: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => ResetCodeVerif(),
+                        builder: (context) => const ResetCodeVerif(),
                       ));
                     },
                     colorButton: primary_cr,

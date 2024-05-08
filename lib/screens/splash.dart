@@ -13,23 +13,23 @@ class SplashScreens extends StatefulWidget {
 
 class _SplashScreensState extends State<SplashScreens>
     with SingleTickerProviderStateMixin {
-  late AnimationController _controller_fill;
-  late Animation<double> _animation_fill;
+  late AnimationController _controllerFill;
+  late Animation<double> _animationFill;
   late Animation<Color?> _color;
 
   @override
   void initState() {
     super.initState();
-    _controller_fill =
+    _controllerFill =
         AnimationController(vsync: this, duration: const Duration(seconds: 3));
-    _animation_fill = Tween<double>(begin: 0, end: (1.10 + getScreenRatio(100))).animate(
+    _animationFill = Tween<double>(begin: 0, end: (1.10 + getScreenRatio(100))).animate(
         CurvedAnimation(
-            parent: _controller_fill,
+            parent: _controllerFill,
             curve: const Interval(0.4, 0.90, curve: Curves.easeOutQuart)))
       ..addListener(() {
         setState(() {});
       });
-    _animation_fill.addStatusListener((status) {
+    _animationFill.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         Navigator.pushReplacement(
             context,
@@ -47,24 +47,22 @@ class _SplashScreensState extends State<SplashScreens>
     });
     _color = ColorTween(begin: light_primary_cr, end: primary_cr).animate(
         CurvedAnimation(
-            parent: _controller_fill,
+            parent: _controllerFill,
             curve: const Interval(0.73, 0.88, curve: Curves.easeInCirc)))
       ..addListener(() {
         setState(() {});
       });
-    _controller_fill.forward();
+    _controllerFill.forward();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
-    _controller_fill.dispose();
+    _controllerFill.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    print("tes ${_animation_fill.value}");
     return Scaffold(
       backgroundColor: white_cr,
       body: Center(
@@ -77,7 +75,7 @@ class _SplashScreensState extends State<SplashScreens>
               child: CustomPaint(
                 size: Size(getWidth(60),
                     (getWidth(60) * 0.5295950155763239)),
-                painter: RPSCustomPainter(_animation_fill.value),
+                painter: RPSCustomPainter(_animationFill.value),
               ),
             ),
             Positioned(
@@ -93,7 +91,7 @@ class _SplashScreensState extends State<SplashScreens>
                   ),
                   Text(
                     'DO - Decorly',
-                    style: apps_name.copyWith(color: (_controller_fill.value >= 0.7 ? _color.value : Colors.transparent )),
+                    style: apps_name.copyWith(color: (_controllerFill.value >= 0.7 ? _color.value : Colors.transparent )),
                   )
                 ],
               ),
@@ -107,19 +105,19 @@ class _SplashScreensState extends State<SplashScreens>
 
 //Copy this CustomPainter code to the Bottom of the File
 class RPSCustomPainter extends CustomPainter {
-  final double _fill_value;
+  final double _fillValue;
 
-  RPSCustomPainter(this._fill_value);
+  RPSCustomPainter(this._fillValue);
   @override
   void paint(Canvas canvas, Size size) {
     Path path_0 = Path();
     // asdasdasdas asdasdasd
-    double value = _fill_value;
-    double value1 = _fill_value;
-    double value2 = _fill_value;
-    double value3 = _fill_value;
-    double value4 = _fill_value;
-    double value5 = _fill_value;
+    double value = _fillValue;
+    double value1 = _fillValue;
+    double value2 = _fillValue;
+    double value3 = _fillValue;
+    double value4 = _fillValue;
+    double value5 = _fillValue;
     path_0.moveTo(
         size.width * (0.9840966 + value * 1.5), size.height * 0.5435406);
 

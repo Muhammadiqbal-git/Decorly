@@ -16,12 +16,11 @@ class CheckOutReviewSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: BlocBuilder<CheckOutCubit, CheckOutState>(
         builder: (context, state) {
-          print("built review");
           if (state.paymentMethod == -1) {
-            return Center(
+            return const Center(
               child: Text("Choose your payment method first"),
             );
           } else {
@@ -39,7 +38,7 @@ class CheckOutReviewSection extends StatelessWidget {
                   heightContainer: 112,
                   widthContainer: double.maxFinite,
                   backgroundColor: accent_cr,
-                  paddingContainer: EdgeInsets.all(10),
+                  paddingContainer: const EdgeInsets.all(10),
                   child: BlocBuilder<CheckOutCubit, CheckOutState>(
                     builder: (context, state) {
                       return Column(
@@ -54,7 +53,7 @@ class CheckOutReviewSection extends StatelessWidget {
                               ),
                               const Spacer(),
                               InkWell(
-                                overlayColor: MaterialStatePropertyAll(
+                                overlayColor: const MaterialStatePropertyAll(
                                     Colors.transparent),
                                 child:
                                     Image.asset("assets/imgs/icons/edit.png"),
@@ -134,7 +133,7 @@ class CheckOutReviewSection extends StatelessWidget {
                           heightContainer: 153,
                           widthContainer: double.maxFinite,
                           backgroundColor: accent_cr,
-                          paddingContainer: EdgeInsets.all(10),
+                          paddingContainer: const EdgeInsets.all(10),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -148,7 +147,7 @@ class CheckOutReviewSection extends StatelessWidget {
                                   ),
                                   const Spacer(),
                                   InkWell(
-                                    overlayColor: MaterialStatePropertyAll(
+                                    overlayColor: const MaterialStatePropertyAll(
                                         Colors.transparent),
                                     child: Image.asset(
                                         "assets/imgs/icons/edit.png"),
@@ -218,7 +217,7 @@ class CheckOutReviewSection extends StatelessWidget {
                                   ),
                                   const Spacer(),
                                   InkWell(
-                                    overlayColor: MaterialStatePropertyAll(
+                                    overlayColor: const MaterialStatePropertyAll(
                                         Colors.transparent),
                                     child: Image.asset(
                                         "assets/imgs/icons/edit.png"),
@@ -458,7 +457,7 @@ class CheckOutReviewSection extends StatelessWidget {
                                   ),
                                   const Spacer(),
                                   InkWell(
-                                    overlayColor: MaterialStatePropertyAll(
+                                    overlayColor: const MaterialStatePropertyAll(
                                         Colors.transparent),
                                     child: Image.asset(
                                         "assets/imgs/icons/edit.png"),
@@ -511,7 +510,7 @@ class CheckOutReviewSection extends StatelessWidget {
                                   ),
                                   const Spacer(),
                                   InkWell(
-                                    overlayColor: MaterialStatePropertyAll(
+                                    overlayColor: const MaterialStatePropertyAll(
                                         Colors.transparent),
                                     child: Image.asset(
                                         "assets/imgs/icons/edit.png"),
@@ -544,7 +543,7 @@ class CheckOutReviewSection extends StatelessWidget {
                           ),
                         );
                       default:
-                        return Placeholder();
+                        return const Placeholder();
                     }
                   },
                 ),

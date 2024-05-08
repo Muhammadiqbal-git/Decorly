@@ -237,7 +237,7 @@ class _CartPageState extends State<CartPage> {
                             colorButton: primary_cr,
                             widthButton: 44,
                             heightButton: 44,
-                            childButton: ImageIcon(
+                            childButton: const ImageIcon(
                               AssetImage("assets/imgs/icons/checklist.png"),
                               color: accent_cr,
                             ))),

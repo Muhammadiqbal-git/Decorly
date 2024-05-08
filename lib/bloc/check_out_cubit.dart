@@ -12,17 +12,16 @@ class CheckOutCubit extends Cubit<CheckOutState> {
 
   void nextPage() {
     _pageController.nextPage(
-        duration: Duration(milliseconds: 300), curve: Curves.linear);
+        duration: const Duration(milliseconds: 300), curve: Curves.linear);
   }
 
   void animateToPage(int indx) {
     _pageController.animateToPage(indx,
-        duration: Duration(milliseconds: 300), curve: Curves.linear);
+        duration: const Duration(milliseconds: 300), curve: Curves.linear);
   }
 
   @override
   Future<void> close() {
-    print("closed");
     _pageController.dispose();
     return super.close();
   }
@@ -84,7 +83,6 @@ class CheckOutCubit extends Cubit<CheckOutState> {
   }
 
   bankPayment(String bankinfo) {
-    print(state.paymentMethod);
     emit(CheckOutProcessing(
       name: state.name,
         address: state.address,

@@ -1,12 +1,6 @@
-import 'dart:io';
-
 import 'package:decorly/models/article_post.dart';
-import 'package:decorly/models/designer.dart';
 import 'package:decorly/models/furniture_item.dart';
 import 'package:decorly/models/saved_list.dart';
-import 'package:decorly/services/article_api.dart';
-import 'package:decorly/services/designer_api.dart';
-import 'package:decorly/services/furniture_api.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'saved_list_state.dart';

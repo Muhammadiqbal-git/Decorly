@@ -67,7 +67,6 @@ class _ResetCodeVerifState extends State<ResetCodeVerif> {
 
   @override
   Widget build(BuildContext context) {
-    print("page code kebuild");
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -134,14 +133,11 @@ class _ResetCodeVerifState extends State<ResetCodeVerif> {
                             LengthLimitingTextInputFormatter(1)
                           ],
                           onChanged: (value) {
-                            print("itcheng");
                             if (value.isNotEmpty) {
                               FocusManager.instance.primaryFocus?.nextFocus();
                             }
                           },
                           onSubmitted: (value) {
-                            print("tes");
-                            print(value);
                           },
                           style: body_1.copyWith(
                               color: primary_cr,
@@ -150,7 +146,7 @@ class _ResetCodeVerifState extends State<ResetCodeVerif> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
                     Container(
@@ -171,7 +167,6 @@ class _ResetCodeVerifState extends State<ResetCodeVerif> {
                             LengthLimitingTextInputFormatter(1)
                           ],
                           onChanged: (value) {
-                            print(value);
                             if (value.isNotEmpty) {
                               FocusManager.instance.primaryFocus?.nextFocus();
                             }
@@ -181,7 +176,7 @@ class _ResetCodeVerifState extends State<ResetCodeVerif> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
                     Container(
@@ -211,7 +206,7 @@ class _ResetCodeVerifState extends State<ResetCodeVerif> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
                     Container(
@@ -248,12 +243,9 @@ class _ResetCodeVerifState extends State<ResetCodeVerif> {
                 ),
                 CustomButton(
                     function: () {
-                      print("pressed");
-                      print(
-                          "${firstText.value.text} ${secondText.value.text} ${thirdText.value.text} ${fourthText.value.text}");
                       Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(
-                        builder: (context) => ResetPassword(),
+                        builder: (context) => const ResetPassword(),
                       ), ModalRoute.withName("/login"),);
                       // Navigator.of(context).pushReplacement(MaterialPageRoute(
                       //   builder: (context) => ResetPassword(),
@@ -281,7 +273,6 @@ class _ResetCodeVerifState extends State<ResetCodeVerif> {
                             const MaterialStatePropertyAll(Colors.transparent),
                         splashFactory: NoSplash.splashFactory,
                         onTap: () {
-                          print("resend code");
                         },
                         child: Text(
                           "Resend",

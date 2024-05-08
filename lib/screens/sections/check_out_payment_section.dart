@@ -27,7 +27,6 @@ class _CheckOutPaymentSectionState extends State<CheckOutPaymentSection> {
 
   @override
   void initState() {
-    // TODO: implement initState
     bankNumber = TextEditingController();
     nameCC = TextEditingController();
     numberCC = TextEditingController();
@@ -39,7 +38,6 @@ class _CheckOutPaymentSectionState extends State<CheckOutPaymentSection> {
 
   @override
   void dispose() {
-    print("disposed");
     bankNumber.dispose();
     nameCC.dispose();
     numberCC.dispose();
@@ -53,7 +51,6 @@ class _CheckOutPaymentSectionState extends State<CheckOutPaymentSection> {
 
   @override
   Widget build(BuildContext context) {
-    print(currentCard);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
@@ -180,7 +177,6 @@ class _CheckOutPaymentSectionState extends State<CheckOutPaymentSection> {
                                       function: () {
                                         BlocProvider.of<CheckOutCubit>(context)
                                             .nextPage();
-                                        print("pressed");
                                         BlocProvider.of<CheckOutCubit>(context)
                                             .bankPayment(bankNumber.value.text);
                                       },

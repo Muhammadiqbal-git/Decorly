@@ -1,3 +1,4 @@
+import 'package:decorly/bloc/appointment_cubit.dart';
 import 'package:decorly/bloc/article_post_cubit.dart';
 import 'package:decorly/bloc/cart_cubit.dart';
 import 'package:decorly/bloc/design_post_cubit.dart';
@@ -46,6 +47,9 @@ class MyApp extends StatelessWidget {
           create: (context) => ArticleCubit(),
         ),
         BlocProvider(
+          create: (context) => AppointmentCubit(),
+        ),
+        BlocProvider(
           create: (context) => SavedListCubit(),
         ),
         BlocProvider(
@@ -81,7 +85,7 @@ class MyApp extends StatelessWidget {
             primaryColor: primary_cr,
             colorScheme: ColorScheme.fromSwatch(accentColor: primary_cr)),
         routes: {
-          "/login": (context) => LoginPage(),
+          "/login": (context) => const LoginPage(),
         },
         home: const TestScreens(),
       ),

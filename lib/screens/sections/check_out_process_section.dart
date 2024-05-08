@@ -1,4 +1,3 @@
-import 'package:decorly/bloc/cart_cubit.dart';
 import 'package:decorly/bloc/check_out_cubit.dart';
 import 'package:decorly/theme.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,6 @@ class CheckOutProcessWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("proggress section built");
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: Row(

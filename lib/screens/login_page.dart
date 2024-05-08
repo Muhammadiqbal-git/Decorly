@@ -15,7 +15,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({super.key});
+  const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -33,7 +33,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
-    print("awal page");
     _emailTextController = TextEditingController();
     _passTextController = TextEditingController();
     _nameTextController = TextEditingController();
@@ -47,7 +46,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    print("disposed");
     _emailTextController.dispose();
     _passTextController.dispose();
     _nameTextController.dispose();
@@ -59,7 +57,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    print("page kebuild lg");
     return Scaffold(
       backgroundColor: white_cr,
       body: SafeArea(
@@ -278,7 +275,6 @@ class _LoginPageState extends State<LoginPage> {
                                                 Colors.transparent),
                                         splashFactory: NoSplash.splashFactory,
                                         onTap: () {
-                                          print("forgot pressed");
                                           FocusScope.of(context).unfocus();
                                           Navigator.of(context)
                                               .push(MaterialPageRoute(
@@ -308,7 +304,7 @@ class _LoginPageState extends State<LoginPage> {
                                         BlocProvider.of<DesignerCubit>(context).getData();
                                         Navigator.of(context)
                                             .pushReplacement(MaterialPageRoute(
-                                          builder: (context) => MainPage(),
+                                          builder: (context) => const MainPage(),
                                         ));
                                       },
                                       colorButton: primary_cr,
@@ -491,7 +487,6 @@ class _LoginPageState extends State<LoginPage> {
                               alignment: Alignment.center,
                               child: CustomButton(
                                   function: () {
-                                    print("sign up pressed");
                                   },
                                   colorButton: primary_cr,
                                   heightButton: 48,

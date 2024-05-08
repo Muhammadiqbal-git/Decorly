@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:decorly/models/designer.dart';
-import 'package:decorly/models/furniture_item.dart';
 import 'package:flutter/services.dart';
 
 class DesignerAPI {
+  //Imitate the REST API call using json assets
 
   String url = "";
   Future<DataDesigner> getData() async{

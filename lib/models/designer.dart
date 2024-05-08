@@ -1,5 +1,3 @@
-import 'package:decorly/models/furniture_item.dart';
-
 class DataDesigner {
   final List<Designer> data;
 

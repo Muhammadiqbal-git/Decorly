@@ -8,11 +8,9 @@ class ShopCubit extends Cubit<ShopState> {
   ShopCubit() : super(ShopLoading());
   getData(List<String> filter) async {
     emit(ShopLoading());
-    await Future.delayed(Duration(milliseconds: 400));
+    await Future.delayed(const Duration(milliseconds: 400));
     DataFurniture dataFurniture = await FurnitureAPI().getAllData(filter);
     dataFurniture.data.retainWhere((element) => element.name.toLowerCase().contains(filter[0].toLowerCase()));
-
-    print(dataFurniture.data);
     emit(ShopFetched(data: dataFurniture.data, filter: filter));
   }
 }
@@ -31,7 +29,7 @@ class FilterCubit extends Cubit<FilterState> {
   ];
   updateFilter(String filter) async {
     emit(FilterLoading(state.filters, state.recentFilters, state.activeFilter));
-    await Future.delayed(Duration(milliseconds: 400));
+    await Future.delayed(const Duration(milliseconds: 400));
     List<String> recentTempFilter = [];
     if (state.recentFilters.isNotEmpty) {
       for (var i = 0; i < state.recentFilters.length; i++) {
@@ -46,14 +44,13 @@ class FilterCubit extends Cubit<FilterState> {
   }
 
   removeFilter(String filter) {
-    print("last");
     emit(FilterInitial(state.filters, state.recentFilters,
         state.activeFilter..remove(filter)));
   }
 
   searchFilter(String searchFilter) async {
     emit(FilterLoading(state.filters, state.recentFilters, state.activeFilter));
-    await Future.delayed(Duration(milliseconds: 400));
+    await Future.delayed(const Duration(milliseconds: 400));
     if (searchFilter.isEmpty) {
       // List<String> recentTempFilter = [];
       // if(state.recentFilters.isNotEmpty){

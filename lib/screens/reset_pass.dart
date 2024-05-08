@@ -91,7 +91,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                   function: () {
                     Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(
-                          builder: (context) => ResetSuccess(),
+                          builder: (context) => const ResetSuccess(),
                         ),
                         ModalRoute.withName("/login"));
                   },

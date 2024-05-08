@@ -2,7 +2,6 @@ import 'package:decorly/bloc/main_page_cubit.dart';
 import 'package:decorly/bloc/saved_list_cubit.dart';
 import 'package:decorly/theme.dart';
 import 'package:decorly/widgets/custom_button.dart';
-import 'package:decorly/widgets/custom_card.dart';
 import 'package:decorly/widgets/custom_card2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +11,6 @@ class SavedPage extends StatelessWidget {
   const SavedPage({super.key});
 
   AppBar appBar(BuildContext? context) {
-    print("saved appbar built");
     return AppBar(
       backgroundColor: white_cr,
       centerTitle: true,
@@ -31,7 +29,6 @@ class SavedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("saved built");
     return BlocBuilder<SavedListCubit, SavedListState>(
       builder: (context, state) {
         if (state is SavedListEmpty) {

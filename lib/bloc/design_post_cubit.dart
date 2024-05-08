@@ -9,7 +9,7 @@ class DesignCubit extends Cubit<DesignState> {
   getData() async {
     emit(DesignLoading());
     DataArticle dataArticle = await ArticleAPI().getData("design");
-    Future.delayed(Duration(milliseconds: 500));
+    Future.delayed(const Duration(milliseconds: 500));
     emit(DesignFetched(currentIndex: 0, dataArticle: dataArticle));
   }
 

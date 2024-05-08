@@ -1,4 +1,3 @@
-import 'package:decorly/theme.dart';
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatelessWidget {
@@ -9,6 +8,7 @@ class CustomCard extends StatelessWidget {
   final EdgeInsets marginContainer;
   final EdgeInsets paddingContainer;
   final AlignmentGeometry? align;
+  final List<BoxShadow>? boxShadow;
 
   /// A Card without a border
   const CustomCard(
@@ -19,7 +19,8 @@ class CustomCard extends StatelessWidget {
       required this.child,
       this.paddingContainer = const EdgeInsets.fromLTRB(16, 15, 16, 10),
       this.marginContainer = const EdgeInsets.all(0),
-      this.align
+      this.align,
+      this.boxShadow
       });
 
   @override
@@ -33,6 +34,7 @@ class CustomCard extends StatelessWidget {
       alignment: align,
       decoration: BoxDecoration(
         color: backgroundColor,
+        boxShadow: boxShadow,
         borderRadius: BorderRadius.circular(12),
       ),
       child: child,

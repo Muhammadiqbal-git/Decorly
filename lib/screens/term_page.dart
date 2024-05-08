@@ -33,7 +33,7 @@ class TermsPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -64,7 +64,7 @@ class TermsPage extends StatelessWidget {
                         width: 16,
                         child: Checkbox(
                           overlayColor:
-                              MaterialStatePropertyAll(Colors.transparent),
+                              const MaterialStatePropertyAll(Colors.transparent),
                           value: state.value,
                           onChanged: (value) {
                             BlocProvider.of<TermCubit>(context)

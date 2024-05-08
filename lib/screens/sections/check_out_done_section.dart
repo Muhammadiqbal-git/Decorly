@@ -1,6 +1,4 @@
 import 'package:decorly/bloc/cart_cubit.dart';
-import 'package:decorly/bloc/main_page_cubit.dart';
-import 'package:decorly/bloc/order_cubit.dart';
 import 'package:decorly/screens/my_order_page.dart';
 import 'package:decorly/theme.dart';
 import 'package:decorly/widgets/custom_button.dart';
@@ -42,7 +40,7 @@ class CheckOutDoneSection extends StatelessWidget {
           CustomButton(
             function: () {
               BlocProvider.of<CartCubit>(context).clearItem();
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => MyOrderPage(),));
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const MyOrderPage(),));
             },
             colorButton: primary_cr,
             widthButton: 130,
@@ -59,11 +57,10 @@ class CheckOutDoneSection extends StatelessWidget {
             builder: (context, state) {
               return InkWell(
                 onTap: () {
-                  print("tapped");
               BlocProvider.of<CartCubit>(context).clearItem();
                 Navigator.of(context).pop();
                 },
-                overlayColor: MaterialStatePropertyAll(Colors.transparent),
+                overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                 child: Text(
                   "Back to Home",
                   style: body_2.copyWith(

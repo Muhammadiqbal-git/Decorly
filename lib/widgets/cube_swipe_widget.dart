@@ -33,26 +33,21 @@ class _CubeSwipeWidgetState extends State<CubeSwipeWidget> {
   late PageController _pageC;
 
   void page(){
-    print("tes");
   }
   @override
   void initState() {
     _pageC = PageController();
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   void dispose() {
     _pageC.dispose();
-    // TODO: implement dispose
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    print("custom built");
-
     return Container(
       height: widget.height,
       width: widget.width,
@@ -82,7 +77,7 @@ class _CubeSwipeWidgetState extends State<CubeSwipeWidget> {
               itemBuilder: (context, index) => InkWell(
                 onTap: widget.onTap,
                 onLongPress: widget.onLongPress,
-                overlayColor: MaterialStatePropertyAll(Colors.transparent),
+                overlayColor: const MaterialStatePropertyAll(Colors.transparent),
                 child: Align(
                   alignment: Alignment.center,
                   child: widget.children[index],

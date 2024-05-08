@@ -4,7 +4,7 @@ import 'package:decorly/models/article_post.dart';
 import 'package:flutter/services.dart';
 
 class ArticleAPI {
-
+  //Imitate the REST API call using json assets
   String url = "";
   Future<DataArticle> getData(String category) async{
     if (category == "design") {
