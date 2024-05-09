@@ -99,7 +99,7 @@ class CheckOutProcessWidget extends StatelessWidget {
                 margin: const EdgeInsets.only(left: 6, right: 6, bottom: 25),
                 height: 3,
                 width: getWidth(14),
-                color: subtle_text_cr,
+                color: state.progress > 1 ? primary_cr : subtle_text_cr,
               );
             },
           ),
@@ -139,11 +139,15 @@ class CheckOutProcessWidget extends StatelessWidget {
                   ))
             ],
           ),
-          Container(
-            margin: const EdgeInsets.only(left: 6, right: 6, bottom: 25),
-            height: 3,
-            width: getWidth(14),
-            color: subtle_text_cr,
+          BlocBuilder<CheckOutCubit, CheckOutState>(
+            builder: (context, state) {
+              return Container(
+                      margin: const EdgeInsets.only(left: 6, right: 6, bottom: 25),
+                      height: 3,
+                      width: getWidth(14),
+                      color: state.progress > 2 ? primary_cr : subtle_text_cr,
+                    );
+            },
           ),
           Stack(
             clipBehavior: Clip.none,
