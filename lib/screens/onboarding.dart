@@ -5,6 +5,7 @@ import 'package:decorly/theme.dart';
 import 'package:decorly/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
 class OnBoardingIndicator extends StatelessWidget {
   OnBoardingIndicator({super.key});
@@ -49,10 +50,10 @@ class OnBoardingIndicator extends StatelessWidget {
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onPressed: (() {
-              BlocProvider.of<OnboardingCubit>(context)
-                  .previous();
+              BlocProvider.of<OnboardingCubit>(context).previous();
             }),
-            icon: const ImageIcon(AssetImage('assets/imgs/icons/back_arrow.png'))),
+            icon: const ImageIcon(
+                AssetImage('assets/imgs/icons/back_arrow.png'))),
         actions: [
           TextButton(
               onPressed: (() {
@@ -63,7 +64,8 @@ class OnBoardingIndicator extends StatelessWidget {
               style: const ButtonStyle(
                   splashFactory: NoSplash.splashFactory,
                   overlayColor: MaterialStatePropertyAll(Colors.transparent)),
-              child: Text("Skip", style: body_2.copyWith(color: white_cr, letterSpacing: 2.2)))
+              child: Text("Skip",
+                  style: body_2.copyWith(color: white_cr, letterSpacing: 2.2)))
         ],
       ),
       body: SafeArea(
@@ -131,24 +133,25 @@ class OnBoardingIndicator extends StatelessWidget {
                     alignment: Alignment.center,
                     children: [
                       AnimatedPositioned(
-                          curve: Curves.easeInOut,
-                          bottom: getHeight( 5),
-                          right: getWidth(
-                              onBoardingList[0].position[state.value]),
-                          duration: const Duration(milliseconds: 290),
-                          child: Image.asset(
-                            "assets/imgs/onboarding_item1.png",
-                            width: getWidth( 100),
-                          )),
+                        curve: Curves.easeInOut,
+                        bottom: getHeight(5),
+                        right:
+                            getWidth(onBoardingList[0].position[state.value]),
+                        duration: const Duration(milliseconds: 290),
+                        child: Image.asset(
+                          "assets/imgs/onboarding_item1.png",
+                          width: getWidth(100),
+                        ),
+                      ),
                       AnimatedPositioned(
                           curve: Curves.easeInOut,
                           bottom: 0,
-                          right: getWidth(
-                              onBoardingList[1].position[state.value]),
+                          right:
+                              getWidth(onBoardingList[1].position[state.value]),
                           duration: const Duration(milliseconds: 290),
                           child: Image.asset(
                             "assets/imgs/onboarding_item2.png",
-                            width: getWidth( 90),
+                            width: getWidth(90),
                           )),
                       AnimatedPositioned(
                           curve: Curves.easeInOut,
@@ -160,7 +163,7 @@ class OnBoardingIndicator extends StatelessWidget {
                           duration: const Duration(milliseconds: 310),
                           child: Image.asset(
                             "assets/imgs/onboarding_item3.png",
-                            width: getWidth( 100),
+                            width: getWidth(100),
                           )),
                       AnimatedPositioned(
                           curve: Curves.easeInOut,
@@ -172,10 +175,10 @@ class OnBoardingIndicator extends StatelessWidget {
                           duration: const Duration(milliseconds: 310),
                           child: Image.asset(
                             "assets/imgs/onboarding_item4.png",
-                            width: getWidth( 80),
+                            width: getWidth(80),
                           )),
                       Positioned(
-                        top: getHeight( 5),
+                        top: getHeight(5),
                         right: 0,
                         child: Padding(
                             padding: const EdgeInsets.only(right: 16),
@@ -222,8 +225,7 @@ class OnBoardingIndicator extends StatelessWidget {
                               BlocProvider.of<OnboardingCubit>(context)
                                   .previous();
                             } else if (details.primaryVelocity! < -sens) {
-                              BlocProvider.of<OnboardingCubit>(context)
-                                  .next();
+                              BlocProvider.of<OnboardingCubit>(context).next();
                             }
                           },
                         ),

@@ -43,15 +43,15 @@ class _HomePageState extends State<HomePage> {
 
   List tes = ["1", "2", 3, 4, 5, 5, 6, 7, 8, 9, 10];
   List iconFilter = [
-    "bedroom.png",
-    "livingroom.png",
-    "diningroom.png",
-    "bathroom.png",
-    "kitchen.png",
-    "office.png",
-    "outdoor.png",
-    "indoor.png",
-    "kids.png"
+    "by_bed.svg",
+    "by_liv.svg",
+    "by_din.svg",
+    "by_bath.svg",
+    "by_kit.svg",
+    "by_off.svg",
+    "by_out.svg",
+    "by_ind.svg",
+    "by_kid.svg"
   ];
   List nameFilter = [
     "Bed Room",
@@ -220,7 +220,7 @@ class _HomePageState extends State<HomePage> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.center,
                                             children: [
-                                              Image.asset("assets/imgs/$e"),
+                                              SvgPicture.asset("assets/imgs/$e"),
                                               const Spacer(),
                                               Text(
                                                 nameFilter[i],
@@ -798,73 +798,75 @@ class _HomePageState extends State<HomePage> {
                             ),
                           );
                         } else if (state is DesignerFetched) {
-                          return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: state.data.data
-                                  .take(2)
-                                  .map(
-                                    (e) => CustomCard(
-                                      backgroundColor: accent_cr,
-                                      widthContainer: 160,
-                                      heightContainer: 270,
-                                      child: Column(
-                                        children: [
-                                          CustomCard2(
-                                              colorCard: accent_cr,
-                                              widthCard: 95,
-                                              heightCard: 95,
-                                              borderColor: white_cr,
-                                              borderWidth: 10.0,
-                                              align: Alignment.bottomCenter,
-                                              childCard: Image.asset(
-                                                e.img,
-                                                fit: BoxFit.cover,
-                                                height: 75,
-                                                alignment:
-                                                    Alignment.bottomCenter,
-                                              )),
-                                          const SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(
-                                            e.name,
-                                            style: body_1.copyWith(
-                                                color: primary_cr),
-                                          ),
-                                          const SizedBox(
-                                            height: 5,
-                                          ),
-                                          CustomRate(
-                                              rateScore:
-                                                  "${e.rate} (75 reviews)"),
-                                          const SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(
-                                            e.biography,
-                                            maxLines: 4,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: body_1.copyWith(
-                                                fontSize: 13, color: text_cr),
-                                          ),
-                                          const Spacer(),
-                                          Align(
-                                            alignment: Alignment.bottomRight,
-                                            child: InkWell(
-                                              onTap: () {
-                                              },
-                                              child: const ImageIcon(
-                                                AssetImage(
-                                                    "assets/imgs/icons/calendar.png"),
-                                                color: secondary_cr,
+                          return SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                                children: state.data.data
+                                    .map(
+                                      (e) => CustomCard(
+                                        backgroundColor: accent_cr,
+                                        widthContainer: 160,
+                                        heightContainer: 270,
+                                        marginContainer: EdgeInsets.only(right: 12),
+                                        child: Column(
+                                          children: [
+                                            CustomCard2(
+                                                colorCard: accent_cr,
+                                                widthCard: 95,
+                                                heightCard: 95,
+                                                borderColor: white_cr,
+                                                borderWidth: 10.0,
+                                                align: Alignment.bottomCenter,
+                                                childCard: Image.asset(
+                                                  e.img,
+                                                  fit: BoxFit.cover,
+                                                  height: 75,
+                                                  alignment:
+                                                      Alignment.bottomCenter,
+                                                )),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              e.name,
+                                              style: body_1.copyWith(
+                                                  color: primary_cr),
+                                            ),
+                                            const SizedBox(
+                                              height: 5,
+                                            ),
+                                            CustomRate(
+                                                rateScore:
+                                                    "${e.rate} (75 reviews)"),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              e.biography,
+                                              maxLines: 4,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: body_1.copyWith(
+                                                  fontSize: 13, color: text_cr),
+                                            ),
+                                            const Spacer(),
+                                            Align(
+                                              alignment: Alignment.bottomRight,
+                                              child: InkWell(
+                                                onTap: () {
+                                                },
+                                                child: const ImageIcon(
+                                                  AssetImage(
+                                                      "assets/imgs/icons/calendar.png"),
+                                                  color: secondary_cr,
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  )
-                                  .toList());
+                                    )
+                                    .toList()),
+                          );
                         } else {
                           return const Text("ss");
                         }

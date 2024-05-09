@@ -2,7 +2,7 @@
   "data": [
     {
       "id": "f5",
-      "img": "assets/imgs/chair.png",
+      "img": "assets/imgs/hanging_chair.png",
       "name": "Modern Pink Sofa",
       "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
       "rate": "4.99",

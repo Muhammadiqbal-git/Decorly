@@ -4,6 +4,7 @@ import 'package:decorly/widgets/chooser_widget.dart';
 import 'package:decorly/widgets/cube_swipe_widget.dart';
 import 'package:decorly/widgets/custom_card.dart';
 import 'package:decorly/widgets/custom_card2.dart';
+import 'package:decorly/widgets/custom_rate_star.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -322,7 +323,8 @@ class _AppointmentsPageState extends State<AppointmentsPage> {
                                                   width: 10,
                                                 ),
                                                 Text(
-                                                  "location",
+                                                  state.appointment!
+                                                      .upcoming[index].location,
                                                   style: body_2.copyWith(
                                                       color: text_cr),
                                                 ),
@@ -370,7 +372,7 @@ class _AppointmentsPageState extends State<AppointmentsPage> {
                                   bottom: 95,
                                   child: CustomCard2(
                                     colorCard: accent_cr,
-                                    widthCard: 80 + getWidth(8),
+                                    widthCard: 60 + getWidth(14),
                                     heightCard: 90,
                                     align: Alignment.bottomCenter,
                                     borderColor: white_cr,
@@ -453,6 +455,8 @@ class _AppointmentsPageState extends State<AppointmentsPage> {
                                     heightContainer: 140,
                                     widthContainer: double.maxFinite,
                                     backgroundColor: accent_cr,
+                                    paddingContainer:
+                                        EdgeInsets.fromLTRB(6, 16, 16, 10),
                                     boxShadow: [
                                       BoxShadow(
                                         color: text_cr.withOpacity(0.4),
@@ -470,7 +474,7 @@ class _AppointmentsPageState extends State<AppointmentsPage> {
                                     child: Row(
                                       children: [
                                         SizedBox(
-                                          width: 90,
+                                          width: 80,
                                           child: Text(
                                             "Completed",
                                             style: body_1.copyWith(
@@ -503,7 +507,8 @@ class _AppointmentsPageState extends State<AppointmentsPage> {
                                                   width: 10,
                                                 ),
                                                 Text(
-                                                  "location",
+                                                  state.appointment!
+                                                      .completed[index].location,
                                                   style: body_2.copyWith(
                                                       color: text_cr),
                                                 ),
@@ -524,49 +529,10 @@ class _AppointmentsPageState extends State<AppointmentsPage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.end,
                                           children: [
-                                            Row(
-                                              children: [
-                                                Image.asset(
-                                                  "assets/imgs/icons/star.png",
-                                                  color: Colors.yellow.shade700,
-                                                ),
-                                                const SizedBox(
-                                                  width: 3,
-                                                ),
-                                                Image.asset(
-                                                  "assets/imgs/icons/star.png",
-                                                  color: Colors.yellow.shade700,
-                                                ),
-                                                const SizedBox(
-                                                  width: 3,
-                                                ),
-                                                Image.asset(
-                                                  "assets/imgs/icons/star.png",
-                                                  color: Colors.yellow.shade700,
-                                                ),
-                                                const SizedBox(
-                                                  width: 3,
-                                                ),
-                                                Image.asset(
-                                                  "assets/imgs/icons/star.png",
-                                                  color: Colors.yellow.shade700,
-                                                ),
-                                                const SizedBox(
-                                                  width: 3,
-                                                ),
-                                                Image.asset(
-                                                  "assets/imgs/icons/star.png",
-                                                  color: Colors.yellow.shade700,
-                                                ),
-                                                const SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Text(
-                                                  "5.0",
-                                                  style: body_2.copyWith(
-                                                      color: text_cr),
-                                                ),
-                                              ],
+                                            CustomRate(
+                                              rateScore: "4",
+                                              style: body_2.copyWith(
+                                                  color: text_cr),
                                             ),
                                             const Spacer(),
                                             Image.asset(
@@ -583,7 +549,7 @@ class _AppointmentsPageState extends State<AppointmentsPage> {
                                   child: Row(
                                     children: [
                                       const SizedBox(
-                                        width: 90,
+                                        width: 80,
                                       ),
                                       Container(
                                         height: 145,
@@ -597,7 +563,7 @@ class _AppointmentsPageState extends State<AppointmentsPage> {
                                   bottom: 95,
                                   child: CustomCard2(
                                     colorCard: accent_cr,
-                                    widthCard: 80 + getWidth(8),
+                                    widthCard: 60 + getWidth(14),
                                     heightCard: 90,
                                     align: Alignment.bottomCenter,
                                     borderColor: white_cr,
@@ -729,7 +695,7 @@ class _AppointmentsPageState extends State<AppointmentsPage> {
                                                   width: 10,
                                                 ),
                                                 Text(
-                                                  "location",
+                                                  state.appointment!.canceled[index].location,
                                                   style: body_2.copyWith(
                                                       color: text_cr),
                                                 ),
@@ -769,7 +735,7 @@ class _AppointmentsPageState extends State<AppointmentsPage> {
                                   bottom: 95,
                                   child: CustomCard2(
                                     colorCard: accent_cr,
-                                    widthCard: 80 + getWidth(8),
+                                    widthCard: 60 + getWidth(14),
                                     heightCard: 90,
                                     align: Alignment.bottomCenter,
                                     borderColor: white_cr,

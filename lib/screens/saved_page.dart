@@ -39,7 +39,7 @@ class SavedPage extends StatelessWidget {
               children: [
                 SvgPicture.asset(
                   "assets/imgs/empty.svg",
-                  width: getWidth(40),
+                  width: getWidth(30),
                 ),
                 const SizedBox(
                   height: 25,

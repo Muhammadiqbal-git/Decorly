@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.decorly_porto_1">
    <application
-        android:label="decorly_porto_1"
+        android:label="Decorly"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

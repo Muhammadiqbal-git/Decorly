@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 class CustomRate extends StatelessWidget {
   final String rateScore;
-  const CustomRate({super.key, required this.rateScore});
+  final TextStyle? style;
+  const CustomRate({super.key, required this.rateScore, this.style});
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +20,8 @@ class CustomRate extends StatelessWidget {
           width: 4,
         ),
         Text(
-          "( $rateScore)",
-          style: caption_1.copyWith(fontSize: 11, color: subtle_text_cr),
+          "($rateScore)",
+          style: style ?? caption_1.copyWith(fontSize: 11, color: subtle_text_cr),
         ),
       ],
     );

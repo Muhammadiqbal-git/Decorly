@@ -61,7 +61,7 @@ class _MainPageState extends State<MainPage> {
               children: listWidget,
             ),
             bottomNavigationBar: BottomNavigationBar(
-              elevation: 8,
+              elevation: 0,
               currentIndex: state.index,
               backgroundColor: white_cr,
               showSelectedLabels: false,

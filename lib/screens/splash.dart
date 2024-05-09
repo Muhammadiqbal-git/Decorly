@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SplashScreens extends StatefulWidget {
-  const SplashScreens({Key? key})
-      : super(key: key);
+  const SplashScreens({Key? key}) : super(key: key);
 
   @override
   State<SplashScreens> createState() => _SplashScreensState();
@@ -20,10 +19,10 @@ class _SplashScreensState extends State<SplashScreens>
   @override
   void initState() {
     super.initState();
-    _controllerFill =
-        AnimationController(vsync: this, duration: const Duration(seconds: 3));
-    _animationFill = Tween<double>(begin: 0, end: (1.10 + getScreenRatio(100))).animate(
-        CurvedAnimation(
+    _controllerFill = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 2500));
+    _animationFill = Tween<double>(begin: 0, end: (1.10 + getScreenRatio(100)))
+        .animate(CurvedAnimation(
             parent: _controllerFill,
             curve: const Interval(0.4, 0.90, curve: Curves.easeOutQuart)))
       ..addListener(() {
@@ -36,7 +35,7 @@ class _SplashScreensState extends State<SplashScreens>
             PageRouteBuilder(
                 pageBuilder: (context, animation, secondaryAnimation) =>
                     OnBoardingIndicator(),
-                transitionDuration: const Duration(seconds: 2),
+                transitionDuration: const Duration(seconds: 1),
                 transitionsBuilder:
                     (context, animation, secondaryAnimation, child) =>
                         FadeTransition(
@@ -46,10 +45,11 @@ class _SplashScreensState extends State<SplashScreens>
       }
     });
     _color = ColorTween(begin: light_primary_cr, end: primary_cr).animate(
-        CurvedAnimation(
-            parent: _controllerFill,
-            curve: const Interval(0.73, 0.88, curve: Curves.easeInCirc)))
-      ..addListener(() {
+      CurvedAnimation(
+        parent: _controllerFill,
+        curve: const Interval(0.70, 0.85, curve: Curves.easeInCirc),
+      ),
+    )..addListener(() {
         setState(() {});
       });
     _controllerFill.forward();
@@ -58,6 +58,10 @@ class _SplashScreensState extends State<SplashScreens>
   @override
   void dispose() {
     _controllerFill.dispose();
+    _color.removeListener(() {});
+    _animationFill.removeListener(() { });
+    _animationFill.removeStatusListener((status) { });
+
     super.dispose();
   }
 
@@ -73,8 +77,8 @@ class _SplashScreensState extends State<SplashScreens>
             Positioned(
               top: getHeight(35),
               child: CustomPaint(
-                size: Size(getWidth(60),
-                    (getWidth(60) * 0.5295950155763239)),
+                size: Size(gtWidth(context, 60),
+                    (gtWidth(context, 60) * 0.5295950155763239)),
                 painter: RPSCustomPainter(_animationFill.value),
               ),
             ),
@@ -84,14 +88,17 @@ class _SplashScreensState extends State<SplashScreens>
                 children: [
                   Container(
                       padding: const EdgeInsets.all(15),
-                      width: getWidth(55),
+                      width: gtWidth(context, 55),
                       child: SvgPicture.asset('assets/imgs/splash_logo.svg')),
                   const SizedBox(
                     height: 6,
                   ),
                   Text(
                     'DO - Decorly',
-                    style: apps_name.copyWith(color: (_controllerFill.value >= 0.7 ? _color.value : Colors.transparent )),
+                    style: apps_name.copyWith(
+                        color: (_controllerFill.value >= 0.7
+                            ? _color.value
+                            : Colors.transparent)),
                   )
                 ],
               ),
@@ -157,17 +164,17 @@ class RPSCustomPainter extends CustomPainter {
 
     // bot right
     path_0.cubicTo(
-        size.width * (0.4833645 - value4 * 0.8),
+        size.width * (0.4833645 - value4 * 1),
         size.height * (1.054000 + value4 * 2.8),
-        size.width * (0.5407290 + value4 * 0.6),
-        size.height * (0.9066882 + value4 * 2.4),
-        size.width * (0.7282212 + value4 * 1),
-        size.height * (0.9375059 + value4 * 1.4));
+        size.width * (0.5407290 + value4 * 0.8),
+        size.height * (0.9066882 + value4 * 2.2),
+        size.width * (0.7282212 + value4 * 1.2),
+        size.height * (0.9375059 + value4 * 1.8));
 
     // right bot
     path_0.cubicTo(
-        size.width * (0.9157103 + value5 * 0.9),
-        size.height * (0.9683176 + value5 * 0.9),
+        size.width * (0.9157103 + value5 * 1.1),
+        size.height * (0.9683176 + value5 * 1.4),
         size.width * (1.039252 + value5 * 1),
         size.height * (0.8587471 + value5 * 0.5),
         size.width * (0.9840966 + value5 * 1.5),

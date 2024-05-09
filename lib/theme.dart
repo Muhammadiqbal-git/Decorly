@@ -47,17 +47,29 @@ double getHeight(num size) {
 }
 
 double getScreenRatio(double size) {
-  return PlatformDispatcher.instance.views.first.physicalSize.width /
-      PlatformDispatcher.instance.views.first.physicalSize.height *
+  return WidgetsBinding.instance.platformDispatcher.views.first.physicalSize.width /
+      WidgetsBinding.instance.platformDispatcher.views.first.physicalSize.height *
       (size / 100);
+}
+
+double gtHeight(BuildContext context, num size) {
+  return MediaQuery.of(context).size.height * (size / 100);
+}
+double gtWidth(BuildContext context, num size) {
+  return MediaQuery.of(context).size.width * (size / 100);
+}
+
+double gtScreenRatio(BuildContext context , double size){
+  return MediaQuery.of(context).size.height / MediaQuery.of(context).size.width * (size/100);
 }
 
 class ButtonPainter extends CustomPainter {
   final Color color;
   final double opacity;
-  ButtonPainter(
-      {required this.color,
-      this.opacity = 1.0,});
+  ButtonPainter({
+    required this.color,
+    this.opacity = 1.0,
+  });
   @override
   void paint(
     Canvas canvas,
@@ -68,8 +80,8 @@ class ButtonPainter extends CustomPainter {
     path_0.cubicTo(0, 5, 5, 0, 12, 0);
     path_0.lineTo(size.width, 0);
     path_0.lineTo(size.width, size.height - 12);
-    path_0.cubicTo(size.width, size.height - 5, size.width - 5,
-        size.height, size.width - 12, size.height);
+    path_0.cubicTo(size.width, size.height - 5, size.width - 5, size.height,
+        size.width - 12, size.height);
     path_0.lineTo(0, size.height);
 
     path_0.close();

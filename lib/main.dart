@@ -11,6 +11,8 @@ import 'package:decorly/bloc/saved_list_cubit.dart';
 import 'package:decorly/bloc/shop_cubit.dart';
 import 'package:decorly/bloc/term_cubit.dart';
 import 'package:decorly/screens/login_page.dart';
+import 'package:decorly/screens/splash.dart';
+import 'package:decorly/screens/splash_w.dart';
 import 'package:decorly/test_screens.dart';
 import 'package:decorly/theme.dart';
 import 'package:flutter/material.dart';
@@ -87,7 +89,7 @@ class MyApp extends StatelessWidget {
         routes: {
           "/login": (context) => const LoginPage(),
         },
-        home: const TestScreens(),
+        home: const SplashWaitPage(),
       ),
     );
   }

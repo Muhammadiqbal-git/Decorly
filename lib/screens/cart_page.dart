@@ -58,7 +58,7 @@ class _CartPageState extends State<CartPage> {
               children: [
                 SvgPicture.asset(
                   "assets/imgs/cart_empty.svg",
-                  width: getWidth(40),
+                  width: getWidth(30),
                 ),
                 const SizedBox(
                   height: 25,
@@ -102,7 +102,7 @@ class _CartPageState extends State<CartPage> {
                     .map((key, value) => MapEntry(
                           key,
                           Container(
-                              height: 114,
+                              height: 120,
                               width: double.maxFinite,
                               padding: EdgeInsets.zero,
                               margin: const EdgeInsets.only(bottom: 12),
@@ -120,7 +120,7 @@ class _CartPageState extends State<CartPage> {
                                 children: [
                                   Column(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.start,
                                     children: [
                                       CustomCard2(
                                           colorCard: accent_cr,
@@ -147,13 +147,15 @@ class _CartPageState extends State<CartPage> {
                                         ),
                                         Text(
                                           value.name,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
                                           style: body_1.copyWith(
                                               color: text_cr,
                                               letterSpacing: 0.4),
                                         ),
                                         Text(
                                           value.desc,
-                                          maxLines: 5,
+                                          maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                           textAlign: TextAlign.justify,
                                           style:
